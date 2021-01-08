@@ -1,0 +1,333 @@
+//
+// Normalizza il valore da assegnare alla proprietà 'scrollbar-size'
+//______________________________________________________________________________________________________________________
+.dna-scrollbar-size(@scrollbar-size: @scrollbar__size){
+  &when (isnumber(@scrollbar-size)){
+    &when(@scrollbar-size >= 12px){
+      scrollbar-width: auto;
+    }
+    &when(@scrollbar-size < 12px){
+      scrollbar-width: thin;
+    }
+  }
+  &when (iskeyword(@scrollbar-size)){
+    scrollbar-width: @scrollbar-size;
+  }
+}
+//
+// Genera le proprietà relative agli stili della scrollbar
+//______________________________________________________________________________________________________________________
+.dna-scrollbar(@size: @scrollbar__size, @color: @scrollbar__color, @background: @scrollbar__background){
+  scrollbar-color: @color @background;
+  .dna-scrollbar-size(@size);
+  &::-webkit-scrollbar {
+    width: @size;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: @background;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: @color;
+  }
+}
+//
+// Custom Loop in stile foreach
+//______________________________________________________________________________________________________________________
+.dna-each (@list, @code) {
+  & {
+    .loop(@i:1) when (@i =< length(@list)) {
+      @value: extract(@list, @i);
+      @code();
+      .loop(@i + 1);
+    }
+    .loop();
+  }
+}
+//
+// Per uso interno. Cicla e definisce i path relativi ad un'icona multi-path.
+//______________________________________________________________________________________________________________________
+._dna-generate-multipath-icon( @icon, @paths, @i: 1) when (@i <= @paths) {
+  @icon-var: "@{icon}-path@{i}";
+  @icon-content: @@icon-var;
+
+  @_isString: isstring(@icon-content);
+  &when (@_isString){
+    @_class: ~".path@{i}";
+    @{_class} {
+      .lib-icon-font-symbol(@icon-content);
+    }
+  }
+  &when not (@_isString){
+    @_class: ~".path@{i}:@{icon-font__position}";
+    @{_class} {
+      @icon-content();
+    }
+  }
+  ._dna-generate-multipath-icon(@icon, @paths, @i + 1);
+}
+//
+// Genera un set di icone basandosi su una lista di icone e le relative variabili
+// Ogni elemento della lista può essere il nome di un'icona:
+// * facebook
+// (che sarà utilizzato per reuperare i dati relativi al contenuto dalla variabile di nome:
+// * icon-facebook)
+// oppure una coppia {nome-icona} {numero-di-paths} in caso di icone multipath
+// * facebook 3
+//______________________________________________________________________________________________________________________
+.dna-generate-icon-set(@list: @dna-icons__set) {
+  .dna-each(@list, {
+    @icon: extract(@value, 1);
+    @paths: extract(@value, 2);
+    @icon-content: "icon-@{icon}";
+
+    .@{dna-icons__prefix}-@{icon}, .control-icon-@{icon} {
+      & when (@paths > 0) {
+        ._dna-generate-multipath-icon(@icon-content, @paths);
+      }
+
+      & when (@paths <= 0) {
+        .lib-icon-font-symbol(@@icon-content);
+      }
+    }
+  });
+}
+//
+// Definisce le proprietà di base di un elemento full-width
+//______________________________________________________________________________________________________________________
+.dna-full-width(){
+  position: relative;
+  right: auto;
+  width: calc(~"100vw - var(--scrollbar-width)");
+  left: calc(~"(100% - 100vw + var(--scrollbar-width))/2");
+}
+
+//
+// Utilities per i posizionamento di elementi absolute
+//______________________________________________________________________________________________________________________
+.dna-absolute-center-y(){
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.dna-absolute-center-x(){
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dna-absolute-center(){
+  .dna-absolute-center-x();
+  .dna-absolute-center-y();
+  transform: translate(-50%,-50%);
+}
+
+//
+// Utilities per form con icone
+//______________________________________________________________________________________________________________________
+//
+.dna-control-icon-icons(){
+  position: relative;
+  & &.i{
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    pointer-events: none;
+    .lib-vendor-box-align(center);
+    .lib-vendor-box-justify(center);
+    .lib-vendor-prefix-display(flex);
+    &[type=button], &[type=submit]{
+      pointer-events: all;
+    }
+  }
+}
+.dna-control-icon-style(
+  @icon-color: @control-icon__color,
+  @icon-color-hover: @control-icon-hover__color,
+  @icon-color-focus: @control-icon-focus__color,
+  @icon-color-valid: @control-icon-valid__color,
+  @icon-color-error: @control-icon-error__color,
+  @icon-font-size: @control-icon__font-size,
+  @icon-line-height: @control-icon__line-height,
+  @icon-height: @control-icon__height,
+  @icon-width: @control-icon__width,
+  @icon-text-gutter: @control-icon-text-gutter,
+  @icon-border-gutter: @control-icon-border-gutter,
+  @rtl: @control-icon-rtl
+){
+  & &.i {
+    color: @icon-color;
+    font-size: @icon-font-size;
+    line-height: @icon-line-height;
+    height: @icon-height;
+    width: @icon-width + @icon-text-gutter + @icon-border-gutter;
+
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+
+  & input:focus ~ &.i{
+    .lib-css(color, @icon-color-focus);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+  & input.mage-error:focus ~ &.i {
+    .lib-css(color, @icon-color-error);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+  & input.valid:focus ~ &.i {
+    .lib-css(color, @icon-color-valid);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+
+  ._dna-form-element-icon-gutters__whit-reverse(
+            @icon-width + @icon-text-gutter + @icon-border-gutter,
+          @icon-border-gutter,
+          @icon-text-gutter,
+          @rtl
+  );
+}
+//======================================================================================================================
+._dna-form-element-icon-gutters__whit-reverse(
+  @spacing: @control-icon__width,
+  @padding-border: @control-icon-border-gutter,
+  @padding-text: @control-icon-text-gutter,
+  @rtl: false){
+
+  &:not(.reverse) &.i{
+    ._dna-form-element-icon-icon-gutters(
+            @spacing,
+            @padding-border,
+            @padding-text,
+            @rtl
+    );
+  }
+  &:not(.reverse) input{
+    ._dna-form-element-icon-input-gutters(
+            @spacing,
+            @rtl);
+  }
+
+  &when (@rtl){
+    &.reverse &.i{
+      ._dna-form-element-icon-icon-gutters(
+              @spacing,
+              @padding-border,
+              @padding-text,
+              false
+      );
+    }
+    &.reverse input{
+      ._dna-form-element-icon-input-gutters(
+              @spacing,
+              false);
+    }
+  }
+
+  &when not(@rtl){
+    &.reverse &.i{
+      ._dna-form-element-icon-icon-gutters(
+              @spacing,
+              @padding-border,
+              @padding-text,
+              true
+      );
+    }
+    &.reverse input{
+      ._dna-form-element-icon-input-gutters(
+              @spacing,
+              true);
+    }
+  }
+}
+
+
+._dna-form-element-icon-icon-gutters(
+  @spacing: @control-icon__width,
+  @padding-border: @control-icon-border-gutter,
+  @padding-text: @control-icon-text-gutter,
+  @rtl: false){
+  & when (@rtl){
+    right:0;
+    left:auto;
+    padding-left: @padding-text;
+    padding-right: @padding-border;
+  }
+  & when not (@rtl){
+      left:0;
+      right:auto;
+      padding-left: @padding-border;
+      padding-right: @padding-text;
+  }
+}
+._dna-form-element-icon-input-gutters(
+  @spacing: @control-icon__width,
+  @rtl: false){
+  & when (@rtl){
+    padding-right: @spacing;
+  }
+  & when not (@rtl){
+    padding-left: @spacing;
+  }
+}
+
+//
+// Utilities per Label
+//______________________________________________________________________________________________________________________
+//
+.dna-form-label-as-placeholder(
+  @label-color: @form-field-label-as-placeholder__color,
+  @label-color-focus: @form-field-label-as-placeholder-focus__color,
+  @label-height: @form-field-label-as-placeholder__height,
+  @label-line-height: @form-field-label-as-placeholder__line-height,
+  @label-align: @form-field-label-as-placeholder__align,
+  @label-padding: @form-field-label-as-placeholder__padding,
+  @label-padding-focus: @form-field-label-as-placeholder-focus__padding,
+  @label-margin: @form-field-label-as-placeholder__margin,
+  @label-margin-focus: @form-field-label-as-placeholder-focus__margin,
+  @label-bg-focus: @form-field-label-as-placeholder-focus__background-color,
+  @label-translate-y-focus: @form-field-label-as-placeholder-focus__translate-y,
+  @label-scale-focus: @form-field-label-as-placeholder-focus__scale,
+  @label-default-gap: @control-icon-border-gutter
+){
+  position: absolute;
+  z-index: 10;
+  .lib-css(padding,@label-padding);
+  .lib-css(margin,@label-margin);
+
+  .dna-form-label-as-placeholder-icon-gaps(@label-default-gap);
+
+  top: 0;
+  bottom: auto;
+  .lib-css(height,@label-height);
+  .lib-css(line-height, @label-line-height);
+  pointer-events: none;
+  .lib-vendor-prefix-display(flex);
+  .lib-vendor-box-align(center);
+  transition-duration: 0.3s;
+  transition-property: transform;
+  .lib-css(transform-origin, @label-align);
+  &.focus, &.not-empty{
+    height: auto;
+    transform: translateY(@label-translate-y-focus) scale(@label-scale-focus);
+    .lib-css(padding,@label-padding-focus);
+    .lib-css(margin,@label-margin-focus);
+    .lib-css(background-color, @label-bg-focus);
+  }
+}
+
+.dna-form-label-as-placeholder-icon-gaps(
+  @label-align: @form-field-label-as-placeholder__align,
+  @gap: @control-icon__width
+){
+  & when (@label-align = left) {
+    left: @gap;
+  }
+  & when (@label-align = right){
+    right: @gap;
+  }
+}

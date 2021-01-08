@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Account</argument>
+            </action>
+        </referenceBlock>
+        <!--<referenceBlock name="customer-account-navigation-delimiter-1" remove="true" />
+        <referenceBlock name="customer-account-navigation-delimiter-2" remove="true" />-->
+        <!--<referenceBlock name="customer-account-navigation-product-reviews-link" remove="true" />
+        <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true" />
+        <referenceBlock name="customer-account-navigation-my-credit-cards-link" remove="true" />-->
+        <referenceBlock name="sidebar.main.account_nav">
+            <arguments>
+                <argument name="block_css" xsi:type="string">account-nav account-nav-page-header</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <arguments>
+                <argument name="css_class" xsi:type="string">nav nav-pills flex-column</argument>
+            </arguments>
+            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="customer-account-navigation-authorization-link"
+                   template="Magento_Customer::navigation/authorization.phtml"/>
+            <!-- TODO: gestire da Modulo in base alle dipendenze -->
+            <!--<block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-returns-link-dna">
+                <arguments>
+                    <argument name="path" xsi:type="string">rma/account/history</argument>
+                    <argument name="label" xsi:type="string" translate="true">I miei resi</argument>
+                    <argument name="sortOrder" xsi:type="number">130</argument>
+                    <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+                    <argument name="icon_class" xsi:type="string">icon-reload</argument>
+                </arguments>
+            </block>-->
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-account-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">La mia Bacheca</argument>
+                <argument name="sortOrder" xsi:type="number">170</argument>
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+                <argument name="icon_class" xsi:type="string">icon-company-logo</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-address-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">I miei indirizzi/cantieri</argument>
+                <argument name="sortOrder" xsi:type="number">150</argument>
+            </arguments>
+            <!--<action method="setTemplate">
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+            </action>-->
+            <action method="setIconClass">
+                <argument name="icon_class" xsi:type="string">icon-placeholder</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-account-edit-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Il mio profilo</argument>
+                <argument name="sortOrder" xsi:type="number">160</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+            </action>
+            <action method="setIconClass">
+                <argument name="icon_class" xsi:type="string">icon-info_profile</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-wish-list-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Salvati per dopo</argument>
+                <argument name="sortOrder" xsi:type="number">120</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+            </action>
+            <action method="setIconClass">
+                <argument name="icon_class" xsi:type="string">icon-heart</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-orders-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">I miei ordini</argument>
+                <argument name="sortOrder" xsi:type="number">140</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+            </action>
+            <action method="setIconClass">
+                <argument name="icon_class" xsi:type="string">icon-cart</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Newsletter</argument>
+                <argument name="sortOrder" xsi:type="number">110</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+            </action>
+            <action method="setIconClass">
+                <argument name="icon_class" xsi:type="string">icon-envelope</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- Returns -->
+        <referenceBlock name="customer-account-navigation-returns-link" remove="true"/>
+        <!-- My Account Link -->
+        <referenceBlock name="customer-account-navigation-authorization-link">
+            <arguments>
+                <argument name="sortOrder" xsi:type="number">10</argument>
+                <argument name="icon_class" xsi:type="string">icon-account</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block name="customer.account.view.custom.title" template="DNAFactory_ThemeCore::misc/page/custom-title.phtml" before="-">
+                <container name="custom.title.back.url"/>
+                <action method="setHeaderClass">
+                    <argument name="header_class" xsi:type="string">headline-3</argument>
+                </action>
+                <action method="setHeaderEl">
+                    <argument name="header_el" xsi:type="string">h3</argument>
+                </action>
+                <action method="setTitle">
+                    <argument name="title" xsi:type="string">Inserisci Titolo</argument>
+                </action>
+                <container name="custom.title.additional.element" htmlTag="div" />
+                <container name="custom.title.additional.header" htmlTag="div" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

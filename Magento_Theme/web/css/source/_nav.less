@@ -1,0 +1,20 @@
+& when (@media-common = true) {
+  .nav {
+    .nav-link, .nav.item {
+      i, [class^="@{dna-icons__prefix}-"], [class*=" @{dna-icons__prefix}-"]{
+        .lib-font-size(2em);
+        vertical-align: middle;
+        margin-right: @layout__width-xs-indent / 4;
+      }
+    }
+  }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+  .nav {
+    .nav-link, .nav.item {
+      i, [class^="@{dna-icons__prefix}-"], [class*=" @{dna-icons__prefix}-"]{
+        margin-right: @layout-indent__width / 4;
+      }
+    }
+  }
+}

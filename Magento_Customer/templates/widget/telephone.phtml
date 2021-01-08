@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Widget\Telephone $block */
+?>
+
+<div class="field field-icon telephone <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="telephone" class="label">
+        <span>
+            <?= $block->escapeHtml(__('Telefono')) ?>
+        </span>
+    </label>
+    <div class="control">
+        <input type="text"
+               name="telephone"
+               id="telephone"
+               value="<?= $block->escapeHtmlAttr($block->getTelephone()) ?>"
+               title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+               class="input-text <?= $block->escapeHtmlAttr(
+                   $block->getAttributeValidationClass('telephone')
+               ) ?>"
+        >
+        <div class="icon-section">
+            <i class="icon-icon_phone"></i>
+        </div>
+        <div for="telephone" class="dna-field-info" id="telephone-info"><?= $block->escapeHtml(__('Inserisci un numero valido, ti servirà in caso di problemi con l\'ordine')) ?></div>
+    </div>
+</div>

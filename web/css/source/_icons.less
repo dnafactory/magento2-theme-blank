@@ -1,0 +1,28 @@
+&when(@media-common = true){
+  .lib-font-face(
+    @family-name: @icons__font-name,
+    @font-path: @icons__font-path,
+    @font-weight: normal,
+    @font-style: normal
+  );
+  @__icon__position-selector: ~":@{icon__position}";
+
+  [class^="@{dna-icons__prefix}-"], [class*=" @{dna-icons__prefix}-"],
+  [class^="control-icon-"]@{__icon__position-selector}, [class*=" control-icon-"]@{__icon__position-selector}{
+    font-family: @icons__font-name;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dna-generate-icon-set();
+
+}

@@ -1,0 +1,66 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Address\Book $block */
+?>
+<div class="block block-addresses-default col-md-6 col-12">
+    <div class="block-title"><div class="headline-4 color-black"><?= $block->escapeHtml(__('Indirizzi Predefiniti')) ?></div></div>
+    <div class="block-content row">
+        <div class="col-12">
+            <?php if ($_pAddsses = $block->getDefaultBilling()) : ?>
+                <div class="box box-address-billing">
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Indirizzo di fatturazione predefinito')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <p>
+                            <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                        </p>
+                    </div>
+                    <div class="box-actions">
+                        <a class="action" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                            <i class="icon-icon_edit"></i>
+                        </a>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="box box-billing-address">
+                    <strong class="box-title"><span><?= $block->escapeHtml(__('Indirizzo di fatturazione predefinito')) ?></span></strong>
+                    <div class="box-content">
+                        <p><?= $block->escapeHtml(__('Non hai nessun indirizzo di fatturazione predefinito.')) ?></p>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+
+        <div class="col-12">
+            <?php if ($_pAddsses = $block->getDefaultShipping()) : ?>
+                <div class="box box-address-shipping">
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Indirizzo di spedizione predefinito')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <p>
+                            <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                        </p>
+                    </div>
+                    <div class="box-actions">
+                        <a class="action" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                            <i class="icon-icon_edit"></i>
+                        </a>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="box box-shipping-address">
+                    <strong class="box-title"><span><?= $block->escapeHtml(__('Indirizzo di spedizione predefinito')) ?></span></strong>
+                    <div class="box-content">
+                        <p><?= $block->escapeHtml(__('Non hai nessun indirizzo di spedizione predefinito.')) ?></p>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>

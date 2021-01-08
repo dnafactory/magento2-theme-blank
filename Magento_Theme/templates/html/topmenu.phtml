@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+?>
+
+<nav class="dnafactory_menu navigation"
+     data-mage-init='{"dnafactoryDrillmenu": {}}'
+     data-action="navigation">
+    <div data-block="navigation"
+         class="dropdown dna-dropdown-modal">
+        <div class="menu_overlay"></div>
+
+        <a title="<?php echo __('My Account'); ?>"
+           class="action shownavigation">
+            <span class="text"><?= $block->escapeHtml(__('Products')) ?></span>
+            <i class="icon-icon_arrow_down"></i>
+        </a>
+
+        <?= $block->getChildHtml() ?>
+    </div>
+
+    <div class="block block-navigation empty dropdown"
+         data-role="dropdownDialog"
+         data-mage-init='{"dropdownDialog": {
+         "appendTo":"[data-block=navigation]",
+         "triggerTarget":".shownavigation",
+         "timeout":"0",
+         "closeOnMouseLeave":"true",
+         "closeOnEscape":"true",
+         "triggerEvent":"hover",
+         "triggerClass":"active",
+         "parentClass":"active",
+         "buttons":[]}}'>
+        <div class="ul_control">
+            <ul data-mage-init='{"menu": {
+            "responsive": true,
+            "expanded": true,
+            "position": {"my":"left top", "at":"left top"}}}'>
+                <?= /* @noEscape */ $_menuHtml?>
+            </ul>
+        </div>
+    </div>
+</nav>

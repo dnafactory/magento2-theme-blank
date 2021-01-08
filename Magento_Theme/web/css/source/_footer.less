@@ -1,0 +1,17 @@
+& when (@media-common = true) {
+  .page-footer {
+    .lib-css(color, @footer__color);
+    a {
+      .lib-link(
+              @footer-link__color,
+              @footer-link__text-decoration,
+              @footer-link__visited__color,
+              @footer-link__visited__text-decoration,
+              @footer-link__hover__color,
+              @footer-link__hover__text-decoration,
+              @footer-link__active__color,
+              @footer-link__active__text-decoration
+      );
+    }
+  }
+}

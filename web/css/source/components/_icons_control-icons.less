@@ -1,0 +1,24 @@
+@control-icon__color: @input-text-placeholder__color;
+@control-icon-hover__color: @control-icon__color;
+@control-icon-focus__color: @input-text__focus__color;
+@control-icon-valid__color: @form-element-validation__color-valid;
+@control-icon-error__color: @form-element-validation__color-error;
+@control-icon__font-size: 2em;
+@control-icon__line-height: @control-icon__font-size;
+@control-icon__height: @input-text__height;
+@control-icon__width: @icon__width;
+@control-icon-text-gutter: 5px;
+@control-icon-border-gutter: 4px;
+@control-icon-rtl: false;
+
+&when(@media-common = true) {
+
+  .control-icon{
+    .dna-control-icon-icons();
+    .dna-control-icon-style();
+  }
+  i, [class^="@{dna-icons__prefix}-"],[class*=" @{dna-icons__prefix}-"]{
+    &:extend(.control-icon.i all);
+  }
+  
+}

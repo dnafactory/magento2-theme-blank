@@ -1,0 +1,72 @@
+$theme-colors: ("primary-alt":    $theme__color__primary-alt);
+
+// TODO: move
+@if($layout__width-xs-indent != $layout-indent__width) {
+  $grid-gutter-widths: (
+          lg: $layout-indent__width * 2
+  ) !default;
+}@else{
+  $grid-gutter-widths: () !default;
+}
+$grid-gutter-width: $layout__width-xs-indent * 2;
+
+// TODO: move
+$input-btn-focus-box-shadow:  $focus__box-shadow;
+$input-btn-focus-width: nth($focus__box-shadow, 4);
+$btn-focus-width: $input-btn-focus-width;
+$input-focus-width: $input-btn-focus-width;
+$btn-focus-box-shadow: $input-btn-focus-box-shadow;
+$input-focus-box-shadow: $input-btn-focus-box-shadow;
+$custom-control-indicator-focus-box-shadow:$input-focus-box-shadow;
+
+// TODO: move
+$grid-breakpoints: (
+          xxxs: 0,
+          xxs:$screen__xxs,
+          xs: $screen__xs,
+          sm: $screen__s,
+          md: $screen__m,
+          lg: $screen__l,
+          xl: $screen__xl
+  );
+
+// TODO: move
+$container-max-widths: (
+        sm: $screen__s - ($layout__width-xs-indent * 2),
+        md: $screen__m - ($layout-indent__width * 2),
+        lg: $layout__max-width,
+        xl: $layout__max-width
+);
+
+$btn-line-height: $line-height__base;
+
+// TODO: move
+$nav-link-padding-y: px-to-rem(map-get(split-value($nav-link__padding),'top'));
+$nav-link-padding-x: px-to-rem(map-get(split-value($nav-link__padding),'left'));
+
+// TODO: move
+$custom-file-height:                $input-height;
+$custom-file-height-inner:          $custom-file-height - 2;
+$custom-file-line-height:           $custom-file-height-inner;
+
+//$custom-file-button-bg:             $theme__color__primary;
+//$custom-file-button-color:          $color-white;
+//$custom-file-border-color:          $custom-file-button-bg;
+$custom-file-text: (
+        en: "Browse",
+        it: "Carica"
+);
+
+// TODO: move
+$alert-bg-level:                    0;
+$alert-border-level:                0;
+$alert-color-level:                 6;
+$success:       $message-success__background;
+$info:          $message-info__background;
+$warning:       $message-warning__background;
+$danger:        $message-error__background;
+$light:         $secondary__color;
+$dark:          $primary__color;
+
+
+$custom-control-indicator-size: 1.3rem;

@@ -1,0 +1,59 @@
+{
+  "children": {
+    "dom-wrapper": {
+      "component": "js/lib/dom-listener",
+      "children": {
+        "password": {
+          "element": "input[type=password]:not(.handled)",
+          "component": "js/theme/dom/password-utils",
+          "options": {
+            "triggerClass": "icon-eye",
+            "triggerClassHide": "icon-eye-off"
+          }
+        },
+        "checkbox": {
+          "element": "input[type=checkbox]:not(.custom-checkbox):not(.custom-switch)",
+          "component": "js/theme/inputs/custom-input",
+          "options": {
+            "type": "checkbox"
+          }
+        },
+        "file": {
+          "element": ".custom-file-input",
+          "component": "js/theme/inputs/custom-file"
+        },
+        "radio": {
+          "element": "input[type=radio]:not(.custom-radio)",
+          "component": "js/theme/inputs/custom-input",
+          "options": {
+            "type": "radio"
+          }
+        },
+        "select": {
+          "element": "select:not(.custom-select)",
+          "component": "js/theme/inputs/custom-select"
+        },
+        "switch": {
+          "element": "input[type=checkbox].custom-switch",
+          "component": "js/theme/inputs/custom-input",
+          "options": {
+            "type": "switch"
+          }
+        },
+        "text": {
+          "element": "input[type=text], input[type=password], input[type=email], textarea",
+          "component": "js/theme/inputs/focusable"
+        },
+        "multipath-icons": {
+          "component": "js/theme/dom/multipath-icons"
+        }
+      }
+    },
+    "scrollbar-fix": {
+      "component": "js/theme/scrollbar-fix"
+    },
+    "autofill": {
+      "component": "js/theme/detect-autofill"
+    }
+  }
+}

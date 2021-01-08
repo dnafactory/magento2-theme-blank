@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>I miei Indirizzi</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="customer.account.address.content" as="customer_account_address_content" htmlTag="div" htmlClass="row row-block" />
+        </referenceContainer>
+        <move element="address_book" destination="customer.account.address.content" />
+        <move element="address_grid" destination="customer.account.address.content" />
+        <referenceBlock name="customer.account.view.custom.title">
+            <action method="setTitle">
+                <argument name="title" xsi:type="string">Il miei Indirizzi/Cantieri</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="custom.title.additional.element" htmlClass="actions-inline" />
+        <referenceContainer name="custom.title.additional.element">
+            <block name="customer.title.header.actions" template="DNAFactory_ThemeCore::address/actions.phtml" before="-" />
+        </referenceContainer>
+    </body>
+</page>

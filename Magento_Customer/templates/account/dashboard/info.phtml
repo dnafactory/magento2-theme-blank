@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-info w-100">
+    <div class="block-content row">
+        <div class="box box-information col-12 <?php if($block->isNewsletterEnabled()) :?>col-md-6 <?php endif; ?>">
+            <div class="box-title">
+                <span><?= $block->escapeHtml(__('Informazioni Contatto')) ?></span>
+            </div>
+            <div class="box-content">
+                <p>
+                    <?= $block->escapeHtml($block->getName()) ?><br>
+                    <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                </p>
+                <?= $block->getChildHtml('customer.account.dashboard.info.extra'); ?>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                    <i class="icon-icon_edit"></i>
+                </a>
+                <a href="<?= $block->escapeUrl($block->getChangePasswordUrl()) ?>" class="action change-password btn btn-md btn-primary btn-round">
+                    <span><?= $block->escapeHtml(__('Cambia password')) ?></span>
+                </a>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()) : ?>
+        <div class="box box-newsletter col-12 col-md-6">
+            <div class="box-title">
+                <span><?= $block->escapeHtml(__('Newsletter')) ?></span>
+            </div>
+            <div class="box-content">
+                <p>
+                    <?php if ($block->getIsSubscribed()) : ?>
+                        <?= $block->escapeHtml(__('Sei iscritto alla "Newsletter Generale"')) ?>
+                    <?php else : ?>
+                        <?= $block->escapeHtml(__('Non sei iscritto a nessuna newletter al momento.')) ?>
+                    <?php endif; ?>
+                </p>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>"><i class="icon-icon_edit"></i></a>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+
+</div>

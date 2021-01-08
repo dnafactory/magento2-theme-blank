@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Address $block */
+?>
+<div class="block block-dashboard-addresses w-100">
+    <div class="block-content row">
+        <div class="box box-billing-address col-12 col-md-6">
+                <div class="box-title">
+                    <span><?= $block->escapeHtml(__('Indirizzo di Fatturazione predefinito')) ?></span>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <?= $block->getPrimaryBillingAddressHtml() ?>
+                    </p>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getPrimaryBillingAddressEditUrl()) ?>" data-ui-id="default-billing-edit-link"><i class="icon-icon_edit"></i></a>
+                    <a class="action btn btn-md btn-primary btn-round" href="<?= $block->escapeUrl($block->getAddressBookUrl()) ?>"><span><?= $block->escapeHtml(__('Gestisci indirizzi')) ?></span></a>
+                </div>
+            </div>
+        <div class="box box-shipping-address col-12 col-md-6">
+                <div class="box-title">
+                    <span><?= $block->escapeHtml(__('Indirizzo di Spedizione predefinito')) ?></span>
+                </div>
+                <div class="box-content">
+                    <p>
+                        <?= $block->getPrimaryShippingAddressHtml() ?>
+                    </p>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getPrimaryShippingAddressEditUrl()) ?>" data-ui-id="default-shipping-edit-link"><i class="icon-icon_edit"></i></a>
+                    <a class="action btn btn-md btn-primary btn-round" href="<?= $block->escapeUrl($block->getAddressBookUrl()) ?>"><span><?= $block->escapeHtml(__('Gestisci indirizzi')) ?></span></a>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Accedi o Crea un Account</title>
+    </head>
+    <body>
+        <referenceContainer name="customer.login.container" htmlClass="login-container row d-lg-block justify-content-center block-group block-group-2-child">
+            <block name="block.separator.login" as="block_separator_login" template="DNAFactory_ThemeCore::misc/block/separator.phtml" after="customer_form_login">
+                <action method="setText">
+                    <argument name="text" xsi:type="string" translate="true">Or</argument>
+                </action>
+                <action method="setCustomCss">
+                    <argument name="custom_css" xsi:type="string">mobile col-12 col-md-8 col-lg-6 float-left</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <move element="page.messages" destination="customer_form_login" as="page.messages"/>
+    </body>
+</page>
