@@ -23,10 +23,10 @@
     "sort-packages": true
   },
   "require": {
-    "php": "~7.1|~7.2|~7.3",
+    "php": "~7.1",
     "magento/framework": "*",
     "magento/theme-frontend-blank": "*",
-    "dnafactory/theme-core": "* || ^2.0",
+    "dnafactory/module-theme": "dev-develop",
     "dnafactory/module-bootstrap": "^0.1"
   },
   "autoload": {
