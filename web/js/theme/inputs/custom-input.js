@@ -23,10 +23,11 @@ define([
             if(!this.options.type)
                 return;
 
+            this._super();
+
             utilities.addClasses(this.container, `custom-control custom-${this.options.type}`);
             this.element.classList.add('custom-control-input');
             utilities.addClasses(this.label, `custom-control-label`);
-            this._super();
         }
     });
 });

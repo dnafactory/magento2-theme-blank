@@ -19,14 +19,14 @@ define([
             opened: false
         },
         _bind: function(){
+            this._super();
+
             // Toggles opened state while interacting with the element
             this.element.addEventListener('mousedown', () => this.toggleOpened());
 
             // Switches off opened state when needed
             utilities.attachEvents(this.element, 'mouseup focusout', () => this.toggleOpened(false));
             utilities.attachEvents(document, 'mouseup focusout', () => this.toggleOpened(false));
-
-            this._super();
         },
         toggleOpened(force){
             var opened = (utilities.isBoolean(force))? force : !this.opened;

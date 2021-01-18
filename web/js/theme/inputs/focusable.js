@@ -30,12 +30,12 @@ define([
          * @private
          */
         _init: function(){
+            this._super();
+
             var tagName = utilities.getInputType(this.element);
 
             this.container.classList.add(`field-${tagName}`);
             this.label.classList.add(`label-${tagName}`);
-
-            this._super();
         },
         _toggleFocus: function(){
             utilities.toggleClasses(this.container, this.options.focusClass, utilities.hasFocus(this.element));

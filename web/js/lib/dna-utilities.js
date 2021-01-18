@@ -1,4 +1,4 @@
-define(function() {
+define(['underscore'], function(_) {
     'use strict';
 
     /**
@@ -51,6 +51,14 @@ define(function() {
              return (item == null);
          },
          /**
+          * Checks if a given value is empty
+          * @param item
+          * @returns {boolean}
+          */
+         isEmpty: function(item){
+             return (this.isUndefined(item) || item === "");
+         },
+         /**
           * Checks if a given value is a boolean
           * @param item
           * @returns {boolean}
@@ -59,12 +67,20 @@ define(function() {
              return (!this.isUndefined(item) && typeof item == 'boolean');
          },
          /**
+          *
+          * @param value
+          * @returns {boolean}
+          */
+         getBooleanValue(value){
+             return (this.isBoolean(value))? value : !!JSON.parse(value);
+         },
+         /**
           * Checks if a given HTML input is empty or has a value defined
           * @param input
           * @returns {boolean}
           */
          isControlEmpty(input){
-             return (input.isAutofilled || this.isUndefined(input.value) || input.value === '');
+             return (!input.isAutofilled && this.isEmpty(input.value));
          },
          /**
           * Returns the input type of a given HTMLElement
@@ -129,9 +145,48 @@ define(function() {
          removeEvents(element, events, handler){
              this.cycleItems(events, (event) => element.removeEventListener(event, handler, false));
          },
+         /**
+          * Returns the value of a css var, if it was defined in the current DOM
+          * @param varname
+          * @returns {string}
+          */
          getCssVar(varname){
              return getComputedStyle(document.body)
                  .getPropertyValue(`--${varname}`);
+         },
+         /**
+          * Sets a value in the dataset of an element
+          * @param element
+          * @param key
+          * @param data
+          * @returns {string|undefined|boolean}
+          */
+         setData(element, key, data){
+             if(!this.isUndefined(element.dataset)){
+                 element.dataset[key] = JSON.stringify(data);
+                 return element.dataset[key];
+             }
+             return false;
+         },
+         /**
+          * Returns a value stored in the dataset of an element
+          * @param element
+          * @param key
+          * @returns {any|boolean}
+          */
+         getData(element, key){
+             return (!this.isUndefined(element.dataset) && !this.isEmpty(element.dataset[key]))?
+                 JSON.parse(element.dataset[key])
+                 : false;
+         },
+         /**
+          * Check if an element contains specific data in his dataset
+          * @param element
+          * @param key
+          * @returns {boolean}
+          */
+         hasData(element, key){
+             return !this.isEmpty(this.getData(element, key));
          }
     };
 

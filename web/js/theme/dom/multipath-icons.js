@@ -23,10 +23,13 @@ define([
             this._super();
             for (let [key, value] of Object.entries(this.options)){
                 document.querySelectorAll(`.${key}`).forEach(item => {
-                    for (let i = 1; i <= value; i++){
-                        var element = document.createElement("span");
-                        element.classList.add(`path${i}`);
-                        item.appendChild(element);
+                    if(item.querySelectorAll('[class^=path]').length < value) {
+                        item.innerHTML = "";
+                        for (let i = 1; i <= value; i++) {
+                            var element = document.createElement("span");
+                            element.classList.add(`path${i}`);
+                            item.appendChild(element);
+                        }
                     }
                 });
             }

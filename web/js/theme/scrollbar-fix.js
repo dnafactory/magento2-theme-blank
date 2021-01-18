@@ -18,7 +18,8 @@ define([
         _bind: function(){
             this._super();
             // debounce method prevents event overlaps
-            window.addEventListener("resize", _.debounce( this._init, 250 ), false);
+            var onResize = _.debounce( this._init.bind(this), 250, false );
+            window.addEventListener("resize", onResize, false);
         }
     });
 });

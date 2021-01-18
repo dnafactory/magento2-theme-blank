@@ -10,8 +10,8 @@ define([
      */
     return JSComponent.extend({
         _bind: function(){
-            this.element.addEventListener('change', this.updateInfo, false);
             this._super();
+            this.element.addEventListener('change', this.updateInfo, false);
         },
         /**
          * Manually updates input's label content

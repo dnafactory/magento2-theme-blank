@@ -44,21 +44,29 @@ define([
         toggleLabelClass(force){
             this.label.classList.toggle(
                 this.options.notEmptyLabelClass,
-                (utilities.isBoolean(force))? force : !utilities.isControlEmpty(this.element)
+                (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
             );
         },
         _checkPlaceholder(){
-            if(utilities.getCssVar('label-as-placeholder')){
+            if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
                 require(['jquery'], ($) => {
-                    if($(this.element).parents('.fieldset').length){
-                        if (utilities.getInputType(this.element) === 'select') {
-                            if (this.element.options.length > 0 && this.element.options[0].value === "")
-                                this.element.options[0].textContent = "";
-                        } else {
-                            this.element.setAttribute('placeholder', "");
+                    // Check if control is in a fieldset
+                    var fieldset = $(this.element).closest('fieldset');
+                    if(fieldset.length){
+                        // if it's a labeled fieldset which has a legend element
+                        if( $('legend', fieldset).length ){
+                            var legend = $('legend', fieldset).get(0);
+                            this.label.classList.forEach(value => legend.classList.add(value));
+                            this.label = legend;
                         }
+                        // than we clear the placeholders
+                        this.element.setAttribute('placeholder', "");
                     }
                 });
+                if (utilities.getInputType(this.element) === 'select') {
+                    if (this.element.options.length > 0 && this.element.options[0].value === "")
+                        this.element.options[0].textContent = "";
+                }
             }
         }
     };

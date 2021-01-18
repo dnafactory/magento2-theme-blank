@@ -1,6 +1,7 @@
 define([
-    'js/lib/vanilla-plugin'
-], function(JSComponent) {
+    'js/lib/vanilla-plugin',
+    'js/lib/dna-utilities'
+], function(JSComponent, utilities) {
     'use strict';
 
     /**
@@ -20,19 +21,25 @@ define([
          * @private
          */
         _create(){
-            var id    = this.element.id,
+            this._super();
+            var id    = utilities.isEmpty(this.element.id)?
+                        `custom_${this.element.name.replace(/[^\\w\\s]/gi, '')}`
+                        : this.element.id,
                 label = document.querySelector(`label[for=${id}]`);
 
             this.container = this.element.parentElement;
 
-            if(!label) {
+            this.element.setAttribute('id', id);
+
+            if(utilities.isEmpty(label)) {
                 label = document.createElement('label');
                 label.setAttribute('for', id);
+                this.element.after(label);
                 this.element.hasAttribute('placeholder')
                     label.textContent = this.element.getAttribute('placeholder');
             }
             this.label = label;
-            this._super();
+            this.element.classList.add('handled-input');
         },
     });
 });

@@ -1,34 +1,37 @@
 define([
-    'js/lib/vanilla-plugin'
-], function(JSComponent){
+    'js/lib/vanilla-plugin',
+    'underscore',
+    'domReady!'
+], function(JSComponent, _){
     'use strict';
 
     /**
      * DOMListener
      * @author Ciro Arcadio <ciro.arcadio@dnafactory.it>
-     *     It adds a listener to the DOM for the 'contentUpdated' event, which is used by Magento 2 ajax components
+     *     Re-run component initialization on DOM updates
      */
     return JSComponent.extend({
+        defaults:{
+           options: {
+               debounceTime: 500,
+               observeItems: {
+                   childList: true,
+                   subtree: true
+               }
+           }
+        },
         /**
          * @private
          */
         _bind(){
-            var body = document.querySelector('body');
-            this._bindToContentUpdated(body);
-            if(this.element !== body)
-                this._bindToContentUpdated(this.element);
-        },
-        /**
-         * 'contentUpdated' events are triggered via jquery in the application.
-         *  so jquery is loaded here asynchronously to prevent rendering slowdown.
-         * @param element
-         * @private
-         */
-        _bindToContentUpdated(element){
-            require(['jquery'], ($) => {
-                $(document).off('contentUpdated', element, (e) => this._init());
-                $(document).on('contentUpdated', element, (e) => this._init());
-            });
+            this._super();
+
+            var body = document.querySelector('body'),
+                // We're debouncing the callback here, to avoid multiple unwanted calls
+                debouncedUpdate = _.debounce(this._init.bind(this), this.options.debounceTime, false),
+                mutationObserver = new MutationObserver(debouncedUpdate);
+            // Starts listening for changes in the root HTML element of the page.
+            mutationObserver.observe(body, this.options.observeItems);
         }
     });
 
