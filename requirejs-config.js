@@ -1,4 +1,9 @@
 var config = {
+    map:{
+        "*":{
+            "dna.responsive": "js/lib/dna-responsive"
+        }
+    },
     paths: {
         'config':'js/config'
     },

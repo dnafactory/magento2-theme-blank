@@ -1,0 +1,16 @@
+//
+// Insert here your custom breakpoint css vars
+// Use the .dna-breakpoint-mixin to maintain compatibility.
+// For an input of .dna-breakpoint(a, b), it will generate a string like:
+// --breakpoint-a: b;
+// where 'a' is the semantic name and 'b' is the value in pixels.
+// Note: if 'b' is not defined, it will try to read the value of the param @screen__'a'
+//
+.dna-root-vars(@media-target) when (@media-target='critical'){
+  .dna-breakpoint-var(xxs);
+  .dna-breakpoint-var(xs);
+  .dna-breakpoint-var(sm, @screen__s);
+  .dna-breakpoint-var(md, @screen__m);
+  .dna-breakpoint-var(lg, @screen__l);
+  .dna-breakpoint-var(xl);
+}

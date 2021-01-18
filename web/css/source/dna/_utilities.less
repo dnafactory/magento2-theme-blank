@@ -331,3 +331,15 @@
     right: @gap;
   }
 }
+
+//
+// Breakpoint css params generator
+//______________________________________________________________________________________________________________________
+//
+.dna-breakpoint-var(@bp){
+  @varname: "screen__@{bp}";
+  .dna-breakpoint-var(@bp, @@varname);
+}
+.dna-breakpoint-var(@bp, @value){
+  --breakpoint-@{bp}: @value;
+}

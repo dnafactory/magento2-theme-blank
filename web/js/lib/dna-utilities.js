@@ -147,12 +147,13 @@ define(['underscore'], function(_) {
          },
          /**
           * Returns the value of a css var, if it was defined in the current DOM
-          * @param varname
+          * @param varName
+          * @param defaultValue
           * @returns {string}
           */
-         getCssVar(varname){
+         getCssVar(varName, defaultValue = null){
              return getComputedStyle(document.body)
-                 .getPropertyValue(`--${varname}`);
+                 .getPropertyValue(`--${varName}`)?? (defaultValue);
          },
          /**
           * Sets a value in the dataset of an element

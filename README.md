@@ -77,6 +77,22 @@ Come per l'utilizzo delle **guardie** in less, un buon mix di direttive `@extend
 ### Modificare/aggiungere colori al tema
 
 ### Aggiungere un breakpoint
+Come per qualunque altra variabile less, tutti i breakpoint sono condivisi con i sorgenti scss di Bootstrap.
+In più, è presente un sistema (sperimentale) che permette di condividere i bp (definiti nel progetto less) con le componenti JS.
+Farò riferimento a questa feature utilizzando il nome __CSS->JS__. Funziona in 2 step:
+1. i bp vengono inseriti nello style del documento come [variabili css](https://www.w3.org/TR/css-variables-1/)
+2. la componente `js/lib/dna-responsive`, richiamata all'occorrenza, restituisce il valore del bp richiesto, leggendolo direttamente dal document.
+
+
+Le variabili presenti (da @screen__xxs a @screen_xl) dovrebbero essere sufficienti a coprire tutte le eventuali necessità.
+Tuttavia, quando e se necessario, è possibile aggiungerne di personalizzati seguendo queste indicazioni al fine di conservare tutte le features associate:
+1. Definisci il tuo bp come variabile all'interno del file `_variables.less` del tuo tema figlio;
+2. Copia il file `lib/_responsive.less` all'interno del tuo tema figlio e modifica/aggiungi le guardie di cui hai bisogno;
+3. __PER LA GENERAZIONE DELLE CLASSI BOOTSTRAP:__ crea (se non è presente) il file `DNAFactory_Bootstrap/web/css/source/scss/themes/_extends.scss` 
+   all'interno del tuo tema figlio ed estendi le variabile come definito nella [documentazione ufficiale](https://getbootstrap.com/docs/4.5/layout/grid/#variables));
+4. __SOLO PER LA FEATURE CSS->JS:__ copia il file `_responsive-vars.less` nel tuo tema figlio ed aggiungi il tuo bp (leggi la doc interna per i dettagli);
+
+Si consiglia di evitare (o quantomeno limitare) l'utilizzo di bp custom e di utilizzare __SEMPRE__ le specifiche guardie all'interno del codice less.
 
 ### Utilizzare il layout full-width
 

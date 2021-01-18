@@ -1,3 +1,20 @@
+### v2.0.0-alpha.2
+- Refactoring del dom-listener con MutationObserver e debouncing
+- Affiancamento del modulo core per la gestione delle componenti configurabili
+  + gestione di fallback per il critical.css
+- css smooth scroll
+- tablist
+- responsive utilities (experimental)
+
+#### Bug risolti:
+- il dom-listener non aggiorna correttamente i components
+- il debounce dello scrollbar-fix non funziona correttamente
+
+#### Bug noti:
+
+---
+
+
 ### v2.0.0-alpha.1 [8/01/2021]
 - Refactoring di theme.js
 - aggiunte icone eye ed eye-off all'icon set
