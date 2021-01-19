@@ -27,18 +27,16 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'c-min') and (@break = @screen__l) {
-    .full-width-container {
-        .dna-full-width();
-    }
-}
-
 .dna-root-vars(@media-target) when (@media-target='critical'){
     scroll-behavior: smooth;
     --scrollbar-width: @scrollbar__size;
     .dna-scrollbar();
 }
 & when (@media-target='critical') {
+    .full-width-container {
+        .dna-full-width();
+    }
+
     .columns {
         #lib-layout-columns();
 
