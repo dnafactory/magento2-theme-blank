@@ -7,7 +7,6 @@ define([
     /**
      * ScrollbarFix
      * @author Ciro Arcadio <ciro.arcadio@dnafactory.it>
-     *     It will
      */
     return JSComponent.extend({
         _init: function(){
@@ -20,6 +19,7 @@ define([
             // debounce method prevents event overlaps
             var onResize = _.debounce( this._init.bind(this), 250, false );
             window.addEventListener("resize", onResize, false);
+            document.addEventListener('dna.DOMUpdated', onResize, false);
         }
     });
 });
