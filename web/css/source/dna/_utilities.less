@@ -17,7 +17,14 @@
 //
 // Genera le proprietà relative agli stili della scrollbar
 //______________________________________________________________________________________________________________________
-.dna-scrollbar(@size: @scrollbar__size, @color: @scrollbar__color, @background: @scrollbar__background){
+.dna-scrollbar(
+  @size: @scrollbar__size,
+  @color: @scrollbar__color,
+  @background: @scrollbar__background,
+  @thumb-spacing: @scrollbar-thumb-spacing,
+  @radius: @scrollbar__border-radius,
+  @inactive-color: @scrollbar__inactive__color
+){
   scrollbar-color: @color @background;
   .dna-scrollbar-size(@size);
   &::-webkit-scrollbar {
@@ -28,6 +35,13 @@
   }
   &::-webkit-scrollbar-thumb {
     background-color: @color;
+    border-radius: @radius;
+    border-width: @thumb-spacing;
+    border-style: solid;
+    border-color: @background;
+    &:window-inactive {
+      background-color: @inactive-color;
+    }
   }
 }
 //
@@ -311,7 +325,7 @@
   transition-duration: 0.3s;
   transition-property: transform;
   .lib-css(transform-origin, @label-align);
-  &.focus, &.not-empty{
+  &.focus, &.not-empty, &.multiple{
     height: auto;
     transform: translateY(@label-translate-y-focus) scale(@label-scale-focus);
     .lib-css(padding,@label-padding-focus);

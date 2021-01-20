@@ -1,3 +1,8 @@
 .dna-root-vars(@media-target) when (@media-target='critical') and (@form-field-label-as-placeholder){
   --label-as-placeholder: true;
 }
+& when(@media-common = true) and (@form-field-label-as-placeholder){
+  select[multiple]{
+    padding-top: 10px;
+  }
+}

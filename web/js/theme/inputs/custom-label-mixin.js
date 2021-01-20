@@ -52,7 +52,7 @@ define([
                 require(['jquery'], ($) => {
                     // Check if control is in a fieldset
                     var fieldset = $(this.element).closest('fieldset');
-                    if(fieldset.length){
+                    if(fieldset.length && !$(this.label).is(':visible')){
                         // if it's a labeled fieldset which has a legend element
                         if( $('legend', fieldset).length ){
                             var legend = $('legend', fieldset).get(0);

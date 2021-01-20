@@ -44,6 +44,7 @@ define([
         _init(){
             this._super();
             this.element.classList.add('custom-select');
+            this.label.classList.toggle('multiple', this.element.hasAttribute('multiple'));
         }
     });
 });
