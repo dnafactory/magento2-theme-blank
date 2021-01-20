@@ -44,6 +44,38 @@
     }
   }
 }
+.dna-selection(
+  @color: @global-text-selection__color,
+  @background: @global-text-selection__background
+){
+  &::selection{
+    color: @color;
+    background: @background;
+  }
+  &::-moz-selection {
+    color: @color;
+    background: @background;
+  }
+}
+.dna-select-selection(
+  @select-color: @global-select-selection__color,
+  @select-background: @global-select-selection__background,
+  @select-color-unfocused: @global-select-selection__unfocused__color,
+  @select-background-unfocused: @global-select-selection__unfocused__background
+){
+  option:checked{
+    color: @select-color-unfocused;
+    background: linear-gradient(@select-background-unfocused, @select-background-unfocused);
+    background-color: @select-background-unfocused;
+  }
+  :not([multiple]) option:hover,
+  &[multiple]:focus option:checked{
+    color: @select-color;
+    background: linear-gradient(@select-background, @select-background);
+    background-color: @select-background;
+    box-shadow: 0 0 10px 100px @select-background inset;
+  }
+}
 //
 // Custom Loop in stile foreach
 //______________________________________________________________________________________________________________________
