@@ -36,7 +36,9 @@ define([
                 label.setAttribute('for', id);
                 this.element.after(label);
                 this.element.hasAttribute('placeholder')
-                    label.textContent = this.element.getAttribute('placeholder');
+                label.textContent = this.element.getAttribute('placeholder');
+                if(utilities.isEmpty(label.textContent))
+                    label.style.display = 'none';
             }
             this.label = label;
             this.element.classList.add('handled-input');
