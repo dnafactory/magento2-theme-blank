@@ -322,63 +322,6 @@
 }
 
 //
-// Utilities per Label
-//______________________________________________________________________________________________________________________
-//
-.dna-form-label-as-placeholder(
-  @label-color: @form-field-label-as-placeholder__color,
-  @label-color-focus: @form-field-label-as-placeholder-focus__color,
-  @label-height: @form-field-label-as-placeholder__height,
-  @label-line-height: @form-field-label-as-placeholder__line-height,
-  @label-align: @form-field-label-as-placeholder__align,
-  @label-padding: @form-field-label-as-placeholder__padding,
-  @label-padding-focus: @form-field-label-as-placeholder-focus__padding,
-  @label-margin: @form-field-label-as-placeholder__margin,
-  @label-margin-focus: @form-field-label-as-placeholder-focus__margin,
-  @label-bg-focus: @form-field-label-as-placeholder-focus__background-color,
-  @label-translate-y-focus: @form-field-label-as-placeholder-focus__translate-y,
-  @label-scale-focus: @form-field-label-as-placeholder-focus__scale,
-  @label-default-gap: @control-icon-border-gutter
-){
-  position: absolute;
-  z-index: 10;
-  .lib-css(padding,@label-padding);
-  .lib-css(margin,@label-margin);
-
-  .dna-form-label-as-placeholder-icon-gaps(@label-default-gap);
-
-  top: 0;
-  bottom: auto;
-  .lib-css(height,@label-height);
-  .lib-css(line-height, @label-line-height);
-  pointer-events: none;
-  .lib-vendor-prefix-display(flex);
-  .lib-vendor-box-align(center);
-  transition-duration: 0.3s;
-  transition-property: transform;
-  .lib-css(transform-origin, @label-align);
-  &.focus, &.not-empty, &.multiple{
-    height: auto;
-    transform: translateY(@label-translate-y-focus) scale(@label-scale-focus);
-    .lib-css(padding,@label-padding-focus);
-    .lib-css(margin,@label-margin-focus);
-    .lib-css(background-color, @label-bg-focus);
-  }
-}
-
-.dna-form-label-as-placeholder-icon-gaps(
-  @label-align: @form-field-label-as-placeholder__align,
-  @gap: @control-icon__width
-){
-  & when (@label-align = left) {
-    left: @gap;
-  }
-  & when (@label-align = right){
-    right: @gap;
-  }
-}
-
-//
 // Breakpoint css params generator
 //______________________________________________________________________________________________________________________
 //
