@@ -9,14 +9,5 @@
         </referenceContainer>
         <move element="address_book" destination="customer.account.address.content" />
         <move element="address_grid" destination="customer.account.address.content" />
-        <referenceBlock name="customer.account.view.custom.title">
-            <action method="setTitle">
-                <argument name="title" xsi:type="string">Il miei Indirizzi/Cantieri</argument>
-            </action>
-        </referenceBlock>
-        <referenceContainer name="custom.title.additional.element" htmlClass="actions-inline" />
-        <referenceContainer name="custom.title.additional.element">
-            <block name="customer.title.header.actions" template="DNAFactory_ThemeCore::address/actions.phtml" before="-" />
-        </referenceContainer>
     </body>
 </page>

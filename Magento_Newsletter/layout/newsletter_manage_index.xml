@@ -7,7 +7,7 @@
             </action>
         </referenceBlock>
         <referenceContainer name="custom.title.back.url">
-            <block name="back.url" template="DNAFactory_ThemeCore::misc/page/back-url.phtml">
+            <block name="back.url" template="DNAFactory_Theme::misc/page/back-url.phtml">
                 <action method="setBackUrl">
                     <argument name="back_url" xsi:type="string">customer/account</argument>
                 </action>

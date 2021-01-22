@@ -7,60 +7,57 @@
 /** @var \Magento\Customer\Block\Address\Book $block */
 ?>
 <div class="block block-addresses-default col-md-6 col-12">
-    <div class="block-title"><div class="headline-4 color-black"><?= $block->escapeHtml(__('Indirizzi Predefiniti')) ?></div></div>
-    <div class="block-content row">
-        <div class="col-12">
-            <?php if ($_pAddsses = $block->getDefaultBilling()) : ?>
-                <div class="box box-address-billing">
-                    <strong class="box-title">
-                        <span><?= $block->escapeHtml(__('Indirizzo di fatturazione predefinito')) ?></span>
-                    </strong>
-                    <div class="box-content">
-                        <p>
-                            <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
-                        </p>
-                    </div>
-                    <div class="box-actions">
-                        <a class="action" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
-                            <i class="icon-icon_edit"></i>
-                        </a>
-                    </div>
-                </div>
-            <?php else : ?>
-                <div class="box box-billing-address">
-                    <strong class="box-title"><span><?= $block->escapeHtml(__('Indirizzo di fatturazione predefinito')) ?></span></strong>
-                    <div class="box-content">
-                        <p><?= $block->escapeHtml(__('Non hai nessun indirizzo di fatturazione predefinito.')) ?></p>
-                    </div>
-                </div>
-            <?php endif ?>
-        </div>
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Default Addresses')) ?></strong></div>
+    <div class="block-content">
 
-        <div class="col-12">
-            <?php if ($_pAddsses = $block->getDefaultShipping()) : ?>
-                <div class="box box-address-shipping">
-                    <strong class="box-title">
-                        <span><?= $block->escapeHtml(__('Indirizzo di spedizione predefinito')) ?></span>
-                    </strong>
-                    <div class="box-content">
-                        <p>
-                            <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
-                        </p>
-                    </div>
-                    <div class="box-actions">
-                        <a class="action" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
-                            <i class="icon-icon_edit"></i>
-                        </a>
-                    </div>
+        <?php if ($_pAddsses = $block->getDefaultBilling()) : ?>
+            <div class="card mb-4 box-address-billing">
+                <strong class="card-header">
+                    <span><?= $block->escapeHtml(__('Default Billing Address')) ?></span>
+                </strong>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                    </p>
                 </div>
-            <?php else : ?>
-                <div class="box box-shipping-address">
-                    <strong class="box-title"><span><?= $block->escapeHtml(__('Indirizzo di spedizione predefinito')) ?></span></strong>
-                    <div class="box-content">
-                        <p><?= $block->escapeHtml(__('Non hai nessun indirizzo di spedizione predefinito.')) ?></p>
-                    </div>
+                <div class="card-footer text-right">
+                    <a class="action card-link" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                        <i class="icon-edit"></i>
+                    </a>
                 </div>
-            <?php endif ?>
-        </div>
+            </div>
+        <?php else : ?>
+            <div class="card mb-4 box-billing-address">
+                <strong class="card-header"><span><?= $block->escapeHtml(__('Default Billing Address')) ?></span></strong>
+                <div class="card-body">
+                    <p class="card-text"><?= $block->escapeHtml(__('You have no default billing address in your address book.')) ?></p>
+                </div>
+            </div>
+        <?php endif ?>
+
+        <?php if ($_pAddsses = $block->getDefaultShipping()) : ?>
+            <div class="card mb-4 box-address-shipping">
+                <strong class="card-header">
+                    <span><?= $block->escapeHtml(__('Default Shipping Address')) ?></span>
+                </strong>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                    </p>
+                </div>
+                <div class="card-footer text-right">
+                    <a class="action card-link" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                        <i class="icon-edit"></i>
+                    </a>
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="box box-shipping-address">
+                <strong class="box-title"><span><?= $block->escapeHtml(__('Default Shipping Address')) ?></span></strong>
+                <div class="box-content">
+                    <p><?= $block->escapeHtml(__('You have no default shipping address in your address book.')) ?></p>
+                </div>
+            </div>
+        <?php endif ?>
     </div>
 </div>

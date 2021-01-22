@@ -4,22 +4,23 @@
  * See COPYING.txt for license details.
  */
 
+// phpcs:disable Generic.Files.LineLength.TooLong
+
 /** @var \Magento\Customer\Block\Form\Login $block */
 ?>
 <div class="block col-lg-6 col-md-8 col-12 float-left block-customer-login">
     <div class="block-title">
-        <strong id="block-customer-login-heading" class="headline-4" role="heading" aria-level="2"><?= $block->escapeHtml(__('Registered Customers')) ?></strong>
+        <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Registered Customers')) ?></strong>
     </div>
     <div class="block-content" aria-labelledby="block-customer-login-heading">
         <form class="form form-login"
               action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
               method="post"
               id="login-form"
-              data-mage-init='{"validation":{ }}'>
+              data-mage-init='{"validation":{}}'>
             <?= $block->getBlockHtml('formkey') ?>
-            <fieldset class="fieldset login">
+            <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>">
                 <div class="field note no-label"><?= $block->escapeHtml(__('If you have an account, sign in with your email address.')) ?></div>
-                <?= $block->getChildHtml('page.messages') ?>
                 <div class="field email required field-icon">
                     <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
                     <div class="control control-icon">
@@ -42,5 +43,14 @@
             </fieldset>
         </form>
     </div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Customer/js/block-submit-on-send": {
+                    "formId": "login-form"
+                }
+            }
+        }
+    </script>
 </div>
 
