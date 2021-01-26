@@ -152,8 +152,9 @@ define(['underscore'], function(_) {
           * @returns {string}
           */
          getCssVar(varName, defaultValue = null){
-             return getComputedStyle(document.body)
+             var value = getComputedStyle(document.body)
                  .getPropertyValue(`--${varName}`)?? (defaultValue);
+             return this.isEmpty(value)? value : value.trim();
          },
          /**
           * Sets a value in the dataset of an element
