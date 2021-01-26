@@ -1,10 +1,20 @@
-### v2.0.0-alpha.2
+### v2.0.0-alpha.2 [26/01/2021]
 - Refactoring del dom-listener con MutationObserver e debouncing
 - Affiancamento del modulo core per la gestione delle componenti configurabili
   + gestione di fallback per il critical.css
 - css smooth scroll
 - tablist
 - responsive utilities (experimental)
+- Pulizia dei file .less del vecchio tema
+  + traduzione di eventuali mixin riutilizzabili.
+- Spostamento delle delle regole scss specifiche per Bootstrap nel modulo `dnafactory/module-bootstrap`
+- Pulizia dei layouts
+- Pulizia dei template:
+  + rimozione dei template non general-purpose
+  + template di header e footer
+  + refactoring delle traduzioni
+- implementazione del carosello di bootstrap per dnaCarousel
+- mixin di supporto per i caroselli
 
 #### Bug risolti:
 - il dom-listener non aggiorna correttamente i components
