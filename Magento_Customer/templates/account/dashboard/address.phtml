@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Address $block */
+?>
+<div class="block block-dashboard-addresses w-100">
+    <div class="block-content row">
+        <div class="d-flex mb-4 mb-md-0 col-12 col-md-6">
+            <div class="card flex-fill box-billing-address">
+                <div class="card-header h3">
+                    <span><?= $block->escapeHtml(__('Default Billing Address')) ?></span>
+                    <a class="action edit card-link float-right" href="<?= $block->escapeUrl($block->getPrimaryBillingAddressEditUrl()) ?>" data-ui-id="default-billing-edit-link"><i class="icon-edit"></i></a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?= $block->getPrimaryBillingAddressHtml() ?>
+                    </p>
+                </div>
+                <div class="card-footer text-right">
+                    <a class="btn btn-primary" href="<?= $block->escapeUrl($block->getAddressBookUrl()) ?>"><span><?= $block->escapeHtml(__('Edit Address')) ?></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex mb-4 mb-md-0 col-12 col-md-6">
+            <div class="card flex-fill box-shipping-address">
+                <div class="card-header h3">
+                    <span><?= $block->escapeHtml(__('Default Shipping Address')) ?></span>
+                    <a class="action edit card-link float-right" href="<?= $block->escapeUrl($block->getPrimaryShippingAddressEditUrl()) ?>" data-ui-id="default-shipping-edit-link"><i class="icon-edit"></i></a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?= $block->getPrimaryShippingAddressHtml() ?>
+                    </p>
+                </div>
+                <div class="card-footer text-right">
+                    <a class="btn btn-primary" href="<?= $block->escapeUrl($block->getAddressBookUrl()) ?>"><span><?= $block->escapeHtml(__('Edit Address')) ?></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

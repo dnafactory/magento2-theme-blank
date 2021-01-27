@@ -1,0 +1,7 @@
+<li class="<?php echo $block->getData('additional_wrapper_class'); ?>">
+    <a <?php echo $this->getLinkAttributes(); ?>>
+        <?php // diamo la possibilità di inserire tag html nel label
+        // echo $this->escapeHtml($this->getLabel()); ?>
+        <?php echo ($this->getLabel()); ?>
+    </a>
+</li>

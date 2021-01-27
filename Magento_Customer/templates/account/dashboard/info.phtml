@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-info w-100">
+    <div class="block-content row">
+        <div class="d-flex mb-4 mb-md-0 col-12 <?php if($block->isNewsletterEnabled()) :?>col-md-6 <?php endif; ?>">
+            <div class="card box-information flex-fill">
+                <div class="card-header h3">
+                    <span><?= $block->escapeHtml(__('Account Information')) ?></span>
+                    <a class="action edit card-link float-right" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                        <i class="icon-edit"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?= $block->escapeHtml($block->getName()) ?><br>
+                        <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                    </p>
+                    <?= $block->getChildHtml('customer.account.dashboard.info.extra'); ?>
+                </div>
+                <div class="card-footer text-right">
+                    <a href="<?= $block->escapeUrl($block->getChangePasswordUrl()) ?>" class="btn btn-primary change-password">
+                        <?= $block->escapeHtml(__('Change Password')) ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()) : ?>
+        <div class="d-flex mb-4 mb-md-0 col-12 col-md-6">
+            <div class="card box-newsletter flex-fill">
+                <div class="card-header h3">
+                    <span><?= $block->escapeHtml(__('Newsletter')) ?></span>
+                    <a class="action edit card-link float-right" href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>"><i class="icon-edit"></i></a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?php if ($block->getIsSubscribed()): ?>
+                            <?= $block->escapeHtml(__('You are subscribed to "General Subscription".')) ?>
+                        <?php else: ?>
+                            <?= $block->escapeHtml(__('You aren\'t subscribed to our newsletter.')) ?>
+                        <?php endif; ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?= $block->getChildHtml('additional_blocks'); ?>
+    </div>
+
+</div>

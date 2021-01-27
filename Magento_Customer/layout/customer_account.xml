@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sidebar.main.account_nav">
+            <arguments>
+                <argument name="block_css" xsi:type="string">account-nav account-nav-page-header</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <arguments>
+                <argument name="css_class" xsi:type="string">nav nav-pills flex-column</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-account-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">My Dashboard</argument>
+                <argument name="sortOrder" xsi:type="number">1000</argument>
+                <argument name="template" xsi:type="string">navigation/link.phtml</argument>
+                <argument name="icon_class" xsi:type="string">icon-company-logo</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

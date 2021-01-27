@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer.account.view.custom.title">
+            <action method="setTitle">
+                <argument name="title" xsi:type="string">Newsletter</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="custom.title.back.url">
+            <block name="back.url" template="DNAFactory_Theme::misc/page/back-url.phtml">
+                <action method="setBackUrl">
+                    <argument name="back_url" xsi:type="string">customer/account</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

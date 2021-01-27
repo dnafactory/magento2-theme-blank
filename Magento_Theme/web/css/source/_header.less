@@ -1,0 +1,27 @@
+& when (@media-target = 'critical') {
+  .page-header {
+    .lib-css(background-color, @header__background-color);
+    .panel.wrapper {
+      .lib-css(background-color, @header-panel__background-color);
+      .lib-css(color, @header-panel__text-color);
+    }
+  }
+  .header.panel {
+    > .header.links {
+      > li {
+        > a {
+          .lib-link(
+            @_link-color: @header-panel__text-color,
+            @_link-text-decoration: none,
+            @_link-color-visited: @header-panel__text-color,
+            @_link-text-decoration-visited: none,
+            @_link-color-hover: @header-panel__text-color,
+            @_link-text-decoration-hover: underline,
+            @_link-color-active: @header-panel__text-color,
+            @_link-text-decoration-active: underline
+          );
+        }
+      }
+    }
+  }
+}

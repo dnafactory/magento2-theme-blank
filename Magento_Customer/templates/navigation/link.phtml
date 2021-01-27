@@ -1,0 +1,39 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Html\Link\Current */
+?>
+
+<?php
+$highlight = '';
+$customClasses = $block->getCustomCss();
+$iconClass = $block->getIconClass();
+
+if ($block->getIsHighlighted()) {
+    $highlight = ' current';
+}
+
+if ($block->isCurrent()) {
+    $html = '<li class="nav item current ' . $customClasses . '">';
+    $html .= '<span>';
+    if ($iconClass) {
+        $html .= '<i class="' . $iconClass .'"></i>';
+    }
+    $html .= $block->escapeHtml(__($block->getLabel()))
+        . '</span>';
+    $html .= '</li>';
+} else {
+    $html = '<li class="nav item' . $highlight . ' ' . $customClasses .'"><a href="' . $block->escapeHtml($block->getHref()) . '"';
+    $html .= $block->getTitle()
+        ? ' title="' . $block->escapeHtml(__($block->getTitle())) . '"'
+        : '';
+    $html .= $block->getAttributesHtml() . '>';
+    if ($iconClass) {
+        $html .= '<i class="' . $iconClass .'"></i>';
+    }
+
+    $html .= $block->escapeHtml(__($block->getLabel()));
+
+    $html .= '</a></li>';
+}
+
+echo $html;
+?>

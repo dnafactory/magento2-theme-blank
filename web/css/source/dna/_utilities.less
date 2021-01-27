@@ -1,0 +1,349 @@
+.lib-vendor-box-justify (
+  @_value: center
+) {
+  -webkit-justify-content: @_value;
+  -ms-justify-content: @_value;
+  justify-content: @_value;
+}
+
+.lib-vendor-prefix-flex-all (
+  @_value: 1
+) {
+  -ms-flex: @_value;
+  -webkit-flex: @_value;
+  flex: @_value;
+}
+//
+// Normalizza il valore da assegnare alla proprietà 'scrollbar-size'
+//______________________________________________________________________________________________________________________
+.dna-scrollbar-size(@scrollbar-size: @scrollbar__size){
+  &when (isnumber(@scrollbar-size)){
+    &when(@scrollbar-size >= 12px){
+      scrollbar-width: auto;
+    }
+    &when(@scrollbar-size < 12px){
+      scrollbar-width: thin;
+    }
+  }
+  &when (iskeyword(@scrollbar-size)){
+    scrollbar-width: @scrollbar-size;
+  }
+}
+//
+// Genera le proprietà relative agli stili della scrollbar
+//______________________________________________________________________________________________________________________
+.dna-scrollbar(
+  @size: @scrollbar__size,
+  @color: @scrollbar__color,
+  @background: @scrollbar__background,
+  @thumb-spacing: @scrollbar-thumb-spacing,
+  @radius: @scrollbar__border-radius,
+  @inactive-color: @scrollbar__inactive__color
+){
+  scrollbar-color: @color @background;
+  .dna-scrollbar-size(@size);
+  &::-webkit-scrollbar {
+    width: @size;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: @background;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: @color;
+    border-radius: @radius;
+    border-width: @thumb-spacing;
+    border-style: solid;
+    border-color: @background;
+    &:window-inactive {
+      background-color: @inactive-color;
+    }
+  }
+}
+.dna-selection(
+  @color: @global-text-selection__color,
+  @background: @global-text-selection__background
+){
+  &::selection{
+    color: @color;
+    background: @background;
+  }
+  &::-moz-selection {
+    color: @color;
+    background: @background;
+  }
+}
+.dna-select-selection(
+  @select-color: @global-select-selection__color,
+  @select-background: @global-select-selection__background,
+  @select-color-unfocused: @global-select-selection__unfocused__color,
+  @select-background-unfocused: @global-select-selection__unfocused__background
+){
+  option:checked{
+    color: @select-color-unfocused;
+    background: linear-gradient(@select-background-unfocused, @select-background-unfocused);
+    background-color: @select-background-unfocused;
+  }
+  :not([multiple]) option:hover,
+  &[multiple]:focus option:checked{
+    color: @select-color;
+    background: linear-gradient(@select-background, @select-background);
+    background-color: @select-background;
+    box-shadow: 0 0 10px 100px @select-background inset;
+  }
+}
+//
+// Custom Loop in stile foreach
+//______________________________________________________________________________________________________________________
+.dna-each (@list, @code) {
+  & {
+    .loop(@i:1) when (@i =< length(@list)) {
+      @value: extract(@list, @i);
+      @code();
+      .loop(@i + 1);
+    }
+    .loop();
+  }
+}
+//
+// Per uso interno. Cicla e definisce i path relativi ad un'icona multi-path.
+//______________________________________________________________________________________________________________________
+._dna-generate-multipath-icon( @icon, @paths, @i: 1) when (@i <= @paths) {
+  @icon-var: "@{icon}-path@{i}";
+  @icon-content: @@icon-var;
+
+  @_isString: isstring(@icon-content);
+  &when (@_isString){
+    @_class: ~".path@{i}";
+    @{_class} {
+      .lib-icon-font-symbol(@icon-content);
+    }
+  }
+  &when not (@_isString){
+    @_class: ~".path@{i}:@{icon-font__position}";
+    @{_class} {
+      @icon-content();
+    }
+  }
+  ._dna-generate-multipath-icon(@icon, @paths, @i + 1);
+}
+//
+// Genera un set di icone basandosi su una lista di icone e le relative variabili
+// Ogni elemento della lista può essere il nome di un'icona:
+// * facebook
+// (che sarà utilizzato per reuperare i dati relativi al contenuto dalla variabile di nome:
+// * icon-facebook)
+// oppure una coppia {nome-icona} {numero-di-paths} in caso di icone multipath
+// * facebook 3
+//______________________________________________________________________________________________________________________
+.dna-generate-icon-set(@list: @dna-icons__set) {
+  .dna-each(@list, {
+    @icon: extract(@value, 1);
+    @paths: extract(@value, 2);
+    @icon-content: "icon-@{icon}";
+
+    .@{dna-icons__prefix}-@{icon}, .control-icon-@{icon} {
+      & when (@paths > 0) {
+        ._dna-generate-multipath-icon(@icon-content, @paths);
+      }
+
+      & when (@paths <= 0) {
+        .lib-icon-font-symbol(@@icon-content);
+      }
+    }
+  });
+}
+//
+// Definisce le proprietà di base di un elemento full-width
+//______________________________________________________________________________________________________________________
+.dna-full-width(){
+  position: relative;
+  right: auto;
+  width: calc(~"100vw - var(--scrollbar-width)");
+  left: calc(~"(100% - 100vw + var(--scrollbar-width))/2");
+}
+
+//
+// Utilities per i posizionamento di elementi absolute
+//______________________________________________________________________________________________________________________
+.dna-absolute-center-y(){
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.dna-absolute-center-x(){
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dna-absolute-center(){
+  .dna-absolute-center-x();
+  .dna-absolute-center-y();
+  transform: translate(-50%,-50%);
+}
+
+//
+// Utilities per form con icone
+//______________________________________________________________________________________________________________________
+//
+.dna-control-icon-icons(){
+  position: relative;
+  & &.i{
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    pointer-events: none;
+    .lib-vendor-box-align(center);
+    .lib-vendor-box-justify(center);
+    .lib-vendor-prefix-display(flex);
+    &[type=button], &[type=submit]{
+      pointer-events: all;
+    }
+  }
+}
+.dna-control-icon-style(
+  @icon-color: @control-icon__color,
+  @icon-color-hover: @control-icon-hover__color,
+  @icon-color-focus: @control-icon-focus__color,
+  @icon-color-valid: @control-icon-valid__color,
+  @icon-color-error: @control-icon-error__color,
+  @icon-font-size: @control-icon__font-size,
+  @icon-line-height: @control-icon__line-height,
+  @icon-height: @control-icon__height,
+  @icon-width: @control-icon__width,
+  @icon-text-gutter: @control-icon-text-gutter,
+  @icon-border-gutter: @control-icon-border-gutter,
+  @rtl: @control-icon-rtl
+){
+  & &.i {
+    color: @icon-color;
+    font-size: @icon-font-size;
+    line-height: @icon-line-height;
+    height: @icon-height;
+    width: @icon-width + @icon-text-gutter + @icon-border-gutter;
+
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+
+  & input:focus ~ &.i{
+    .lib-css(color, @icon-color-focus);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+  & input.mage-error:focus ~ &.i {
+    .lib-css(color, @icon-color-error);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+  & input.valid:focus ~ &.i {
+    .lib-css(color, @icon-color-valid);
+    &:hover{
+      .lib-css(color, @icon-color-hover);
+    }
+  }
+
+  ._dna-form-element-icon-gutters__whit-reverse(
+            @icon-width + @icon-text-gutter + @icon-border-gutter,
+          @icon-border-gutter,
+          @icon-text-gutter,
+          @rtl
+  );
+}
+//======================================================================================================================
+._dna-form-element-icon-gutters__whit-reverse(
+  @spacing: @control-icon__width,
+  @padding-border: @control-icon-border-gutter,
+  @padding-text: @control-icon-text-gutter,
+  @rtl: false){
+
+  &:not(.reverse) &.i{
+    ._dna-form-element-icon-icon-gutters(
+            @spacing,
+            @padding-border,
+            @padding-text,
+            @rtl
+    );
+  }
+  &:not(.reverse) input{
+    ._dna-form-element-icon-input-gutters(
+            @spacing,
+            @rtl);
+  }
+
+  &when (@rtl){
+    &.reverse &.i{
+      ._dna-form-element-icon-icon-gutters(
+              @spacing,
+              @padding-border,
+              @padding-text,
+              false
+      );
+    }
+    &.reverse input{
+      ._dna-form-element-icon-input-gutters(
+              @spacing,
+              false);
+    }
+  }
+
+  &when not(@rtl){
+    &.reverse &.i{
+      ._dna-form-element-icon-icon-gutters(
+              @spacing,
+              @padding-border,
+              @padding-text,
+              true
+      );
+    }
+    &.reverse input{
+      ._dna-form-element-icon-input-gutters(
+              @spacing,
+              true);
+    }
+  }
+}
+
+
+._dna-form-element-icon-icon-gutters(
+  @spacing: @control-icon__width,
+  @padding-border: @control-icon-border-gutter,
+  @padding-text: @control-icon-text-gutter,
+  @rtl: false){
+  & when (@rtl){
+    right:0;
+    left:auto;
+    padding-left: @padding-text;
+    padding-right: @padding-border;
+  }
+  & when not (@rtl){
+      left:0;
+      right:auto;
+      padding-left: @padding-border;
+      padding-right: @padding-text;
+  }
+}
+._dna-form-element-icon-input-gutters(
+  @spacing: @control-icon__width,
+  @rtl: false){
+  & when (@rtl){
+    padding-right: @spacing;
+  }
+  & when not (@rtl){
+    padding-left: @spacing;
+  }
+}
+
+//
+// Breakpoint css params generator
+//______________________________________________________________________________________________________________________
+//
+.dna-breakpoint-var(@bp){
+  @varname: "screen__@{bp}";
+  .dna-breakpoint-var(@bp, @@varname);
+}
+.dna-breakpoint-var(@bp, @value){
+  --breakpoint-@{bp}: @value;
+}

@@ -1,0 +1,18 @@
+.nav.flex-column{
+  .nav-item{
+    margin-bottom:0;
+  }
+}
+.nav.item{
+  display: initial;
+  @extend .nav-item;
+}
+.nav.item > a,
+.nav.item > strong,
+.nav.item > span{
+    @extend .nav-link;
+}
+.nav.item.current >span,
+.nav.item.current > strong {
+    @extend .nav-link, .active;
+}
