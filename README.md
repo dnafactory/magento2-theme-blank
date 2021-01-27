@@ -120,58 +120,58 @@ E' stato quindi realizzato un plugin di base (in `js/lib/vanilla-plugin.js`) che
 #### boxed
 ```html
 <div data-mage-init='{ "dnaCarousel": { "middleWrapperClass":"row", "innerWrapperClass":"w-100" } }' class="slider flex-row d-flex flex-nowrap overflow-hidden">
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-success">Slide 1</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill bg-warning">Slide 2</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-primary">Slide 3</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-secondary">Slide 4</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-success">Slide 5</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill bg-warning">Slide 6</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-primary">Slide 7</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-secondary">Slide 8</div>
-    </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-success py-5 px-4">Slide 1</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill bg-warning py-5 px-4">Slide 2</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-primary py-5 px-4">Slide 3</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-secondary py-5 px-4">Slide 4</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-success py-5 px-4">Slide 5</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill bg-warning py-5 px-4">Slide 6</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-primary py-5 px-4">Slide 7</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-secondary py-5 px-4">Slide 8</div>
+  </div>
 </div>
 ```
 #### full width
 ```html
-<div data-mage-init='{ "dnaCarousel": { "middleWrapperClass":"full-width-container overflow-hidden", "innerWrapperClass":"mx-auto container px-0" } }' class="slider flex-row d-flex flex-nowrap overflow-hidden">
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-success">Slide 1</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill bg-warning">Slide 2</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-primary">Slide 3</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-secondary">Slide 4</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-success">Slide 5</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill bg-warning">Slide 6</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-primary">Slide 7</div>
-    </div>
-    <div class="slide col-3 d-inline-flex">
-        <div class="flex-fill text-white bg-secondary">Slide 8</div>
-    </div>
+<div data-mage-init='{ "dnaCarousel": { "middleWrapperClass":"full-width-container overflow-hidden", "innerWrapperClass":"mx-auto container-lg px-0" } }' class="slider flex-row d-flex flex-nowrap overflow-hidden">
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-success py-5 px-4">Slide 1</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill bg-warning py-5 px-4">Slide 2</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-primary py-5 px-4">Slide 3</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-secondary py-5 px-4">Slide 4</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-success py-5 px-4">Slide 5</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill bg-warning py-5 px-4">Slide 6</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-primary py-5 px-4">Slide 7</div>
+  </div>
+  <div class="slide col-3 d-inline-flex">
+    <div class="flex-fill text-white bg-secondary py-5 px-4">Slide 8</div>
+  </div>
 </div>
 ```

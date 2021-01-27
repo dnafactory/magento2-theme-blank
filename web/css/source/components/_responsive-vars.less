@@ -6,11 +6,13 @@
 // where 'a' is the semantic name and 'b' is the value in pixels.
 // Note: if 'b' is not defined, it will try to read the value of the param @screen__'a'
 //
-.dna-root-vars(@media-target) when (@media-target='critical'){
-  .dna-breakpoint-var(xxs);
-  .dna-breakpoint-var(xs);
-  .dna-breakpoint-var(sm, @screen__s);
-  .dna-breakpoint-var(md, @screen__m);
-  .dna-breakpoint-var(lg, @screen__l);
-  .dna-breakpoint-var(xl);
+& when (@media-target = 'critical') {
+  .dna-root-vars(@media-target) when (@media-target='critical') {
+    .dna-breakpoint-var(xxs);
+    .dna-breakpoint-var(xs);
+    .dna-breakpoint-var(sm, @screen__s);
+    .dna-breakpoint-var(md, @screen__m);
+    .dna-breakpoint-var(lg, @screen__l);
+    .dna-breakpoint-var(xl);
+  }
 }
