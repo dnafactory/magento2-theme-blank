@@ -12,7 +12,7 @@ define([
         _init: function(){
             this._super();
             document.documentElement.style
-                .setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + "px");
+                .setProperty('--scrollbar-width', (window.innerWidth - document.body.clientWidth) + "px");
         },
         _bind: function(){
             this._super();
