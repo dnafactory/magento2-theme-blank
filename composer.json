@@ -27,7 +27,7 @@
     "magento/framework": "*",
     "magento/theme-frontend-blank": "*",
     "dnafactory/module-theme": "dev-develop",
-    "dnafactory/module-bootstrap": "^0.1|dev-master"
+    "dnafactory/module-bootstrap": "^0.1|dev-develop"
   },
   "autoload": {
     "files": [
