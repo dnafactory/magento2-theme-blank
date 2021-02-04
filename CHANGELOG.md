@@ -1,3 +1,8 @@
+### v2.0.0-alpha.3
+- Refactoring delle griglie:
+  + griglie di bootstrap con Css vars
+  + Layout gutter specifico, indipendente dal grid-gutter
+
 ### v2.0.0-alpha.2 [26/01/2021]
 - Refactoring del dom-listener con MutationObserver e debouncing
 - Affiancamento del modulo core per la gestione delle componenti configurabili
