@@ -11,8 +11,19 @@
 @control-icon-border-gutter: 4px;
 @control-icon-rtl: false;
 
+.dna-root-vars(@media-target) when (@media-target='critical'){
+  .dna-control-icon-spacing-variant(
+    @icon-width: 0px,
+    @icon-text-gutter: 0px,
+    @icon-border-gutter: extract(@form-element-input__padding, 2)
+  );
+}
+
 &when(@media-common = true) {
 
+  .field-icon{
+    .dna-control-icon-spacing-variant();
+  }
   .control-icon{
     .dna-control-icon-icons();
     .dna-control-icon-style();

@@ -46,6 +46,7 @@ define([
                 this.options.notEmptyLabelClass,
                 (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
             );
+            this.label.classList.toggle('disabled', this.element.disabled);
         },
         _checkPlaceholder(){
             if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
