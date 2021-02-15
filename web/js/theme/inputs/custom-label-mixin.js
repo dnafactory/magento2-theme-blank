@@ -60,8 +60,6 @@ define([
                             this.label.classList.forEach(value => legend.classList.add(value));
                             this.label = legend;
                         }
-                        // than we clear the placeholders
-                        this.element.setAttribute('placeholder', "");
                     }
                 });
                 if (utilities.getInputType(this.element) === 'select') {

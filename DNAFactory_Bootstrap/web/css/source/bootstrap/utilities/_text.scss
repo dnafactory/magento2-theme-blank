@@ -42,7 +42,7 @@
 
 @each $size-label, $font-size in $font-sizes {
   .font-#{$size-label}{
-    font-size: $font-size;
+    font-size: $font-size !important;
   }
 }
 

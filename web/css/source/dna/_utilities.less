@@ -141,7 +141,7 @@
     @paths: extract(@value, 2);
     @icon-content: "icon-@{icon}";
 
-    .@{dna-icons__prefix}-@{icon}, .control-icon-@{icon} {
+    .@{dna-icons__prefix}-@{icon} {
       & when (@paths > 0) {
         ._dna-generate-multipath-icon(@icon-content, @paths);
       }
@@ -179,135 +179,6 @@
   .dna-absolute-center-x();
   .dna-absolute-center-y();
   transform: translate(-50%,-50%);
-}
-
-//
-// Utilities per form con icone
-//______________________________________________________________________________________________________________________
-//
-.dna-control-icon-icons(){
-  position: relative;
-  & &.i{
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    pointer-events: none;
-    .lib-vendor-box-align(center);
-    .lib-vendor-box-justify(center);
-    .lib-vendor-prefix-display(flex);
-    &[type=button], &[type=submit]{
-      pointer-events: all;
-    }
-  }
-}
-
-.dna-control-icon-spacing-variant(
-  @icon-width: @control-icon__width,
-  @icon-text-gutter: @control-icon-text-gutter,
-  @icon-border-gutter: @control-icon-border-gutter
-){
-  .lib-css(--c-icon-width, @icon-width);
-  .lib-css(--c-icon-text-gutter, @icon-text-gutter);
-  .lib-css(--c-icon-border-gutter, @icon-border-gutter);
-};
-.dna-control-icon-style(
-  @icon-color: @control-icon__color,
-  @icon-color-hover: @control-icon-hover__color,
-  @icon-color-focus: @control-icon-focus__color,
-  @icon-color-valid: @control-icon-valid__color,
-  @icon-color-error: @control-icon-error__color,
-  @icon-font-size: @control-icon__font-size,
-  @icon-line-height: @control-icon__line-height,
-  @icon-height: @control-icon__height,
-  @rtl: @control-icon-rtl
-){
-  & &.i {
-    color: @icon-color;
-    font-size: @icon-font-size;
-    line-height: @icon-line-height;
-    height: @icon-height;
-    width: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter))";
-
-    &:hover{
-      .lib-css(color, @icon-color-hover);
-    }
-  }
-
-  & input:focus ~ &.i{
-    .lib-css(color, @icon-color-focus);
-    &:hover{
-      .lib-css(color, @icon-color-hover);
-    }
-  }
-  & input.mage-error:focus ~ &.i {
-    .lib-css(color, @icon-color-error);
-    &:hover{
-      .lib-css(color, @icon-color-hover);
-    }
-  }
-  & input.valid:focus ~ &.i {
-    .lib-css(color, @icon-color-valid);
-    &:hover{
-      .lib-css(color, @icon-color-hover);
-    }
-  }
-
-  ._dna-form-element-icon-gutters__whit-reverse(@rtl);
-}
-//======================================================================================================================
-._dna-form-element-icon-gutters__whit-reverse(
-  @rtl: false){
-
-  &:not(.reverse) &.i{
-    ._dna-form-element-icon-icon-gutters(@rtl);
-  }
-  &:not(.reverse) input{
-    ._dna-form-element-icon-input-gutters(@rtl);
-  }
-
-  &when (@rtl){
-    &.reverse &.i{
-      ._dna-form-element-icon-icon-gutters(false);
-    }
-    &.reverse input{
-      ._dna-form-element-icon-input-gutters(false);
-    }
-  }
-
-  &when not(@rtl){
-    &.reverse &.i{
-      ._dna-form-element-icon-icon-gutters(true);
-    }
-    &.reverse input{
-      ._dna-form-element-icon-input-gutters(true);
-    }
-  }
-}
-
-
-._dna-form-element-icon-icon-gutters(
-  @rtl: false){
-  & when (@rtl){
-    right:0;
-    left:auto;
-    padding-left: var(--c-icon-text-gutter);
-    padding-right: var(--c-icon-border-gutter);
-  }
-  & when not (@rtl){
-      left:0;
-      right:auto;
-      padding-left: var(--c-icon-border-gutter);
-      padding-right: var(--c-icon-text-gutter);
-  }
-}
-._dna-form-element-icon-input-gutters(
-  @rtl: false){
-  & when (@rtl){
-    padding-right: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter))";
-  }
-  & when not (@rtl){
-    padding-left: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter))";
-  }
 }
 
 //

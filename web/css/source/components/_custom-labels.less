@@ -60,7 +60,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 1px;
+      height: 2px;
       top: 50%;
       z-index: -1;
     }
@@ -69,6 +69,27 @@
     transform: translateY(-50%);
     height: 6px;
   }
+
+    &:not(.not-empty):not(.focus){
+        + .control > input {
+            color: transparent;
+            &::-webkit-input-placeholder {
+                color:transparent;
+            }
+
+            &::-moz-placeholder {
+                color:transparent;
+            }
+
+            &::-ms-placeholder {
+                color:transparent;
+            }
+
+            &::placeholder {
+                color:transparent;
+            }
+        }
+    }
 }
 
 .dna-form-label-as-placeholder-icon-gaps(

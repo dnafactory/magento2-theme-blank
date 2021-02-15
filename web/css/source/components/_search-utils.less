@@ -1,0 +1,40 @@
+@search-utils-icon__color: @control-icon__color;
+@search-utils-icon-hover__color: @control-icon-hover__color;
+@search-utils-icon-focus__color: @control-icon-focus__color;
+@search-utils-icon-valid__color: @control-icon-valid__color;
+@search-utils-icon-error__color: @control-icon-error__color;
+@search-utils-icon__font-size: @control-icon__font-size;
+@search-utils-icon__line-height: @control-icon__line-height;
+@search-utils-icon__height: @control-icon__height;
+@search-utils-icon__width: @control-icon__width;
+@search-utils-icon-text-gutter: @control-icon-text-gutter;
+@search-utils-icon-border-gutter: @control-icon-border-gutter;
+@search-utils-icon-rtl: true;
+
+
+// requires _icons_control-icons.less
+& when(@media-common = true) {
+  .search-utils-container{
+
+      &:extend(.control-icon-container);
+      .dna-extend-control-icon-icon(~'.search-utils', @search-utils-icon-rtl);
+
+      .dna-control-icon-variant(
+          @icon-color:         @search-utils-icon__color,
+          @icon-color-hover:   @search-utils-icon-hover__color,
+          @icon-color-focus:   @search-utils-icon-focus__color,
+          @icon-color-valid:   @search-utils-icon-valid__color,
+          @icon-color-error:   @search-utils-icon-error__color,
+          @icon-font-size:     @search-utils-icon__font-size,
+          @icon-line-height:   @search-utils-icon__line-height,
+          @icon-height:        @search-utils-icon__height,
+          @icon-width:         @search-utils-icon__width,
+          @icon-text-gutter:   @search-utils-icon-text-gutter,
+          @icon-border-gutter: @search-utils-icon-border-gutter
+      );
+    .search-utils{
+      pointer-events: all !important;
+      cursor: pointer;
+    }
+  }
+}

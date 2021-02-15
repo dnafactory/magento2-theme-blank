@@ -23,12 +23,15 @@ define([
             triggerEvent: 'click'
         },
         _init: function(){
-            this.triggerClassHide = this.triggerClassHide?? this.triggerClass;
+            this.options.triggerClassHide = this.options.triggerClassHide?? this.options.triggerClass;
             $(this.element)
                 .each((index, element) => {
-                    var trigger = $('<span/>',{
+                    var trigger = $(element).siblings('.password-utils');
+                    if(!trigger.length)
+                        trigger = $('<span/>',{
                        'class': `password-utils ${this.options.triggerClass}`
-                    }).on(this.options.triggerEvent, event => this._togglePasswordVisibility(event, element));
+                    });
+                    trigger.on(this.options.triggerEvent, event => this._togglePasswordVisibility(event, element));
                     $(element)
                         .addClass('handled')
                         .parent().addClass('password-utils-container')

@@ -11,25 +11,226 @@
 @control-icon-border-gutter: 4px;
 @control-icon-rtl: false;
 
+
+//
+// Utilities per form con icone
+//______________________________________________________________________________________________________________________
+//
+.dna-control-icon-icons(){
+    position: relative;
+    & .control-icon{
+        position: absolute;
+        z-index: 10;
+        top: 1px;
+        pointer-events: none;
+        .lib-vendor-box-align(center);
+        .lib-vendor-box-justify(center);
+        .lib-vendor-prefix-display(flex);
+        &[type=button], &[type=submit]{
+            pointer-events: all;
+        }
+    }
+}
+
+.dna-extend-control-icon-icon(@icon, @rtl: false){
+    @{icon}{
+        &:extend(.control-icon-container .control-icon all);
+    }
+    input:focus ~ @{icon}{
+        &:extend(.control-icon-container input:focus ~ .control-icon all);
+    }
+    input.mage-error:focus ~ @{icon} {
+        &:extend(.control-icon-container input.mage-error:focus ~ .control-icon all);
+    }
+    input.valid:focus ~ @{icon}{
+        &:extend(.control-icon-container input.valid:focus ~ .control-icon all);
+    }
+    &.both {
+        @{icon}{ &:extend(.control-icon-container.both .control-icon all); }
+        input{ &:extend(.control-icon-container.both input all); }
+    }
+    &when not(@rtl){
+        &:not(.reverse){
+            @{icon}{ &:extend(.control-icon-container:not(.reverse) .control-icon all); }
+            input{ &:extend(.control-icon-container:not(.reverse) input all); }
+        }
+        &.reverse {
+            @{icon}{ &:extend(.control-icon-container.reverse .control-icon all); }
+            input{ &:extend(.control-icon-container.reverse input all); }
+        }
+    }
+    &when(@rtl){
+        &:not(.reverse){
+            @{icon}{ &:extend(.control-icon-container.reverse .control-icon all); }
+            input{ &:extend(.control-icon-container.reverse input all); }
+        }
+        &.reverse {
+            @{icon}{ &:extend(.control-icon-container:not(.reverse) .control-icon all); }
+            input{ &:extend(.control-icon-container:not(.reverse) input all); }
+        }
+    }
+}
+
+.dna-control-icon-variant(
+    @icon-color: false,
+    @icon-color-hover: false,
+    @icon-color-focus: false,
+    @icon-color-valid: false,
+    @icon-color-error: false,
+    @icon-font-size: false,
+    @icon-line-height: false,
+    @icon-height: false,
+    @icon-width: false,
+    @icon-text-gutter: false,
+    @icon-border-gutter: false,
+    @icon-width: false,
+    @icon-text-gutter: false,
+    @icon-border-gutter: false
+){
+    .lib-css(--c-icon-color, @icon-color);
+    .lib-css(--c-icon-color-hover, @icon-color-hover);
+    .lib-css(--c-icon-color-focus, @icon-color-focus);
+    .lib-css(--c-icon-color-valid, @icon-color-valid);
+    .lib-css(--c-icon-color-error, @icon-color-error);
+    .lib-css(--c-icon-font-size, @icon-font-size);
+    .lib-css(--c-icon-line-height, @icon-line-height);
+    .lib-css(--c-icon-height, @icon-height);
+    .lib-css(--c-icon-width, @icon-width);
+    .lib-css(--c-icon-text-gutter, @icon-text-gutter);
+    .lib-css(--c-icon-border-gutter, @icon-border-gutter);
+}
+
+.dna-control-icon-style(
+    @rtl: @control-icon-rtl
+){
+    & .control-icon {
+        color: var(--c-icon-color);//@icon-color;
+        font-size: var(--c-icon-font-size); //@icon-font-size;
+        line-height: ~"calc(var(--c-icon-line-height) - 2px)";//~"calc(@{icon-line-height} - 2px)";
+        height: ~"calc(var(--c-icon-height) - 2px)";//~"calc(@{icon-height} - 2px)";
+        width: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter) - 2px)";
+
+        &:hover{
+            color: var(--c-icon-color-hover);
+        }
+    }
+
+    & input:focus ~ .control-icon{
+        color: var(--c-icon-color-focus);
+        &:hover{
+            color: var(--c-icon-color-hover);
+        }
+    }
+    & input.mage-error:focus ~ .control-icon {
+        color: var(--c-icon-color-error);
+        &:hover{
+            color: var(--c-icon-color-hover);
+        }
+    }
+    & input.valid:focus ~ .control-icon {
+        color: var(--c-icon-color-valid);
+        &:hover{
+            color: var(--c-icon-color-hover);
+        }
+    }
+
+    ._dna-form-element-icon-gutters__whit-reverse(@rtl);
+}
+//======================================================================================================================
+._dna-form-element-icon-gutters__whit-reverse(
+    @rtl: false){
+
+    &:not(.reverse) .control-icon:not(.reverse),
+    &.reverse .control-icon.reverse{
+        ._dna-form-element-icon-icon-gutters(@rtl);
+    }
+    &:not(.reverse) input,
+    &.both input{
+        ._dna-form-element-icon-input-gutters(@rtl);
+    }
+
+    &when (@rtl){
+        &.reverse .control-icon:not(.reverse),
+        &:not(.reverse) .control-icon.reverse{
+            ._dna-form-element-icon-icon-gutters(false);
+        }
+        &.reverse input,
+        &.both input{
+            ._dna-form-element-icon-input-gutters(false);
+        }
+    }
+
+    &when not(@rtl){
+        &.reverse .control-icon:not(.reverse),
+        &:not(.reverse) .control-icon.reverse{
+            ._dna-form-element-icon-icon-gutters(true);
+        }
+        &.reverse input,
+        &.both input{
+            ._dna-form-element-icon-input-gutters(true);
+        }
+    }
+}
+
+
+._dna-form-element-icon-icon-gutters(
+    @rtl: false){
+    & when (@rtl){
+        right:1px;
+        left:auto;
+        padding-left: var(--c-icon-text-gutter);
+        padding-right: var(--c-icon-border-gutter);
+    }
+    & when not (@rtl){
+        left:1px;
+        right:auto;
+        padding-left: var(--c-icon-border-gutter);
+        padding-right: var(--c-icon-text-gutter);
+    }
+}
+._dna-form-element-icon-input-gutters(
+    @rtl: false){
+    & when (@rtl){
+        padding-right: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter))";
+    }
+    & when not (@rtl){
+        padding-left: ~"calc(var(--c-icon-width) + var(--c-icon-text-gutter) + var(--c-icon-border-gutter))";
+    }
+}
+
+
+
 .dna-root-vars(@media-target) when (@media-target='critical'){
-  .dna-control-icon-spacing-variant(
-    @icon-width: 0px,
-    @icon-text-gutter: 0px,
-    @icon-border-gutter: extract(@form-element-input__padding, 2)
-  );
+    .dna-control-icon-variant(
+        @icon-width: 0px,
+        @icon-text-gutter: 0px,
+        @icon-border-gutter: extract(@form-element-input__padding, 2)
+    );
 }
 
 &when(@media-common = true) {
 
-  .field-icon{
-    .dna-control-icon-spacing-variant();
-  }
-  .control-icon{
-    .dna-control-icon-icons();
-    .dna-control-icon-style();
-  }
-  i, [class^="@{dna-icons__prefix}-"],[class*=" @{dna-icons__prefix}-"]{
-    &:extend(.control-icon.i all);
-  }
-  
+    .field-icon, .control-icon-container{
+        .dna-control-icon-variant(
+            @icon-color: @control-icon__color,
+            @icon-color-hover: @control-icon-hover__color,
+            @icon-color-focus: @control-icon-focus__color,
+            @icon-color-valid: @control-icon-valid__color,
+            @icon-color-error: @control-icon-error__color,
+            @icon-font-size: @control-icon__font-size,
+            @icon-line-height: @control-icon__line-height,
+            @icon-height: @control-icon__height,
+            @icon-width: @control-icon__width,
+            @icon-text-gutter: @control-icon-text-gutter,
+            @icon-border-gutter: @control-icon-border-gutter
+        );
+    }
+    .control-icon-container{
+        .dna-control-icon-icons();
+        .dna-control-icon-style();
+
+        .dna-extend-control-icon-icon(i);
+        .dna-extend-control-icon-icon(~'[class^="@{dna-icons__prefix}-"]');
+        .dna-extend-control-icon-icon(~'[class*=" @{dna-icons__prefix}-"]');
+    }
 }
