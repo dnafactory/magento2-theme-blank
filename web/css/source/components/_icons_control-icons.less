@@ -26,8 +26,14 @@
         .lib-vendor-box-align(center);
         .lib-vendor-box-justify(center);
         .lib-vendor-prefix-display(flex);
-        &[type=button], &[type=submit]{
+        &[type=button], &[type=submit], &[data-role=button]{
             pointer-events: all;
+            cursor: pointer;
+            &:disabled, &.disabled{
+                pointer-events: none;
+                cursor: unset;
+                opacity: 0.3;
+            }
         }
     }
 }
@@ -80,9 +86,6 @@
     @icon-font-size: false,
     @icon-line-height: false,
     @icon-height: false,
-    @icon-width: false,
-    @icon-text-gutter: false,
-    @icon-border-gutter: false,
     @icon-width: false,
     @icon-text-gutter: false,
     @icon-border-gutter: false

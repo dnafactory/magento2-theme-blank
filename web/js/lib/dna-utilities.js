@@ -179,7 +179,7 @@ define(['underscore'], function(_) {
          getData(element, key){
              return (!this.isUndefined(element.dataset) && !this.isEmpty(element.dataset[key]))?
                  JSON.parse(element.dataset[key])
-                 : false;
+                 : null;
          },
          /**
           * Check if an element contains specific data in his dataset

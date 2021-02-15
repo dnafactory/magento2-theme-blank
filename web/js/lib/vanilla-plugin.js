@@ -126,7 +126,7 @@ define([
          * @private
          */
         _loadChild(key, options, element){
-            if(utilities.hasData(element, key)) {
+            if(!utilities.hasData(element, key)) {
                 utilities.loadModule(
                     options,
                     element,
