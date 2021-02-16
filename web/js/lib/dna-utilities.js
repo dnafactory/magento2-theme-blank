@@ -80,12 +80,13 @@ define(['underscore'], function(_) {
           * @returns {boolean}
           */
          isControlEmpty(input){
-             return (!input.isAutofilled && this.isEmpty(input.value));
+             // Hack for select inputs: isAutofilled is always true after the first user selection
+             return (!(input.isAutofilled && this.getInputType(input) !== 'select') && this.isEmpty(input.value));
          },
          /**
           * Returns the input type of a given HTMLElement
           * @param input
-          * @returns {boolean}
+          * @returns {string}
           */
          getInputType(input){
              var type = input.tagName.toLowerCase();
