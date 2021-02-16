@@ -126,12 +126,13 @@ define([
          * @private
          */
         _loadChild(key, options, element){
-            if(!utilities.hasData(element, key)) {
+            if(!utilities.hasData(element, key) ||
+                (!utilities.isUndefined(options.skipLock) && utilities.getBooleanValue(options.skipLock) === true)) {
+                utilities.setData(element, key, true);
                 utilities.loadModule(
                     options,
                     element,
                     (instance) => {
-                        utilities.setData(element, key, true);
                         this.instances[key].push(instance);
                     });
             }

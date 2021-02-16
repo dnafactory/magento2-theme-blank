@@ -1,8 +1,8 @@
 define([
     'jquery',
-    'js/lib/dna-utilities',
-    'jquery-ui-modules/widget',
-], function($, utilities){
+    'underscore',
+    'jquery-ui-modules/widget'
+], function($, _){
     'use strict';
 
     /**
@@ -67,6 +67,8 @@ define([
                 });
                 button.insertAfter(this.element);
             }
+            // Prevents overlapping
+            const throttledFunction = _.throttle( (e) => this.updateValue(step), this.options.throttle);
             return button
                 .data('step', step)
                 .on('mousedown', (event) => {
@@ -74,10 +76,10 @@ define([
                     event.preventDefault();
                     this.element.focus();
                     // Update value immediately
-                    this.updateValue(step);
+                    this.updateValue(step)
                     // On mouse down start adjusting value by 'step' each 'throttle' ms
                     clearInterval(this.runner);
-                    this.runner = setInterval(() => this.updateValue(step), this.options.throttle);
+                    this.runner = setInterval(throttledFunction, this.options.throttle);
                 }).on('mouseup', () => {
                     // Stop the timer on mouseup
                     clearInterval(this.runner);
@@ -88,7 +90,7 @@ define([
          * @param step
          */
         updateValue(step){
-            const actualValue = utilities.isEmpty(this.element.val())?
+            const actualValue = _.isEmpty(this.element.val())?
                 0 : parseInt(this.element.val());
             this.element.val(actualValue + step);
             this.element.change();
@@ -98,7 +100,7 @@ define([
          * @private
          */
         _checkValue(){
-            const value = (!utilities.isEmpty(this.element.val()))?
+            const value = (!_.isEmpty(this.element.val()))?
                 parseInt(this.element.val()) : this.options.min;
             if(value < this.options.min)
                 this.element.val(this.options.min);                         // value exceeds the minimum
