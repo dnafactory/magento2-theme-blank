@@ -7,7 +7,7 @@
     --@{external-gutters__var-name}: @layout__width-xs-indent;
   }
 }
-.media-width(@extremum, @break) when (@extremum = 'c-min') and (@break = @screen__l){
+.media-width(@extremum, @break, @type) when (@extremum = 'min') and (@break = @screen__l) and (@type = 'critical'){
   .lg-grid,
   :root{
     --@{grid-gutters__var-name}: @grid-gutters__width/2;

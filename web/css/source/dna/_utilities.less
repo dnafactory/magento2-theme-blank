@@ -43,19 +43,19 @@
   scrollbar-color: @color @background;
   .dna-scrollbar-size(@size);
   &::-webkit-scrollbar {
-    width: @size;
+    .lib-css(width, @size);
   }
   &::-webkit-scrollbar-track {
-    background-color: @background;
+    .lib-css(background-color, @background);
   }
   &::-webkit-scrollbar-thumb {
-    background-color: @color;
-    border-radius: @radius;
-    border-width: @thumb-spacing;
+    .lib-css(background-color, @color);
+    .lib-css(border-radius, @radius);
+    .lib-css(border-width, @thumb-spacing);
     border-style: solid;
-    border-color: @background;
+    .lib-css(border-color, @background);
     &:window-inactive {
-      background-color: @inactive-color;
+      .lib-css(background-color, @inactive-color);
     }
   }
 }

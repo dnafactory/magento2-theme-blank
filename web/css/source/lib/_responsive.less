@@ -18,29 +18,30 @@
 //  Media width mixin used to group styles output based on media queries
 //  ---------------------------------------------
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {}
+.media-width(@extremum, @break, @type) when (@extremum = 'max') and (@break = @screen__s) and (@type = 'all'){}
+.media-width(@type) when (@type = 'touch'){}
 
 & when (@media-target = 'critical') {
   @media all and (min-width: @screen__s) {
-    .media-width('c-min', @screen__s);
+    .media-width('min', @screen__s, 'critical');
   }
 
   @media all and (min-width: @screen__m),
   print {
-    .media-width('c-min', @screen__m);
+    .media-width('min', @screen__m, 'critical');
   }
 
   @media all and (min-width: (@screen__m + 1)){
-    .media-width('c-min', (@screen__m + 1));
+    .media-width('min', (@screen__m + 1), 'critical');
   }
 
   @media all and (min-width: @screen__l){
-    .media-width('c-min', @screen__l);
+    .media-width('min', @screen__l, 'critical');
   }
 
   @media all and (min-width: @screen__xl){
-    .media-width('c-min', @screen__xl);
+    .media-width('min', @screen__xl, 'critical');
   }
 }
 
@@ -73,7 +74,6 @@
   @media all and (min-width: @screen__s) {
     .media-width('min', @screen__s);
   }
-
 }
 
 //

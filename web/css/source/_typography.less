@@ -53,7 +53,7 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'c-min') and (@break = @screen__m) {
+.media-width(@extremum, @break, @type) when (@extremum = 'min') and (@break = @screen__m) and (@type = 'critical'){
     h1 {
         .lib-css(font-size, @h1__font-size-desktop);
         .lib-css(margin-bottom, @h1__margin-bottom__desktop);
