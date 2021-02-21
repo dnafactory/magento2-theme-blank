@@ -42,8 +42,16 @@
           }
         },
         "select": {
-          "element": "select:not(.custom-select)",
-          "component": "js/theme/inputs/custom-select"
+          "element": "select:not(.custom-select):not(.custom-dropdown)",
+          "component": "js/theme/inputs/custom-dropdown",
+          "options": {
+            "valueTemplate":  false,
+            "labelTemplate": false
+            }
+        },
+        "dropdown": {
+          "element": "select.custom-dropdown",
+          "component": "js/theme/inputs/custom-dropdown"
         },
         "switch": {
           "element": "input[type=checkbox].custom-switch",

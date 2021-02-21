@@ -1,0 +1,26 @@
+.dna-dropdown-widget{
+  &.disabled .action.toggle{
+    @extend .custom-select:disabled;
+  }
+  .action.toggle.focus{
+    @extend .custom-select:focus;
+  }
+  .dna-dropdown-dialog{
+    @include border-radius($custom-select-border-radius, 0);
+    @include box-shadow($custom-select-box-shadow);
+  }
+  .custom-control,
+  .custom-control-input,
+  .custom-control-label{
+    pointer-events: none;
+  }
+  &.active {
+    .dna-dropdown-dialog {
+      @extend .d-flex;
+      @extend .form-control:focus, .custom-select:focus;
+      .selected .custom-control-input{
+        @extend .custom-control-input:checked;
+      }
+    }
+  }
+}
