@@ -14,9 +14,6 @@ var config = {
         mixins:{
             "js/theme/inputs/focusable":{
                 "js/theme/inputs/custom-label-mixin": true
-            },
-            "mage/sticky":{
-                "js/mixins/sticky-mixin": true
             }
         }
     }
