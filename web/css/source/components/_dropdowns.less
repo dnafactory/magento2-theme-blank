@@ -122,11 +122,12 @@
             @_dropdown-list-z-index: @dropdown-list__z-index,
             @_dropdown-list-position-top:0,
             @_dropdown-list-item-padding: @indent__xs 15px,
-            @_dropdown-list-height: 290px
+            @_dropdown-list-height: false
         );
         .dna-dropdown-dialog {
             padding-top: ~"calc(var(--input-height)) !important";
             overflow: hidden;
+            max-height: 290px;
         }
         &.active{
             .action.toggle{

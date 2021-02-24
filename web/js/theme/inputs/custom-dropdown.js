@@ -38,13 +38,7 @@ define([
             this.triggerElement = $('<span/>', { class: "action toggle", "data-toggle":"dropdown", "aria-haspopup":true });
             this.dialogElement = $('<ul/>', { class: "dna-dropdown modal-content", "data-target": "dropdown" });
 
-            // Generates the option-list's mirror element
-            $('option', this.element).each( (i, option) => {
-                const element = $(this._generateOptionElement(option));
-                element.attr('data-value', this._trimValue(option.value));
-                element.toggleClass('disabled', option.disabled);
-                this.dialogElement.append(element);
-            });
+            this._generateOptionList();
 
             this.options.containerClass && $(this.container).addClass(this.options.containerClass);
         },
@@ -57,17 +51,25 @@ define([
             this._super();
             // We need a custom mutationObserver to track any visibility changes in the original select
             const debouncedUpdate = _.debounce(this.syncVisibility.bind(this), 200, false),
-                mutationObserver = new MutationObserver(debouncedUpdate);
+                debouncedOptionListRecreate = _.debounce(this._generateOptionList.bind(this), 200, false),
+                attributeMutationObserver = new MutationObserver(debouncedUpdate),
+                optionsMutationObserver = new MutationObserver(debouncedOptionListRecreate);
             // Starts listening for changes in the root HTML element of the page.
-            mutationObserver.observe(this.element, {
+            attributeMutationObserver.observe(this.element, {
                 childList: false,
                 subtree: false,
                 attributes: true,
-                attributeFilter: ['style','class']
+                attributeFilter: ['style','class','disabled']
             });
 
+            optionsMutationObserver.observe(this.element, {
+                childList: true,
+                subtree: false,
+                attributes: false
+            });
+
+
             // Option selection's handlers
-            $('[data-value]', this.dialogElement).on('click', this._onOptionSelected.bind(this));
             $(this.element).on('change', this.checkValue.bind(this));
 
             // Simulates the select focus (in/out) when user interacts with the ui widget
@@ -122,6 +124,7 @@ define([
         syncVisibility(){
             this.triggerElement.css('display', () => $(this.element).is(':visible')? '' : 'none');
             this.container.classList.toggle('disabled', this.element.disabled);
+            _.isFunction(this.toggleLabelClass) && this.toggleLabelClass();
         },
         /**
          * Runs whenever the user selects an option
@@ -204,6 +207,19 @@ define([
         },
         updateModalTitle(title){
             this.init && this.dialogElement.dropdownModal("option", "title", title);
+        },
+        _generateOptionList(){
+            $('[data-value]', this.dialogElement)
+                .off('click', this._onOptionSelected.bind(this))
+                .remove();
+            // Generates the option-list's mirror element
+            $('option', this.element).each( (i, option) => {
+                const element = $(this._generateOptionElement(option));
+                element.attr('data-value', this._trimValue(option.value));
+                element.toggleClass('disabled', option.disabled);
+                this.dialogElement.append(element);
+            });
+            $('[data-value]', this.dialogElement).on('click', this._onOptionSelected.bind(this));
         }
     });
 });
