@@ -42,19 +42,19 @@
 ){
   scrollbar-color: @color @background;
   .dna-scrollbar-size(@size);
-  &::-webkit-scrollbar {
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
     .lib-css(width, @size);
   }
-  &::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
     .lib-css(background-color, @background);
   }
-  &::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb{
     .lib-css(background-color, @color);
     .lib-css(border-radius, @radius);
     .lib-css(border-width, @thumb-spacing);
     border-style: solid;
     .lib-css(border-color, @background);
-    &:window-inactive {
+    &:window-inactive, :window-inactive {
       .lib-css(background-color, @inactive-color);
     }
   }
