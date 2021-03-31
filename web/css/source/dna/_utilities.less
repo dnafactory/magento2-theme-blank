@@ -17,22 +17,44 @@
 // Normalizza il valore da assegnare alla proprietà 'scrollbar-size'
 //______________________________________________________________________________________________________________________
 .dna-scrollbar-size(@scrollbar-size: @scrollbar__size){
+  .lib-css(--scrollbar-width, @scrollbar-size);
   &when (isnumber(@scrollbar-size)){
     &when(@scrollbar-size >= 12px){
-      scrollbar-width: auto;
+      --sb-width: auto;
     }
     &when(@scrollbar-size < 12px){
-      scrollbar-width: thin;
+      --sb-width: thin;
     }
   }
   &when (iskeyword(@scrollbar-size)){
-    scrollbar-width: @scrollbar-size;
+    --sb-width: @scrollbar-size;
   }
 }
 //
 // Genera le proprietà relative agli stili della scrollbar
 //______________________________________________________________________________________________________________________
-.dna-scrollbar(
+.dna-scrollbar(){
+  .dna-scrollbar-variant();
+  scrollbar-color: var(--sb-color) var(--sb-bg);
+  scrollbar-width: var(--sb-width);
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+  }
+  &::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
+    background-color: var(--sb-bg);
+  }
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb{
+    background-color: var(--sb-color);
+    border-radius: var(--sb-radius);
+    border-width: var(--sb-spacing);
+    border-style: solid;
+    border-color: var(--sb-bg);
+    &:window-inactive, :window-inactive {
+      background-color: var(--sb-inactive);
+    }
+  }
+}
+.dna-scrollbar-variant(
   @size: @scrollbar__size,
   @color: @scrollbar__color,
   @background: @scrollbar__background,
@@ -40,25 +62,15 @@
   @radius: @scrollbar__border-radius,
   @inactive-color: @scrollbar__inactive__color
 ){
-  scrollbar-color: @color @background;
+  .lib-css(--sb-color, @color);
+  .lib-css(--sb-bg, @background);
+  .lib-css(--sb-radius, @radius);
+  .lib-css(--sb-spacing, @thumb-spacing);
+  .lib-css(--sb-inactive, @inactive-color);
   .dna-scrollbar-size(@size);
-  &::-webkit-scrollbar, ::-webkit-scrollbar {
-    .lib-css(width, @size);
-  }
-  &::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
-    .lib-css(background-color, @background);
-  }
-  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb{
-    .lib-css(background-color, @color);
-    .lib-css(border-radius, @radius);
-    .lib-css(border-width, @thumb-spacing);
-    border-style: solid;
-    .lib-css(border-color, @background);
-    &:window-inactive, :window-inactive {
-      .lib-css(background-color, @inactive-color);
-    }
-  }
 }
+
+
 .dna-selection(
   @color: @global-text-selection__color,
   @background: @global-text-selection__background
