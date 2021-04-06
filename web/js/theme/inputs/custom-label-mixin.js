@@ -50,7 +50,7 @@ define([
         },
         _checkPlaceholder(){
             if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
-                require(['jquery'], ($) => {
+                requirejs(['jquery'], ($) => {
                     // Check if control is in a fieldset
                     var fieldset = $(this.element).closest('fieldset');
                     if(fieldset.length && !$(this.label).is(':visible')){
