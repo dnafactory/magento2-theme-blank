@@ -44,8 +44,18 @@ define([
          * @private
          */
         _processSelect: function (event) {
-            this._fetchParamsBag(event.currentTarget);
-            this._super(event);
+            const target = event.currentTarget,
+                option = $(`option[value=${target.value}]`,target);
+            if(option.length && option.data('value')) {
+                this._fetchParamsBag(option);
+                this.changeUrl(
+                    event.data.paramName,
+                    option.data('value'),
+                    event.data.default
+                );
+            }else {
+                this._super(event);
+            }
         },
 
         /**
