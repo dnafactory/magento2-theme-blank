@@ -74,8 +74,20 @@ define([
 
             // Simulates the select focus (in/out) when user interacts with the ui widget
             $(this.container)
-                .on('dropdownmodalopen', () => { this.label.classList.add(this.options.focusClass) } )
-                .on('dropdownmodalclose', () => { this.label.classList.remove(this.options.focusClass) });
+                .on('dropdownmodalopen', this._onDropdownOpen.bind(this))
+                .on('dropdownmodalclose', this._onDropdownClose.bind(this));
+        },
+        _onDropdownOpen(){
+            this.label.classList.add(this.options.focusClass);
+            $('body').on('mousedown', this._onClickOutside.bind(this));
+        },
+        _onDropdownClose(){
+            this.label.classList.remove(this.options.focusClass);
+            $('body').off('mousedown', this._onClickOutside.bind(this));
+        },
+        _onClickOutside(event){
+            if(!$(this.container).has(event.target).length)
+                this.close();
         },
 
         /**
