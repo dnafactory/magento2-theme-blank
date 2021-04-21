@@ -79,11 +79,10 @@ define([
         },
         _onDropdownOpen(){
             this.label.classList.add(this.options.focusClass);
-            $('body').on('mousedown', this._onClickOutside.bind(this));
+            $('body').one('mousedown', this._onClickOutside.bind(this));
         },
         _onDropdownClose(){
             this.label.classList.remove(this.options.focusClass);
-            $('body').off('mousedown', this._onClickOutside.bind(this));
         },
         _onClickOutside(event){
             if(!$(this.container).has(event.target).length)
