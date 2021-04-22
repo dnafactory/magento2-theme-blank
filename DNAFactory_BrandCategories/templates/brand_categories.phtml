@@ -1,0 +1,56 @@
+<?php
+/** @var \DNAFactory\BrandCategories\Block\Categories\Renderer $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Catalog\Helper\Output $_outputHelper */
+$_outputHelper = $this->helper('Magento\Catalog\Helper\Output');
+$categories = $block->getBrandCategories();
+?>
+
+<?php if (count($categories['items']) > 0) : ?>
+    <?php
+        $categoriesCount = count($categories['items']);
+        $items = [
+            'md' => min($categoriesCount, 6),
+            'sm' => min($categoriesCount, 3),
+            'xs' => min($categoriesCount, 2),
+        ]
+    ?>
+    <div class="row d-block">
+        <div class="flex-row d-flex flex-nowrap overflow-hidden"
+             data-mage-init="{ &quot;dnaCarousel&quot;: { &quot;autoHeight&quot;: true, &quot;dots&quot;: false, &quot;nav&quot;: false, &quot;middleWrapperClass&quot;:&quot;overflow-hidden&quot;, &quot;responsive&quot;:{ &quot;xs&quot;:{&quot;items&quot;:<?= $items['xs'] ?>}, &quot;sm&quot;:{&quot;items&quot;:<?= $items['sm'] ?> }, &quot;md&quot;:{&quot;items&quot;:<?= $items['md'] ?>, &quot;controls&quot;:true } } }}">
+            <?php
+                /** @var \Magento\Catalog\Api\Data\CategoryInterface $category */
+                foreach ($categories['items'] as $category) :
+            ?>
+                <div class="col-6 col-sm-4 col-md-2 d-inline-flex">
+                    <div class="card flex-fill d-table">
+                        <?php
+                            if ($_imgUrl = $category->getImageUrl()) {
+                                $categoryName = $category->getName();
+                                $categoryUrl = $block->buildBrandCategoryUrl($category);
+                                $_imgHtml = "<a target=\"_blank\" href=\"$categoryUrl\"><div class=\"overflow-hidden\"> <img src=\"$_imgUrl\" alt=\"$categoryName\" class=\"card-img-zoom card-img-top\" /></div></a>";
+                                $_imgHtml = $_outputHelper->categoryAttribute($category, $_imgHtml, 'image');
+                                /* @escapeNotVerified */ echo $_imgHtml;
+                            }
+                        ?>
+                        <div class="card-body">
+                            <a target="_blank" class="text-decoration-none" href="<?= /** @noEscape  */ $block->buildBrandCategoryUrl($category) ?>"><h3 class="card-title"><?= $escaper->escapeHtml($category->getName()) ?></h3></a>
+                            <?php if (array_key_exists($category->getId(), $categories['children']) && count($categories['children'][$category->getId()]['items']) > 0) : ?>
+                                <div class="card-text">
+                                    <ul class="mt-1-5 mb-0 list-unstyled brand-categories">
+                                        <?php foreach ($categories['children'][$category->getId()]['items'] as $child) : ?>
+                                            <li class="d-block"><a target="_blank" class="link-secondary" href="<?= /** @noEscape  */ $block->buildBrandCategoryUrl($child) ?>"><?= $escaper->escapeHtml($child->getName()) ?></a></li>
+                                        <?php endforeach; ?>
+                                        <?php if ($categories['children'][$category->getId()]['view_all']) : ?>
+                                            <li class="d-block"><a class="link-icon" target="_blank" href="<?= /** @noEscape  */ $block->buildBrandCategoryUrl($category) ?>"><?= $escaper->escapeHtml(__("View more")) ?></a></li>
+                                        <?php endif ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif ?>
