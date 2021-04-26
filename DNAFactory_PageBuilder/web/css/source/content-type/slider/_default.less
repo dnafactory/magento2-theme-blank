@@ -1,13 +1,25 @@
-& when (@media-common = true) {
+& when (@media-target = 'critical') {
     .pagebuilder-slider-wrapper.pagebuilder-slider-floating {
         //Move wrapper in the opposite child way, and add negative margin bottom to move next element and make it overlapping the slider
         -webkit-transform: translateY(-40%);
         transform: translateY(-40%);
-        margin-bottom: -140px!important;
+        margin-bottom: -140px !important;
+
         .tns-outer {
             -webkit-transform: translateY(40%);
             transform: translateY(40%);
+        }
+    }
 
+    // Fix heading z-index for slider floating overflow
+    [data-content-type='heading'] {
+        z-index: 1;
+    }
+}
+
+& when (@media-common = true) {
+    .pagebuilder-slider-wrapper.pagebuilder-slider-floating {
+        .tns-outer {
             .tns-nav {
                 position: absolute;
                 top: unset;
@@ -21,10 +33,5 @@
                 top: 135px;
             }
         }
-    }
-
-    // Fix heading z-index for slider floating overflow
-    [data-content-type='heading'] {
-        z-index: 1;
     }
 }
