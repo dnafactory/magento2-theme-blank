@@ -178,14 +178,14 @@ define([
                 const selectedOptions = this.element.selectedOptions;
                 for(var i = 0; i < selectedOptions.length; i++) {
                     suffix += (this.options.valueTemplate)?
-                        this.options.valueTemplate.replaceAll('%text%',selectedOptions[0].textContent) :
+                        this.options.valueTemplate.replace(/%text%/gi,selectedOptions[0].textContent) :
                         `<span>${selectedOptions[0].textContent}</span>`;
                 }
             }
             return (this.options.labelTemplate)?
                 this.options.labelTemplate
-                    .replaceAll('%label%', this.label.textContent.trim())
-                    .replaceAll('%selected%', suffix)
+                    .replace(/%label%/gi, this.label.textContent.trim())
+                    .replace(/%selected%/gi, suffix)
                 : suffix;
         },
         _generateModalTitle(){
@@ -194,7 +194,7 @@ define([
         },
         _generateOptionElement(option){
             return this.options.optionTemplate
-                .replaceAll('%text%', option.textContent);
+                .replace(/%text%/gi, option.textContent);
         },
         _trimValue(value){
             return utilities.isEmpty(value)? "-" : value;

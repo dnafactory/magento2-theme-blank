@@ -23,7 +23,7 @@ define([
         _create(){
             this._super();
             var id    = utilities.isEmpty(this.element.id)?
-                        `custom_${this.element.name.replaceAll(/[^\w\s]/gi, '')}`
+                        `custom_${this.element.name.replace(/[^\w\s]/gi, '')}`
                         : this.element.id,
                 label = document.querySelector(`label[for=${id}]`);
 
