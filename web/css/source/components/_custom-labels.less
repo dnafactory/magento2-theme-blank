@@ -102,7 +102,9 @@
     margin-right: ~"calc(var(--c-icon-border-gutter) + var(--c-icon-width) + var(--c-icon-text-gutter))";
   }
 }
-
+.dna-root-vars(@media-target) when (@media-target='critical') and not(@form-field-label-as-placeholder){
+  --label-as-placeholder: false;
+}
 .dna-root-vars(@media-target) when (@media-target='critical') and (@form-field-label-as-placeholder){
   --label-as-placeholder: true;
 }
