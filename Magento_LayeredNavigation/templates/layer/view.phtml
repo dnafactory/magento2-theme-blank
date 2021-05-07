@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<?php if ($block->canShowBlock()) : ?>
+    <div class="block filter px-2 px-md-0" id="filter-menu">
+        <div class="block-title filter-title text-secondary d-none d-md-block h3 mb-1-5">
+            <strong><?= $block->escapeHtml(__('Shop By')) ?></strong>
+        </div>
+        <div class="filter-title d-md-none mobile px-2 mx-n2 bg-secondary h4 text-white d-flex flex-row flex-wrap align-items-center">
+            <i data-close="filters" class="icon-pointer-left font-h3 col-auto px-0"></i>
+            <span class="col" data-bind="scope: 'filter-layer'">
+                <?= __('Filters') ?>
+                <!-- ko if: activeFiltersCount() > 0 -->
+                    <span class="count font-body d-md-none font-weight-normal" data-bind="text: '('+ activeFiltersCount() + ')'"></span>
+                <!-- /ko -->
+            </span>
+            <?php if ($block->getLayer()->getState()->getFilters()) : ?>
+                <div class="block-actions filter-actions col-auto ml-auto px-0">
+                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action text-white link-secondary bg-transparent font-body clear filter-clear d-block p-1">
+                        <span><?= $block->escapeHtml(__('Clear Filters')) ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="block-content filter-content pb-6 pb-md-0 ml-n2 mr-n2 px-2 ml-md-n1-5 mr-md-0 px-md-0">
+            <div class="filter-state-wraper d-md-none">
+                <?= $block->getChildHtml('state') ?>
+            </div>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter) : ?>
+            <?php /** @var $filter \Magento\Catalog\Model\Layer\Filter\AbstractFilter */ ?>
+            <?php $is_collapsible = !($filter instanceof \Amasty\Shopby\Api\Data\FromToFilterInterface); ?>
+                <?php if (!$wrapOptions) : ?>
+                    <dl class="filter-options" id="narrow-by-list">
+                    <?php $wrapOptions = true;
+                endif; ?>
+                    <?php if ($filter->getItemsCount()) : ?>
+                        <dt role="heading"
+                            data-mage-init='{"toggleAdvanced": {
+                            "selectorsToggleClass": "sub-active",
+                            "baseToggleClass": "expanded",
+                            "toggleContainers": "#filter-content-<?= $filter->getRequestVar() ?><?php if($is_collapsible): ?>, #filter-menu<?php endif; ?>"
+                            }}'
+                            aria-level="3"
+                            class="filter-options-title h4 align-items-center d-flex filter-options-title p-1-5 mb-1 mb-md-0 mt-0 mx-0 <?php if($is_collapsible): ?>abs-card-shadow rounded bg-white<?php else: ?>expanded-fixed<?php endif; ?>">
+                            <span data-bind="scope: 'filter-layer'" class="filter-title <?php if(!$is_collapsible): ?>d-flex flex-row justify-content-between w-100<?php endif; ?>">
+                                <span>
+                                    <?= $block->escapeHtml(__($filter->getName())) ?>
+                                    <!-- ko if: getFilter('<?= $filter->getRequestVar() ?>')() && getFilter('<?= $filter->getRequestVar() ?>')().values.length > 0 -->
+                                    <span class="single-count font-body d-md-none font-weight-normal" data-bind="text: '(' + getFilter('<?= $filter->getRequestVar() ?>')().values.length + ')'"></span>
+                                    <!-- /ko -->
+                                </span>
+                                <!-- ko if: getFilter('<?= $filter->getRequestVar() ?>')() -->
+                                    <span class="selected-values d-block d-md-none text-truncate text-body font-body font-weight-normal" data-bind="text: getFilter('<?= $filter->getRequestVar() ?>')().labels.join(', ')"></span>
+                                <!-- /ko -->
+                            </span>
+                            <i class="filter-trigger icon-pointer-right ml-auto font-h3 <?php if(!$is_collapsible): ?>d-none d-md-block<?php endif; ?>"></i>
+                        </dt>
+                        <dd class="filter-options-content m-0 px-1-5 pb-1-5 <?php if(!$is_collapsible): ?>expanded-fixed<?php endif; ?>" id="filter-content-<?= $escaper->escapeHtmlAttr($filter->getRequestVar()) ?>"><?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?></dd>
+                    <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if ($wrapOptions) : ?>
+                </dl>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,138 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .block.filter {
+        margin-bottom: @indent__xl;
+    }
+
+    .block-subtitle {
+        display: inline-block;
+        margin-bottom: @indent__s;
+    }
+
+    .filter-options-content {
+        .filter-count-label {
+            &:extend(.abs-visually-hidden all);
+        }
+    }
+
+    .filter-options {
+        margin: 0;
+
+        .filter-options-title {
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .count {
+            &:before {
+                content: '(';
+            }
+
+            &:after {
+                content: ')';
+            }
+        }
+    }
+
+    .items {
+        &:extend(.abs-reset-list all);
+    }
+
+    .filtered {
+        .items {
+            margin: 15px 0;
+        }
+
+        .item {
+            margin-bottom: 6px;
+            padding-left: 22px;
+            position: relative;
+
+            .label {
+                font-weight: @font-weight__bold;
+            }
+
+            .action.remove {
+                &:extend(.abs-remove-button-for-blocks all);
+                left: -6px;
+                position: absolute;
+                top: 0;
+            }
+        }
+
+        & + .actions {
+            margin-bottom: 35px;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-with-filter {
+        .columns {
+            .sidebar-main {
+                .lib-vendor-prefix-order(0);
+                .block.filter{
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    background-color: @color-white;
+                    z-index: @z-index-10;
+                    height: 100vh;
+                    transform: translateX(-100%);
+                    transition-duration: 0.3s;
+                    opacity: 0;
+                    &.active{
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                    &.sub-active{
+                        transform: translateX(-100%);
+                    }
+
+                    & > .block-content.filter-content{
+                        height: ~"calc(100vh - var(--filters-header-h) - 1rem)";
+                        overflow-y: auto;
+                        overflow-x: visible;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    dt[role="heading"] {
+        & > .filter-trigger {
+            .lib-rotate(90deg);
+        }
+        &.expanded > .filter-trigger {
+            .lib-rotate(-90deg);
+        }
+    }
+    .filter-options {
+        .filter-options-title{
+            box-shadow: none !important;
+        }
+        .filter-options-content{
+            border-bottom:1px solid @border-color__base;
+        }
+    }
+}
