@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ciro Arcadio
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Sposto lo stato dei filtri dalla sidebar alla top bar -->
+        <referenceBlock class="Magento\LayeredNavigation\Block\Navigation\State" name="amshopby.catalog.topnav.state"/>
+
+        <move element="amshopby.catalog.topnav" destination="category.product.list.additional" before="-" />
+        <referenceContainer name="category.product.list.additional" htmlTag="div" htmlClass="product-listing additional col px-0 order-first" />
+
+        <referenceBlock name="amshopby.catalog.topnav" template="Amasty_Shopby::layer/top/view.phtml" />
+
+        <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="css_class" xsi:type="string" translate="true">d-flex flex-row</argument>
+                <argument name="parent_css_class" xsi:type="string" translate="true">float-left</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="columns.top">
+            <block class="Magento\Framework\View\Element\Template" name="filters.trigger" template="Amasty_Shopby::layer/trigger.phtml" after="page.main.title"/>
+        </referenceContainer>
+    </body>
+</page>
