@@ -11,7 +11,6 @@ define([
     const mixin = {
         afterChangeContentExternal: function (productList) {
             this._super(productList);
-
             $(document).trigger('shopby_update:complete', productList);
         }
     };

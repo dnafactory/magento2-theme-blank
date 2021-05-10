@@ -11,6 +11,10 @@ define([
         renderShowButton: function (e, element) {
             this._super(e, element);
             $('.' + $.mage.amShopbyApplyFilters.prototype.showButton + ' > .am-button').prop('disabled', false);
+        },
+        _create: function(){
+            this.element.on('click', () => $(document).trigger('shopby_update:start'));
+            this._super();
         }
     };
 

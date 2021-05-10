@@ -6,38 +6,54 @@ define([
 ], function (Component, ko, $) {
     'use strict';
 
-    var activeFilters = ko.observableArray(),
+    /** Gli activeFilters contengono lo stato attuale del filter layer */
+    const activeFilters = ko.observableArray(),
         activeFiltersCount = ko.computed(function() {
             return activeFilters().reduce( (count, filter) => count + filter.values.length ,0);
         }),
-        getFilter = function(code){
-            return ko.computed({
-                read: function () {
-                    return this().find(element => element.code === code);
-                }
-            }, this);
-        }.bind(activeFilters),
-        _updateActiveFilters = function(data){
+        _updateActiveFilters = function(data, filters){
             if(data && data.code) {
-                activeFilters.remove( filter => filter.code === data.code );
-                activeFilters.push(data);
+                filters.remove( filter => filter.code === data.code );
+                filters.push(data);
             }
         };
 
-    $(document).on('shopby_layer:status', (event, data) => _updateActiveFilters(data));
+    /** I currentFilters contengono le modifiche apportate al filter layer non ancora applicate */
+    const currentFilters = ko.observableArray(),
+        currentFiltersCount = ko.computed(function(){
+            return activeFiltersCount + currentFilters().reduce( (count, filter) => count + filter.values.length ,0);
+        });
+
+    const getFilter = function(code){
+            return ko.computed({
+                read: function () {
+                    const active = activeFilters().find(element => element.code === code),
+                        current = currentFilters().find(element => element.code === code);
+                    return (active && current)? Object.assign(active, current) : active;
+                }
+            }, this);
+        }.bind(this);
+
+
+    $(document).on('shopby_layer:status', (event, data) => _updateActiveFilters(data, activeFilters));
+    $(document).on('shopby_layer:update', (event, data) => _updateActiveFilters(data, currentFilters));
 
     return Component.extend({
         defaults: {
             toggleSelector: '[data-toggle="filters"]',
-            closeTrigger: '[data-close="filters"]',
             filtersContainer: '#filter-menu',
             activeClass: 'active filters-active -am-noscroll',
-            expandedClass: 'expanded',
-            menuActive: false,
-            activeFilters: activeFilters,
-            activeFiltersCount: activeFiltersCount,
-            getFilter: getFilter
+            expandedClass: 'expanded'
         },
+        test: function() {
+            return this.activeFilters().reduce( (count, filter) => count + filter.values.length ,0);
+        },
+        activeFilters: activeFilters,
+        activeFiltersCount: activeFiltersCount,
+        currentFilters: currentFilters,
+        currentFiltersCount: currentFiltersCount,
+        getFilter: getFilter,
+        isLoading: ko.observable(false),
 
         initialize: function(){
             this._super();
@@ -46,7 +62,13 @@ define([
             this._initTriggers('body');
 
             $(document)
+                .on('shopby_update:start', () => {
+                    this.isLoading(true);
+                    this.currentFilters.removeAll();
+                    $(`${this.filtersContainer}, body`).toggleClass(this.activeClass, false);
+                })
                 .on('shopby_update:complete', () => {
+                    this.isLoading(false);
                     // inizializza eventuali trigger presenti all'interno del markup aggiunto
                     this._initTriggers(this.filtersContainer);
                     // applica i bindings ko al markup appena aggiunto
@@ -58,13 +80,9 @@ define([
             if(this.toggleSelector.length) {
                 $(this.toggleSelector, container).toggleAdvanced({
                     selectorsToggleClass: this.activeClass,
-                    baseToggleClass: this.expanded,
+                    baseToggleClass: '',
                     toggleContainers: `${this.filtersContainer}, body`
                 });
-                if(this.closeTrigger.length)
-                    $(this.closeTrigger).on('click', () => {
-                        $(`${this.toggleSelector}.active`).click();
-                    });
             }
         },
 

@@ -7,19 +7,23 @@ define([
     const abstractMixin = {
         _init: function(){
             this._super();
+            this._triggerReset();
+            $(document).on('shopby_update:complete', () => this._triggerReset());
+        },
+        _triggerReset(){
             $(document).trigger('shopby_layer:status', this.getFilterState());
         },
 
         apply: function (link, clearFilter) {
             this._super(link, clearFilter);
-            $(document).trigger('shopby_layer:status', this.getFilterState());
+            $(document).trigger('shopby_layer:update', this.getFilterState());
         },
 
         getFilterState: function(){
             const self = this,
                 form = $(this.element).closest('form');
             if(form.length){
-                const code = form.attr('data-amshopby-filter-request-var'),
+                const code = form.attr('data-amshopby-filter-request-var') || form.attr('data-amshopby-filter'),
                     label = $('.label', this.element).text(),
                     fields = form.serializeArray(),
                     values = [];
