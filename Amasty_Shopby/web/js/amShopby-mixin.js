@@ -1,6 +1,6 @@
 define([
     "jquery",
-    "Amasty_Shopby/js/layer-state"
+    "filterManager"
 ], function ($) {
     'use strict';
 
@@ -8,17 +8,38 @@ define([
         _init: function(){
             this._super();
             this._triggerReset();
+
+            // Notifica un reset dello stato del filtro, quando questo viene applicato/cancellato in Ajax
             $(document).on('shopby_update:complete', () => this._triggerReset());
         },
+        /**
+         * Lancia un evento che notifica un set/reset dello stato del filtro
+         * @private
+         */
         _triggerReset(){
             $(document).trigger('shopby_layer:status', this.getFilterState());
         },
-
-        apply: function (link, clearFilter) {
-            this._super(link, clearFilter);
+        /**
+         * Lancia un evento che notifica un aggiornamento di stato del filtro
+         * @private
+         */
+        _triggerUpdate(){
             $(document).trigger('shopby_layer:update', this.getFilterState());
         },
+        /**
+         *
+         * @param link
+         * @param clearFilter
+         */
+        apply: function (link, clearFilter) {
+            this._super(link, clearFilter);
+            this._triggerUpdate();
+        },
 
+        /**
+         * Colleziona i dati relativi all'attuale stato del filtro, a partire dal form che lo contiene
+         * @returns {null|{code: *, values: *[], label: (*|Window.jQuery), labels: *[]}}
+         */
         getFilterState: function(){
             const self = this,
                 form = $(this.element).closest('form');
@@ -29,14 +50,10 @@ define([
                     values = [];
                 var labels = [];
                 $.each( fields, function( i, field ) {
-                    field.value.length && values.push(field.value);
-                    if(self.widgetName !== 'amShopbyFilterSlider') {
-                        var input = $(`[value=${field.value}]`, form),
-                            label = $('.label', input.parent()).text();
-                        labels.push(label);
-                    } else {
-                        labels = values;
-                    }
+                    var item = self._getFilterValue(field, form);
+                    if(item)
+                        values.push(item.value) && labels.push(item.label);
+
                 });
                 return {
                     code: code,
@@ -46,9 +63,26 @@ define([
                 }
             }
             return null;
+        },
+
+        /**
+         * Colleziona valore e label dell'opzione del filtro specificata in input
+         * @param field
+         * @param form
+         * @returns {null}
+         * @private
+         */
+        _getFilterValue: function (field, form){
+            var item = null;
+            if(field.value.length > 0) {
+                item = {};
+                item.value = field.value;
+                var input = $(`[value=${field.value}]`, form);
+                item.label = $('.label', input.parent()).text();
+            }
+            return item;
         }
     };
-
 
     return function(target){
         $.widget('mage.amShopbyFilterAbstract', $.mage.amShopbyFilterAbstract, abstractMixin);

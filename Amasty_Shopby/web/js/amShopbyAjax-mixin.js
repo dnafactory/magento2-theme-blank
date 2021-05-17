@@ -12,7 +12,7 @@ define([
         afterChangeContentExternal: function (productList) {
             this._super(productList);
             $(document).trigger('shopby_update:complete', productList);
-        }
+        },
     };
 
     return function(target){

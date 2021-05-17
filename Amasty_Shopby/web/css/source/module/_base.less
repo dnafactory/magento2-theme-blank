@@ -33,7 +33,10 @@
     }
 
     .amshopby-hightlighted {
-        background-color: @search-hightlighted__background-color;
+        .lib-typography(
+            @_color: @primary__color__darker,
+            @_font-weight: @font-weight__bold
+        );
     }
 
     .amshopby-item .filter-value {
@@ -63,7 +66,7 @@
         .swatch-attribute.size .swatch-option.selected,
         .swatch-attribute.manufacturer .swatch-option.selected {
             background-position: center;
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
         }
 
@@ -80,26 +83,11 @@
         }
 
         .am-filter-price {
-            padding: 5px;
-            max-width: 50px;
-            width: 46%;
+            max-width: 75px;
         }
 
         .items a {
             margin-left: 0;
-        }
-
-        .count {
-            display: inline-flex;
-        }
-
-        .am-shopby-swatch-label .count {
-            margin: 0;
-            padding: 0;
-        }
-
-        .am-shopby-swatch-label .label {
-            margin-right: 5px;
         }
 
         .am-shopby-form {
@@ -120,35 +108,11 @@
             position: relative;
             display: none;
             margin-top: 10px;
-            padding: 5px 25px 10px 0;
-            color: inherit;
             cursor: pointer;
         }
-
-        &:hover {
-            background-color: transparent;
-            color: @am-shopby__link__color;
-        }
-
-        &:before,
         &:after {
             .transition(.1);
-
-            position: absolute;
-            right: 0;
-            width: 8px;
-            height: 1px;
-            background: #000;
-            content: '';
-        }
-
-        &:before {
-            right: 5px;
-            transform: rotate(45deg);
-        }
-
-        &:after {
-            transform: rotate(-45deg);
+            transform: rotate(90deg);
         }
 
         &.-active {
@@ -162,20 +126,30 @@
         }
 
         &[data-is-hide='false'] {
-            &:before {
-                right: 6px;
-                transform: rotate(-45deg);
-            }
-
             &:after {
-                transform: rotate(45deg);
+                transform: rotate(-90deg);
             }
         }
     }
 
-    .range.am-fromto-widget .am-filter-go {
-        margin: 0 10px;
-        vertical-align: top;
+    .range.am-fromto-widget {
+        .control-icon-container{
+            .dna-control-icon-variant(
+                @icon-width: 10px,
+                @icon-text-gutter: 5px,
+                @icon-border-gutter: 10px
+            );
+            .am-filter-price{
+                padding-right: 5px;
+            }
+            .unit{
+                font-style: normal;
+            }
+        }
+        .am-filter-go {
+            margin: 0 10px;
+            vertical-align: top;
+        }
     }
 
     .am-filter-go {
@@ -211,10 +185,6 @@
             background-repeat: no-repeat;
         }
 
-        > .item {
-            padding-bottom: 4px;
-        }
-
         > .item:hover {
             background-color: transparent;
         }
@@ -228,11 +198,6 @@
     }
 
     // magento styles override
-    .filter-options .am-swatch-wrapper {
-        margin: 0 0 5px 0 !important;
-        line-height: initial;
-    }
-
     .catalog-topnav .filter-options {
         & {
             flex-wrap: wrap;
@@ -784,7 +749,7 @@
             width: 100%;
             transition: bottom .3s ease;
         }
-        &.visible, .mobile.filters-active &{
+        .mobile.filters-active &{
             bottom: 0;
         }
         &:not(.visible) {
@@ -847,6 +812,7 @@
 
         .item {
             padding-bottom: 0;
+            margin-bottom: 0 !important;
         }
     }
 
@@ -896,12 +862,6 @@
         #amasty-shopby-overlay .loader {
             top: 30%;
             transform: translate(-50%, -30%);
-        }
-    }
-
-    .filter-options-content {
-        .am-filter-price {
-            width: 40%;
         }
     }
 
@@ -1090,9 +1050,6 @@
 //  --------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .filter-options-content .am-filter-price {
-        width: 43%;
-    }
 
     .amslider-container.am-swiper-slider {
         width: 85%;
