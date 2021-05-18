@@ -5,7 +5,8 @@ var config = {
         },
         "*":{
             filterManager: 'Amasty_Shopby/js/filters/manager',
-            filterAccordion: "Amasty_Shopby/js/filters/accordion"
+            filterAccordion: "Amasty_Shopby/js/filters/accordion",
+            amShopbyApplyFiltersCount: 'Amasty_Shopby/js/amShopbyApplyFilters-count'
         }
     },
     config: {
@@ -21,6 +22,9 @@ var config = {
                 "Amasty_Shopby/js/amShopbyAjax-mixin": true
             },
             "Amasty_Shopby/js/amShopbyApplyFilters":{
+                "Amasty_Shopby/js/amShopbyApplyFilters-mixin": true
+            },
+            "Amasty_Shopby/js/amShopbyApplyFilters-count":{
                 "Amasty_Shopby/js/amShopbyApplyFilters-mixin": true
             }
         }

@@ -15,7 +15,11 @@ define([
         _create: function(){
             this.element.on('click', () => $(document).trigger('shopby_update:start'));
             this._super();
-        }
+        },
+        showButtonCounter: function (count) {
+            $(document).trigger('shopby_count:update', count);
+            this._super(count);
+        },
     };
 
     return function(target){

@@ -23,10 +23,12 @@ define([
         defaults: {
             toggleSelector: '[data-toggle="filters"]',
             filtersContainer: '#filter-menu',
-            activeClass: 'active filters-active -am-noscroll',
-            expandedClass: 'expanded'
+            activeClass: 'active filters-active',
+            expandedClass: 'expanded',
+            productsCount: ko.observable(0)
         },
         isLoading: ko.observable(false),
+        isExpanded: ko.observable(false),
 
         initialize: function(){
             this._super();
@@ -35,25 +37,33 @@ define([
             this._initTriggers('body');
 
 
-            this.isLoading.subscribe( (newValue) => {
+            /*this.isLoading.subscribe( (newValue) => {
                 $(this.toggleSelector).each( (i,toggle) => {
                     if($(toggle).data('mageToggleAdvanced'))
                         $(toggle).toggleAdvanced("toggleEnabled",!newValue);
                 });
-            });
+            });*/
 
             $(document)
+                .on('shopby_count:update', (event, count) => {
+                    this.productsCount(parseInt(count));
+                })
                 .on('shopby_update:start', () => {
                     this.isLoading(true);
+                })
+                .on('amshopby:submit_filters', () => {
+                    this.isLoading(true);
                     this.currentFilters.removeAll();
-                    $(`${this.filtersContainer}, body`).toggleClass(this.activeClass, false);
                 })
                 .on('shopby_update:complete', () => {
                     this.isLoading(false);
                     // inizializza eventuali trigger presenti all'interno del markup aggiunto
                     this._initTriggers(this.filtersContainer);
+
+                    this._toggleTriggers(this.isExpanded());
                     // applica i bindings ko al markup appena aggiunto
                     this._applyBindings(document.querySelector(this.filtersContainer));
+                    this.isLoading(false);
                 });
         },
 
@@ -62,9 +72,23 @@ define([
                 $(this.toggleSelector, container).toggleAdvanced({
                     selectorsToggleClass: this.activeClass,
                     baseToggleClass: '',
-                    toggleContainers: `${this.filtersContainer}, body`
-                });
+                    toggleContainers: `${this.filtersContainer}, body`,
+                    isToggled: this.isExpanded()
+                }).on('toggle', (event, state) => this.isExpanded(state));
             }
+        },
+
+        _toggleTriggers(state){
+            $(this.toggleSelector).each((index, item) => {
+                if($(item).data('mageToggleAdvanced')) {
+                    if (state)
+                        $(item).toggleAdvanced("toggleOn");
+                    else
+                        $(item).toggleAdvanced("toggleOff");
+                }else{
+                    $(item).remove();
+                }
+            });
         },
 
         _applyBindings(element){
