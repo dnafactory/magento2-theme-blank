@@ -7,8 +7,9 @@ define([
     'use strict';
 
     const mixin = {
-        _init: function(){
+        _create: function(){
             this._super();
+            this._checkIfEnabled();
             currency().symbol.subscribe((newValue) => this._triggerUpdate());
         },
         _getFilterValue: function(field, form){
@@ -28,6 +29,12 @@ define([
                 });
             }
             return item;
+        },
+        _checkIfEnabled(){
+            if(this.options.max - this.options.min <= this.options.step)
+                this.slider.slider("disable");
+            else
+                this.slider.slider("enable");
         }
     };
 

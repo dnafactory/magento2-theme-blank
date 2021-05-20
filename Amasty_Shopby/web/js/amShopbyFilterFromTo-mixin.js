@@ -16,8 +16,8 @@ define([
             this.options.forceInteger && this._fixedToInteger();
         },
         _fixedToInteger: function(){
-            this.from.val(Math.floor(this.from.val()));
-            this.to.val(Math.floor(this.to.val()));
+            this.from.val(Math.round(this.from.val()));
+            this.to.val(Math.round(this.to.val()));
         }
     };
 

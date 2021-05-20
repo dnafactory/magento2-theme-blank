@@ -56,8 +56,8 @@ define([
                     this.currentFilters.removeAll();
                 })
                 .on('shopby_update:complete', () => {
-                    this.isLoading(false);
                     this.productsCount(0);
+                    this.isLoading(false);
                     // inizializza eventuali trigger presenti all'interno del markup aggiunto
                     this._initTriggers(this.filtersContainer);
 
