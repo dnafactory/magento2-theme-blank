@@ -48,15 +48,16 @@ define([
                 .on('shopby_count:update', (event, count) => {
                     this.productsCount(parseInt(count));
                 })
-                .on('shopby_update:start', () => {
+                /*.on('shopby_update:start', () => {
                     this.isLoading(true);
-                })
+                })*/
                 .on('amshopby:submit_filters', () => {
                     this.isLoading(true);
                     this.currentFilters.removeAll();
                 })
                 .on('shopby_update:complete', () => {
                     this.isLoading(false);
+                    this.productsCount(0);
                     // inizializza eventuali trigger presenti all'interno del markup aggiunto
                     this._initTriggers(this.filtersContainer);
 
