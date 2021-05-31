@@ -3,6 +3,7 @@ define([
     "mage/template",
     'text!Amasty_Shopby/template/slider-value.html',
     "Magento_Directory/js/currency-data",
+    "amShopbyFilterSlider"
 ], function ($, template, valueTpl, currency) {
     'use strict';
 
