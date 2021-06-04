@@ -26,6 +26,9 @@ var config = {
             },
             "Amasty_Shopby/js/amShopbyApplyFilters-count":{
                 "Amasty_Shopby/js/amShopbyApplyFilters-mixin": true
+            },
+            "Amasty_Shopby/js/components/amShopbyFilterSlider": {
+                "Amasty_Shopby/js/components/amShopbyFilterSlider-mixin": true
             }
         }
     }

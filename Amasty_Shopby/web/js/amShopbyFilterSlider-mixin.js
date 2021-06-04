@@ -2,8 +2,7 @@ define([
     "jquery",
     "mage/template",
     'text!Amasty_Shopby/template/slider-value.html',
-    "Magento_Directory/js/currency-data",
-    "amShopbyFilterSlider"
+    "Magento_Directory/js/currency-data"
 ], function ($, template, valueTpl, currency) {
     'use strict';
 
@@ -41,6 +40,7 @@ define([
 
 
     return function(target){
-        $.widget('mage.amShopbyFilterSlider', $.mage.amShopbyFilterSlider, mixin);
+        if($.mage.amShopbyFilterSlider)
+            $.widget('mage.amShopbyFilterSlider', $.mage.amShopbyFilterSlider, mixin);
     }
 });
