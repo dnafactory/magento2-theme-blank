@@ -76,6 +76,9 @@ define([
             $(this.container)
                 .on('dropdownmodalopen', this._onDropdownOpen.bind(this))
                 .on('dropdownmodalclose', this._onDropdownClose.bind(this));
+
+            // Used to force element sync
+            $(document).on('ui:force-refresh', this.syncVisibility.bind(this));
         },
         _onDropdownOpen(){
             this.label.classList.add(this.options.focusClass);
