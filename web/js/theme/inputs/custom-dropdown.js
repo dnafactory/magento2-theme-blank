@@ -154,6 +154,7 @@ define([
                 this.element.dispatchEvent(evt);
             } else
                 this.element.fireEvent("onchange");
+            $(this.element).trigger('change');
 
             if(this.options.closeOnSelect)
                 this.close();
