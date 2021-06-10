@@ -19,6 +19,6 @@
   --font-family-monospace: #{inspect($font-family-monospace)};
 
   // Grid gutter variable
-  --#{$grid-gutter-var-name}: #{$grid-gutter-width / 2};
-  --#{$external-gutter-var-name}: #{$grid-gutter-width};
+  //--#{$grid-gutter-var-name}: #{$grid-gutter-width / 2};
+  //--#{$external-gutter-var-name}: #{$grid-gutter-width};
 }
