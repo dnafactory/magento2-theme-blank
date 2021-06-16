@@ -22,9 +22,7 @@ define([
          */
         _create(){
             this._super();
-            var id    = utilities.isEmpty(this.element.id)?
-                        `custom_${this.element.name.replace(/[^\w\s]/gi, '')}`
-                        : this.element.id,
+            var id = this._getOrGenerateUniqueId(),
                 label = document.querySelector(`label[for=${id}]`);
 
             this.container = this.element.parentElement;
@@ -42,5 +40,15 @@ define([
             this.label = label;
             this.element.classList.add('handled-input');
         },
+
+        _getOrGenerateUniqueId(){
+            if (!utilities.isEmpty(this.element.id))
+                return this.element.id;
+
+            const nameId = utilities.isEmpty(this.element.name)?
+                Math.random().toString(36).substr(2, 9)
+                : this.element.name.replace(/[^\w\s]/gi, '');
+            return `custom_${nameId}`;
+        }
     });
 });
