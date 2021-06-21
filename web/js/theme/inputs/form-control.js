@@ -42,13 +42,15 @@ define([
         },
 
         _getOrGenerateUniqueId(){
+            var id = '';
             if (!utilities.isEmpty(this.element.id))
-                return this.element.id;
+                id = this.element.id;
 
             const nameId = utilities.isEmpty(this.element.name)?
                 Math.random().toString(36).substr(2, 9)
                 : this.element.name.replace(/[^\w\s]/gi, '');
-            return `custom_${nameId}`;
+            id = `custom_${nameId}`;
+            return id.replace(":","\\:");
         }
     });
 });
