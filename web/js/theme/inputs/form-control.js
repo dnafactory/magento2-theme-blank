@@ -23,7 +23,7 @@ define([
         _create(){
             this._super();
             var id = this._getOrGenerateUniqueId(),
-                label = document.querySelector(`label[for=${id}]`);
+                label = document.querySelector(`label[for=${id}]`.replace(":","\\:"));
 
             this.container = this.element.parentElement;
 
@@ -42,15 +42,13 @@ define([
         },
 
         _getOrGenerateUniqueId(){
-            var id = '';
             if (!utilities.isEmpty(this.element.id))
-                id = this.element.id;
+                return this.element.id;
 
             const nameId = utilities.isEmpty(this.element.name)?
                 Math.random().toString(36).substr(2, 9)
                 : this.element.name.replace(/[^\w\s]/gi, '');
-            id = `custom_${nameId}`;
-            return id.replace(":","\\:");
+            return `custom_${nameId}`;
         }
     });
 });
