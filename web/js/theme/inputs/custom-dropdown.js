@@ -201,7 +201,7 @@ define([
                 .replace(/%text%/gi, option.textContent);
         },
         _trimValue(value){
-            return utilities.isEmpty(value)? "-" : value;
+            return utilities.isEmpty(value)? "-" : value.trim();
         },
         /**
          * Visually hides an element
