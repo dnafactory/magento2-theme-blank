@@ -72,6 +72,10 @@ define([
             return button
                 .data('step', step)
                 .on('mousedown', (event) => {
+                    var evt = event || window.event;
+                    if ("buttons" in evt && evt.buttons !== 1) {
+                        return false;
+                    }
                     // Keep focus on the input
                     event.preventDefault();
                     this.element.focus();
