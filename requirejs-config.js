@@ -1,7 +1,8 @@
 var config = {
     map:{
         "*":{
-            "dna.responsive": "js/lib/dna-responsive"
+            "dna.responsive": "js/lib/dna-responsive",
+            "dna.share": "js/theme/share"
         }
     },
     paths: {

@@ -17,6 +17,16 @@
       "name": "Ciro Arcadio",
       "email": "ciro.arcadio@dnafactory.it",
       "role": "Developer"
+    },
+    {
+      "name": "Antonio Vitale",
+      "email": "antonio.vitale@dnafactory.it",
+      "role": "Contributor"
+    },
+    {
+      "name": "Luigi Ambra",
+      "email": "luigi.ambra@dnafactory.it",
+      "role": "Contributor"
     }
   ],
   "config": {
