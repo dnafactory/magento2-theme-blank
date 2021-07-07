@@ -1,8 +1,9 @@
 define([
     'jquery',
     'underscore',
+    'js/lib/dna-utilities',
     'jquery-ui-modules/widget'
-], function($, _){
+], function($, _, utilities){
     'use strict';
 
     /**
@@ -36,9 +37,9 @@ define([
          */
         _init: function(){
             this.element.parent().addClass(this.options.containerClass);
-            this.options.step = parseInt(this.element.attr('step')?? this.options.step);
-            this.options.min = parseInt(this.element.attr('min')?? this.options.min);
-            this.options.max = this.element.attr('max')?? this.options.max;
+            this.options.step = parseInt(utilities.nullishCoalescingValue(this.element.attr('step'), this.options.step));
+            this.options.min = parseInt(utilities.nullishCoalescingValue(this.element.attr('min'), this.options.min));
+            this.options.max = utilities.nullishCoalescingValue(this.element.attr('max'), this.options.max);
             // Retrieve or generate buttons
             this.minus  = this._bindButton(this.options.minusButtonClass, this.options.step * -1);
             this.plus = this._bindButton(this.options.plusButtonClass, this.options.step);

@@ -24,7 +24,7 @@ define([
             triggerEvent: 'click'
         },
         _init: function(){
-            this.options.triggerClassHide = this.options.triggerClassHide?? this.options.triggerClass;
+            this.options.triggerClassHide = this.options.triggerClassHide || this.options.triggerClass;
 
             this.trigger = this.element.siblings('.password-utils');
             if(!this.trigger.length)

@@ -48,7 +48,7 @@ define(['underscore'], function(_) {
           * @returns {boolean}
           */
          isUndefined: function(item){
-             return (item == null);
+             return (item == null || false);
          },
          /**
           * Checks if a given value is empty
@@ -153,8 +153,10 @@ define(['underscore'], function(_) {
           * @returns {string}
           */
          getCssVar(varName, defaultValue = null){
-             var value = getComputedStyle(document.body)
-                 .getPropertyValue(`--${varName}`)?? (defaultValue);
+             var value = this.nullishCoalescingValue(
+                 getComputedStyle(document.body).getPropertyValue(`--${varName}`),
+                 defaultValue
+             );
              return this.isEmpty(value)? value : value.trim();
          },
          /**
@@ -190,6 +192,18 @@ define(['underscore'], function(_) {
           */
          hasData(element, key){
              return !this.isEmpty(this.getData(element, key));
+         },
+
+         /**
+          * Act as the Nullish coalescing operator (??)
+          * returns its right-hand side operand when its left-hand side operand is null or undefined,
+          * and otherwise returns its left-hand side operand.
+          * @param a
+          * @param b
+          * @returns {*}
+          */
+         nullishCoalescingValue(a, b){
+             return (!this.isUndefined(a))? a : b;
          }
     };
 
