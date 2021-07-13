@@ -68,8 +68,6 @@ define([
                 });
                 button.insertAfter(this.element);
             }
-            // Prevents overlapping
-            const throttledFunction = _.throttle( (e) => this.updateValue(step), this.options.throttle);
             return button
                 .data('step', step)
                 .on('mousedown', (event) => {
@@ -81,13 +79,7 @@ define([
                     event.preventDefault();
                     this.element.focus();
                     // Update value immediately
-                    this.updateValue(step)
-                    // On mouse down start adjusting value by 'step' each 'throttle' ms
-                    clearInterval(this.runner);
-                    this.runner = setInterval(throttledFunction, this.options.throttle);
-                }).on('mouseup', () => {
-                    // Stop the timer on mouseup
-                    clearInterval(this.runner);
+                    this.updateValue(step);
                 });
         },
         /**
@@ -107,26 +99,25 @@ define([
         _checkValue(){
             const value = (!_.isEmpty(this.element.val()))?
                 parseInt(this.element.val()) : this.options.min;
-            if(value < this.options.min)
-                this.element.val(this.options.min);                         // value exceeds the minimum
-            else if(this.options.max && value > parseInt(this.options.max))
+            if(this.options.max && value > parseInt(this.options.max))
                 this.element.val(this.options.max);                         // value exceeds the maximum
-            else {
-                if(this.options.resetButtonClass){
-                    // if reset button is enabled, checks it's status
-                    const reset = ((value - this.options.step) <= 0);
-                    if(reset)
-                        this.minus.removeClass(this.options.minusButtonClass)
-                            .addClass(this.options.resetButtonClass);
-                    else
-                        this.minus.removeClass(this.options.resetButtonClass)
-                            .addClass(this.options.minusButtonClass);
-                }
-                // Eventually, applies the 'disabled' classes
-                this.minus.toggleClass(this.options.disabledClass, (value <= this.options.min));
-                if(this.options.max)
-                    this.plus.toggleClass(this.options.disabledClass, (value >= this.options.max));
+            else if(value < this.options.min)
+                this.element.val(this.options.min);                         // value exceeds the minimum
+
+            if(this.options.resetButtonClass){
+                // if reset button is enabled, checks it's status
+                const reset = ((value - this.options.step) <= 0);
+                if(reset)
+                    this.minus.removeClass(this.options.minusButtonClass)
+                        .addClass(this.options.resetButtonClass);
+                else
+                    this.minus.removeClass(this.options.resetButtonClass)
+                        .addClass(this.options.minusButtonClass);
             }
+            // Eventually, applies the 'disabled' classes
+            this.minus.toggleClass(this.options.disabledClass, (value <= this.options.min));
+            if(this.options.max)
+                this.plus.toggleClass(this.options.disabledClass, (value >= this.options.max));
         },
         /**
          * Builds a CSS selector string by a space separated classes one
