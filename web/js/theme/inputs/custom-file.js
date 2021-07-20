@@ -11,7 +11,7 @@ define([
     return JSComponent.extend({
         _bind: function(){
             this._super();
-            this.element.addEventListener('change', this.updateInfo, false);
+            this.element.addEventListener('change', () => this.updateInfo(), false);
         },
         /**
          * Manually updates input's label content
