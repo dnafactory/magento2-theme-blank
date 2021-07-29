@@ -1,9 +1,9 @@
 .dna-dropdown-widget{
   &.disabled .action.toggle{
-    @extend .custom-select:disabled;
+    @extend .custom-select, :disabled;
   }
   .action.toggle.focus{
-    @extend .custom-select:focus;
+    @extend .custom-select, :focus;
   }
   .dna-dropdown-dialog{
     @include border-radius($custom-select-border-radius, 0);
@@ -17,9 +17,10 @@
   &.active {
     .dna-dropdown-dialog {
       @extend .d-flex;
-      @extend .form-control:focus, .custom-select:focus;
+      @extend .form-control, :focus;
+      @extend .custom-select, :focus;
       .selected .custom-control-input{
-        @extend .custom-control-input:checked;
+        @extend .custom-control-input, :checked;
       }
     }
   }

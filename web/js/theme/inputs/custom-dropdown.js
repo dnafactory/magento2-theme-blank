@@ -234,7 +234,7 @@ define([
                 element.toggleClass('disabled', option.disabled);
                 this.dialogElement.append(element);
             });
-            $('[data-value]', this.dialogElement).on('click', this._onOptionSelected.bind(this));
+            $('[data-value]:not(.disabled)', this.dialogElement).on('click', this._onOptionSelected.bind(this));
         }
     });
 });
