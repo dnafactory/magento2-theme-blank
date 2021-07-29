@@ -204,6 +204,16 @@ define(['underscore'], function(_) {
           */
          nullishCoalescingValue(a, b){
              return (!this.isUndefined(a))? a : b;
+         },
+
+         /**
+          *
+          * @param element
+          * @returns {boolean}
+          */
+         isVisible(element){
+             return ((element.currentStyle ? element.currentStyle.display :
+                 getComputedStyle(element, null).display) !== 'none');
          }
     };
 

@@ -136,7 +136,9 @@ define([
          * Take tracks of any visibility change on the original select
          */
         syncVisibility(){
-            this.triggerElement.css('display', () => $(this.element).is(':visible')? '' : 'none');
+            this.triggerElement.css('display', () =>
+                ($(this.element).is(':visible') || utilities.isVisible(this.element))? '' : 'none'
+            );
             this.container.classList.toggle('disabled', this.element.disabled);
             _.isFunction(this.toggleLabelClass) && this.toggleLabelClass();
         },
