@@ -11,6 +11,7 @@ define([
         triggerElement: null,
         dialogElement: null,
         init: false,
+        searchInputString: "",
         defaults: {
             options: {
                 labelTemplate: "<span class='dropdown-label'>%label%</span>%selected%",
@@ -25,7 +26,8 @@ define([
                 closeOnMouseLeave: false,
                 closeOnEscape: true,
                 modal: false,
-                bodyClass: "_has-modal dropdown"
+                bodyClass: "_has-modal dropdown",
+                searchThreshold: 400
             }
         },
         /**
@@ -41,6 +43,8 @@ define([
             this._generateOptionList();
 
             this.options.containerClass && $(this.container).addClass(this.options.containerClass);
+
+            this._onKeyDownBinded = this._onKeyDown.bind(this);
         },
 
         /**
@@ -83,13 +87,59 @@ define([
         _onDropdownOpen(){
             this.label.classList.add(this.options.focusClass);
             $('body').one('mousedown', this._onClickOutside.bind(this));
+            document.addEventListener('keydown', this._onKeyDownBinded, false);
+
+            setTimeout(() =>
+                $('[data-value].selected', this.dialogElement).each((i, item) => {
+                    this._scrollTo(item);
+                }),50
+            );
         },
         _onDropdownClose(){
             this.label.classList.remove(this.options.focusClass);
+            document.removeEventListener('keydown',this._onKeyDownBinded, false);
         },
         _onClickOutside(event){
             if(!$(this.container).has(event.target).length)
                 this.close();
+        },
+
+        _onKeyDown(event){
+            /**
+             * Utilizza un timeout per resettare l'input in fase di ricerca
+             */
+            if(!this.timeoutSearch)
+                this.timeoutSearch = setTimeout(() => {
+                    clearTimeout(this.timeoutSearch);
+                    this.timeoutSearch = false;
+                    this.searchInputString = "";
+                },  this.options.searchThreshold);
+
+            this.searchInputString += event.key;
+
+            var found = [...this.dialogElement[0].querySelectorAll('[data-value]:not(.disabled)')].find(
+                element => this._searchItem(element, this.searchInputString)
+            );
+            if(found){
+                this._scrollTo(found);
+                this._selectOption(found.getAttribute('data-value'), false);
+            }
+        },
+
+        _searchItem(element, searchString){
+            const regexp = new RegExp(`^${searchString}`,"i");
+            return (element.textContent.search(regexp) >= 0)
+                || (element.getAttribute('data-value').search(regexp) >= 0 );
+        },
+
+        _scrollTo(element){
+            // TODO: applicare una soluzione più efficiente
+            var container = this.dialogElement.closest('.dna-dropdown-modal')[0];
+            container.scroll({
+                //behavior: 'smooth',
+                left: 0,
+                top: element.offsetTop - 50
+            });
         },
 
         /**
@@ -148,8 +198,12 @@ define([
          * @private
          */
         _onOptionSelected(e){
+            this._selectOption($(e.target).data('value'), this.options.closeOnSelect);
+        },
+
+        _selectOption(option, close = false){
             $(this.element)
-                .val($(e.target).data('value'));
+                .val(option);
             if ("createEvent" in document) {
                 var evt = document.createEvent("HTMLEvents");
                 evt.initEvent("change", false, true);
@@ -158,8 +212,7 @@ define([
                 this.element.fireEvent("onchange");
             $(this.element).trigger('change');
 
-            if(this.options.closeOnSelect)
-                this.close();
+            (close) && this.close();
         },
 
         /**
