@@ -55,8 +55,8 @@ define([
                     var fieldset = $(this.element).closest('fieldset');
                     if(fieldset.length && !$(this.label).is(':visible')){
                         // if it's a labeled fieldset which has a legend element
-                        if( $('legend', fieldset).length ){
-                            var legend = $('legend', fieldset).get(0);
+                        if( $('> legend', fieldset).length ){
+                            var legend = $('> legend', fieldset).get(0);
                             this.label.classList.forEach(value => legend.classList.add(value));
                             this.label = legend;
                         }
