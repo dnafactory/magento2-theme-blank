@@ -70,26 +70,26 @@
     height: 6px;
   }
 
-    &:not(.not-empty):not(.focus){
-        + .control > input {
-            color: transparent;
-            &::-webkit-input-placeholder {
-                color:transparent;
-            }
+  &:not(.not-empty):not(.focus){
+    + .control:not(.not-empty):not(.focus) > input {
+      color: transparent;
+      &::-webkit-input-placeholder {
+        color:transparent;
+      }
 
-            &::-moz-placeholder {
-                color:transparent;
-            }
+      &::-moz-placeholder {
+        color:transparent;
+      }
 
-            &::-ms-placeholder {
-                color:transparent;
-            }
+      &::-ms-placeholder {
+        color:transparent;
+      }
 
-            &::placeholder {
-                color:transparent;
-            }
-        }
+      &::placeholder {
+        color:transparent;
+      }
     }
+  }
 }
 
 .dna-form-label-as-placeholder-icon-gaps(

@@ -46,6 +46,10 @@ define([
                 this.options.notEmptyLabelClass,
                 (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
             );
+            this.container.classList.toggle(
+                this.options.notEmptyLabelClass,
+                (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
+            );
             this.label.classList.toggle('disabled', this.element.disabled);
         },
         _checkPlaceholder(){
