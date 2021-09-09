@@ -16,10 +16,15 @@ define([
         },
         _bind: function(){
             this._super();
-            // debounce method prevents event overlaps
-            var onResize = _.debounce( this._init.bind(this), 250, false );
-            window.addEventListener("resize", onResize, false);
-            document.addEventListener('contentUpdated', onResize, false);
+            // throttle method prevents event overlaps
+            var onResize = _.throttle( this._init.bind(this), 100, false );
+
+            var mutationObserver = new MutationObserver(onResize);
+            mutationObserver.observe(document.body, {
+                attributes: true,
+                childList: false,
+                subtree: false
+            });
         }
     });
 });

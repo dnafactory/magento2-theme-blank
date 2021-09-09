@@ -18,6 +18,7 @@
 //______________________________________________________________________________________________________________________
 .dna-scrollbar-size(@scrollbar-size: @scrollbar__size){
   .lib-css(--scrollbar-width, @scrollbar-size);
+  .lib-css(--actual-scrollbar-width, @scrollbar-size);
   &when (isnumber(@scrollbar-size)){
     &when(@scrollbar-size >= 12px){
       --sb-width: auto;
@@ -38,7 +39,7 @@
   scrollbar-color: var(--sb-color) var(--sb-bg);
   scrollbar-width: var(--sb-width);
   &::-webkit-scrollbar, ::-webkit-scrollbar {
-    width: var(--scrollbar-width);
+    width: var(--actual-scrollbar-width);
   }
   &::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
     background-color: var(--sb-bg);
