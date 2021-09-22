@@ -68,9 +68,10 @@ define([
                 });
                 button.insertAfter(this.element);
             }
+            let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
             return button
                 .data('step', step)
-                .on('mousedown', (event) => {
+                .on(touchEvent, (event) => {
                     var evt = event || window.event;
                     if ("buttons" in evt && evt.buttons !== 1) {
                         return false;
