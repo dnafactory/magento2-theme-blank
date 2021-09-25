@@ -78,7 +78,8 @@ define([
                     }
                     // Keep focus on the input
                     event.preventDefault();
-                    this.element.focus();
+                    // rimosso per iphone ed altri dispositivi touch
+                    //this.element.focus();
                     // Update value immediately
                     this.updateValue(step);
                 });
