@@ -36,7 +36,7 @@
     "php": "~7.1",
     "magento/framework": "*",
     "magento/theme-frontend-blank": "*",
-    "dnafactory/module-theme": "dev-develop",
+    "dnafactory/module-theme": "^1.0|dev-develop",
     "dnafactory/module-bootstrap": "^0.1|dev-develop"
   },
   "autoload": {
