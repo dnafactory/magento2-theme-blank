@@ -17,6 +17,16 @@
       "name": "Ciro Arcadio",
       "email": "ciro.arcadio@dnafactory.it",
       "role": "Developer"
+    },
+    {
+      "name": "Antonio Vitale",
+      "email": "antonio.vitale@dnafactory.it",
+      "role": "Contributor"
+    },
+    {
+      "name": "Luigi Ambra",
+      "email": "luigi.ambra@dnafactory.it",
+      "role": "Contributor"
     }
   ],
   "config": {
@@ -26,8 +36,8 @@
     "php": "~7.1",
     "magento/framework": "*",
     "magento/theme-frontend-blank": "*",
-    "dnafactory/module-theme": "dev-develop",
-    "dnafactory/module-bootstrap": "^0.1"
+    "dnafactory/module-theme": "^1.0|dev-develop",
+    "dnafactory/module-bootstrap": "^0.1|dev-develop"
   },
   "autoload": {
     "files": [

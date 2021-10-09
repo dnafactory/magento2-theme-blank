@@ -24,7 +24,7 @@
         > .field,
         > .fields > .field {
 
-           .lib-form-field();
+            .lib-form-field();
 
             &.no-label {
                 > .label {
@@ -44,7 +44,7 @@
                     font-weight: normal;
                 }
             }
-            &:not(.choice) when (@form-field-label-as-placeholder){
+            &:not(.choice):not(.field-checkbox):not(.field-radio):not(.field-switch) when (@form-field-label-as-placeholder){
                 position: relative;
                 .label{
                     .dna-form-label-as-placeholder();
@@ -147,12 +147,12 @@
         ~ .ui-datepicker-trigger {
             .lib-button-reset();
             .lib-icon-font(
-            @_icon-font-content: @icon-calendar,
-            @_icon-font-color: @primary__color__lighter,
-            @_icon-font-size: @icon-calendar__font-size,
-            @_icon-font-line-height: @icon-calendar__font-size,
-            @_icon-font-display: block,
-            @_icon-font-text-hide: true
+                @_icon-font-content: @icon-calendar,
+                @_icon-font-color: @primary__color__lighter,
+                @_icon-font-size: @icon-calendar__font-size,
+                @_icon-font-line-height: @icon-calendar__font-size,
+                @_icon-font-display: block,
+                @_icon-font-text-hide: true
             );
             display: inline-block;
             vertical-align: middle;

@@ -1,0 +1,41 @@
+@if $enable-grid-classes {
+
+  %container-fixed-base{
+    width: 100vw;
+    width: calc(100vw - (var(--#{$external-gutter-var-name}) - var(--#{$grid-gutter-var-name}))*2);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container-fixed{
+    @extend %container-fixed-base;
+  }
+
+  // Responsive containers that are 100% wide until a breakpoint
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    .container-fixed-#{$breakpoint} {
+      @extend %container-fixed-base;
+    }
+
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      %responsive-container-fixed-#{$breakpoint} {
+        width: $container-max-width;
+        width: calc(#{$container-max-width} - (var(--#{$external-gutter-var-name}) - var(--#{$grid-gutter-var-name}))*2);
+      }
+
+      // Extend each breakpoint which is smaller or equal to the current breakpoint
+      $extend-breakpoint: true;
+
+      @each $name, $width in $grid-breakpoints {
+        @if ($extend-breakpoint) {
+          .container-fixed#{breakpoint-infix($name, $grid-breakpoints)}{
+            @extend %responsive-container-fixed-#{$breakpoint};
+          }
+          // Once the current breakpoint is reached, stop extending
+          @if ($breakpoint == $name) {
+            $extend-breakpoint: false;
+          }
+        }
+      }
+    }
+  }
+}

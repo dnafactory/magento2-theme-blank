@@ -23,14 +23,14 @@
                 <div class="field note no-label"><?= $block->escapeHtml(__('If you have an account, sign in with your email address.')) ?></div>
                 <div class="field email required field-icon">
                     <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
-                    <div class="control control-icon">
+                    <div class="control control-icon-container">
                         <input name="login[username]" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}">
                         <i class="icon-envelope"></i>
                     </div>
                 </div>
                 <div class="field password required field-icon">
                     <label for="pass" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
-                    <div class="control control-icon">
+                    <div class="control control-icon-container">
                         <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}">
                         <i class="icon-lock"></i>
                     </div>

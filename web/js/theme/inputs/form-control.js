@@ -22,10 +22,8 @@ define([
          */
         _create(){
             this._super();
-            var id    = utilities.isEmpty(this.element.id)?
-                        `custom_${this.element.name.replace(/[^\\w\\s]/gi, '')}`
-                        : this.element.id,
-                label = document.querySelector(`label[for=${id}]`);
+            var id = this._getOrGenerateUniqueId(),
+                label = document.querySelector(`label[for=${id}]`.replace(/(\:|\.)/g,"\\$1"));
 
             this.container = this.element.parentElement;
 
@@ -37,11 +35,20 @@ define([
                 this.element.after(label);
                 this.element.hasAttribute('placeholder')
                 label.textContent = this.element.getAttribute('placeholder');
-                if(utilities.isEmpty(label.textContent))
-                    label.style.display = 'none';
+                label.style.display = 'none';
             }
             this.label = label;
             this.element.classList.add('handled-input');
         },
+
+        _getOrGenerateUniqueId(){
+            if (!utilities.isEmpty(this.element.id))
+                return this.element.id;
+
+            const nameId = utilities.isEmpty(this.element.name)?
+                Math.random().toString(36).substr(2, 9)
+                : this.element.name.replace(/[^\w\s]/gi, '');
+            return `custom_${nameId}`;
+        }
     });
 });

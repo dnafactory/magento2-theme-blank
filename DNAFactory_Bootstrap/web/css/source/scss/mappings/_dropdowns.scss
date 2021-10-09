@@ -1,0 +1,41 @@
+.dna-dropdown-widget{
+  &.disabled .action.toggle{
+    color: $custom-select-disabled-color;
+    background-color: $custom-select-disabled-bg;
+  }
+  .action.toggle.focus{
+    border-color: $custom-select-focus-border-color;
+    outline: 0;
+  }
+  .dna-dropdown-dialog{
+    @include border-radius($custom-select-border-radius, 0);
+    @include box-shadow($custom-select-box-shadow);
+  }
+  .custom-control,
+  .custom-control-input,
+  .custom-control-label{
+    pointer-events: none;
+  }
+  &.active {
+    .dna-dropdown-dialog {
+      @extend .d-flex;
+      border-color: $custom-select-focus-border-color;
+      outline: 0;
+      .selected .custom-control-input{
+        & ~ .custom-control-label {
+          &::after {
+            background-color: $custom-control-indicator-bg;
+            background-image: escape-svg($custom-radio-indicator-icon-checked);
+          }
+          &::before {
+            color: $custom-control-indicator-checked-color;
+            border-color: $custom-control-indicator-checked-border-color;
+            @include gradient-bg($custom-control-indicator-checked-bg);
+            @include box-shadow($custom-control-indicator-checked-box-shadow);
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -33,7 +33,6 @@
 
 .dna-root-vars(@media-target) when (@media-target='critical'){
     scroll-behavior: smooth;
-    --scrollbar-width: @scrollbar__size;
     .dna-scrollbar();
 }
 & when (@media-target='critical') {
@@ -78,8 +77,16 @@
     .page-wrapper > .page-bottom,
     .block.category.event,
     .top-container {
-        padding-left: @layout__width-xs-indent;
-        padding-right: @layout__width-xs-indent;
+        padding-left: ~"var(--@{external-gutters__var-name})";
+        padding-right: ~"var(--@{external-gutters__var-name})";
+    }
+}
+
+& when(@media-common = true){
+    .dna-disabled,
+    .disabled{
+        opacity: 0.7;
+        pointer-events: none;
     }
 }
 
@@ -101,7 +108,7 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'c-min') and (@break = @screen__l) {
+.media-width(@extremum, @break, @type) when (@extremum = 'min') and (@break = @screen__l) and (@type = 'critical') {
     .navigation,
     .breadcrumbs,
     .page-header .header.panel,

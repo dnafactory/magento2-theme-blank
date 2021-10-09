@@ -1,0 +1,45 @@
+& when (@media-target = 'critical') {
+    .pagebuilder-slider-wrapper {
+        &.pagebuilder-slider-floating {
+            //Move wrapper in the opposite child way, and add negative margin bottom to move next element and make it overlapping the slider
+            -webkit-transform: translateY(-40%);
+            transform: translateY(-40%);
+            margin-bottom: -140px !important;
+
+            .tns-outer {
+                -webkit-transform: translateY(40%);
+                transform: translateY(40%);
+            }
+        }
+
+        [data-is-full-width="true"] {
+            .dna-full-width();
+        }
+    }
+
+    // Fix heading z-index for slider floating overflow
+    [data-content-type='heading'] {
+        z-index: 1;
+    }
+}
+
+& when (@media-common = true) {
+    &.pagebuilder-slider-wrapper {
+        .pagebuilder-slider-floating {
+            .tns-outer {
+                .tns-nav {
+                    position: absolute;
+                    top: unset;
+                    text-align: left;
+                    padding-left: 10px;
+                    bottom: 145px;
+                    padding-bottom: 0;
+                }
+
+                .tns-controls {
+                    top: 135px;
+                }
+            }
+        }
+    }
+}

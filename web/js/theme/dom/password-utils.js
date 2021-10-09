@@ -17,32 +17,32 @@ define([
          *                              | when toggled. Set `false` to use the same as triggerClasses.
          * @property triggerEvent       | the event that will trigger the visibility toggle.
          */
+        trigger: null,
         options:{
             triggerClass: 'pu-trigger',
             triggerClassHide: false,
             triggerEvent: 'click'
         },
         _init: function(){
-            this.triggerClassHide = this.triggerClassHide?? this.triggerClass;
-            $(this.element)
-                .each((index, element) => {
-                    var trigger = $('<span/>',{
-                       'class': `password-utils ${this.options.triggerClass}`
-                    }).on(this.options.triggerEvent, event => this._togglePasswordVisibility(event, element));
-                    $(element)
-                        .addClass('handled')
-                        .parent().addClass('password-utils-container')
-                        .append(trigger);
+            this.options.triggerClassHide = this.options.triggerClassHide || this.options.triggerClass;
+
+            this.trigger = this.element.siblings('.password-utils');
+            if(!this.trigger.length)
+                this.trigger = $('<span/>',{
+                    'class': `password-utils ${this.options.triggerClass}`
                 });
+            this.trigger.on(this.options.triggerEvent, this._togglePasswordVisibility.bind(this));
+            this.element
+                .addClass('handled')
+                .parent().addClass('password-utils-container')
+                .append(this.trigger);
         },
-        _togglePasswordVisibility: function(event, target){
-            var element = $(target),
-                trigger = $(event.target),
-                isPassword = element.is('[type=password]');
-            element
+        _togglePasswordVisibility: function(event){
+            const isPassword = this.element.is('[type=password]');
+            this.element
                 .toggleClass('password-shown', isPassword)
-                .attr('type', (isPassword)? 'text':'password');
-            trigger
+                .prop('type', (isPassword)? 'text':'password');
+            this.trigger
                 .toggleClass(this.options.triggerClass, !isPassword)
                 .toggleClass(this.options.triggerClassHide, isPassword);
         }

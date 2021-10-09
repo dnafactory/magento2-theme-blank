@@ -1,0 +1,199 @@
+@overlay__blur: 3px;
+@dropdown-desktop__from: @screen__s;
+
+.dna-backdrop-style(){
+    .lib-css(backdrop-filter, blur(@overlay__blur)) !important;
+    border-radius: 0 !important;
+    background-color: fade(@overlay__background, percentage(@overlay__opacity)) !important;
+}
+
+.dna-root-vars(@media-target) when (@media-target = 'critical'){
+    --input-height: @input-text__height;
+}
+
+& when(@media-target = 'critical'){
+    .dna-dropdown-widget{
+        &.validation-{
+            &error-state{
+                .action.toggle{
+                    &:extend(select.mage-error);
+                }
+            }
+            &valid-state{
+                .action.toggle{
+                    &:extend(select.valid);
+                }
+            }
+        }
+    }
+}
+
+&when(@media-common = true){
+    .dna-dropdown-widget{
+        .dna-dropdown-modal{
+            max-height: 100%;
+        }
+        .dna-dropdown-dialog{
+            .dna-dropdown{
+                margin: 0;
+                padding: 0 6px 0 0;
+                list-style: none none;
+                max-height: 100%;
+                .dna-scrollbar-variant(
+                    @size: 15px,
+                    @thumb-spacing: 10px 13px 10px 0px,
+                    @color: @primary__color__light,
+                    @background: @color-white
+                );
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        }
+        &.disabled{
+            &, .action.toggle{
+                &:extend(.dna-disabled);
+            }
+        }
+        .action.toggle,
+        .modal-header .ui-dialog-title{
+            position: relative;
+            transition: none;
+            > span:nth-child(2){
+                &:before{
+                    content: ': ';
+                    font-weight: @font-weight__regular;
+                }
+            }
+        }
+        .action.toggle{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .required & .dropdown-label:after{
+            content:'*';
+        }
+        .action.toggle .value,
+        .modal-header .value,
+        .dna-dropdown .selected{
+            color: @primary__color__dark;
+            font-weight: @font-weight__semibold;
+        }
+    }
+    @media (pointer: coarse) {
+        .dna-dropdown-widget {
+            .action.toggle{
+                pointer-events: none;
+                touch-action: none;
+                z-index: 0;
+            }
+            select{
+                // hack: la select viene riportata in primo piano, per permettere l'interazione
+                z-index: 1 !important;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @dropdown-desktop__from){
+    ._has-modal.dropdown{
+        overflow-y: unset;
+        height: unset;
+        width: unset;
+    }
+    label, .label{
+        &.focus {
+            // fix: la label deve sempre avere uno z-index superiore al dropdown
+            .lib-css(z-index, @dropdown-list__z-index + 2) !important;
+        }
+    }
+    .dna-dropdown-widget{
+        .lib-dropdown(
+            @_options-selector : ~".dna-dropdown-dialog",
+            @_dropdown-toggle-icon-content: @dropdown-toggle-icon__content,
+            @_dropdown-toggle-active-icon-content: @dropdown-toggle-icon__active__content,
+            @_icon-font: false,
+            @_icon-font-size: false,
+            @_icon-font-line-height: false,
+            @_icon-font-color: false,
+            @_icon-font-color-hover: false,
+            @_icon-font-color-active: false,
+            @_icon-font-margin: false,
+            @_icon-font-position: false,
+            @_icon-font-vertical-align: false,
+            @_icon-font-text-hide: false,
+            @_dropdown-list-pointer: false,
+            @_dropdown-list-margin-top: 0,
+            @_dropdown-list-z-index: @dropdown-list__z-index,
+            @_dropdown-list-position-top:0,
+            @_dropdown-list-item-padding: @indent__xs 15px,
+            @_dropdown-list-height: false
+        );
+        .dna-dropdown-dialog {
+            padding-top: ~"calc(var(--input-height)) !important";
+            overflow: hidden;
+            max-height: 290px;
+        }
+        &.active{
+            .action.toggle{
+                background-color: transparent;
+                border-color: transparent;
+                box-shadow: none;
+                z-index: @dropdown-list__z-index + 1;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+        .dna-dropdown {
+            li .custom-control {
+                padding: 0;
+
+                > input,
+                > .custom-control-label:after,
+                > .custom-control-label:before {
+                    display: none;
+                }
+            }
+        }
+        .modal-header,
+        .modal-footer,
+        .ui-dialog-buttonpane{
+            display: none;
+        }
+        .modal-inner-wrap{
+            height: 100%;
+            overflow: hidden;
+        }
+        display: block;
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @dropdown-desktop__from){
+    @media (hover: hover) {
+        .dna-dropdown-widget {
+            .dna-dropdown-modal{
+                .lib-modal();
+                .lib-modal-popup();
+                .dna-backdrop-style();
+                overflow: hidden;
+
+                .modal-inner-wrap{
+                    bottom:0;
+                    margin: 0 auto;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                    width: @screen__xs;
+                    max-width: 100%;
+                    padding: @indent__base;
+
+                    -webkit-transform: translateY(200%);
+                    transform: translateY(200%);
+                }
+                .modal-header{
+                    padding-bottom: @indent__base;
+                }
+            }
+        }
+    }
+}

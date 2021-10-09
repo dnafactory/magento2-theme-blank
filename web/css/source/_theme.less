@@ -289,7 +289,6 @@
 //@h1__line-height: @heading__line-height__base;
 //@h1__margin-top: 0;
 //@h1__margin-bottom: @heading__margin-bottom__base;
-//@h1__font-size-desktop: ceil((@font-size__base * 2.85)); // 40px
 //
 //@h2__font-size: ceil((@font-size__base * 1.85)); // 26px
 //@h2__font-color: @heading__color__base;
@@ -335,6 +334,21 @@
 //@h6__line-height: @heading__line-height__base;
 //@h6__margin-top: @heading__margin-top__base;
 //@h6__margin-bottom: @heading__margin-bottom__base;
+
+//@h1__font-size-desktop: ceil((@font-size__base * 2.85)); // 40px
+//@h1__margin-bottom__desktop: false;
+//@h2__font-size-desktop: false;
+//@h2__margin-bottom__desktop: false;
+//@h3__font-size-desktop: false;
+//@h3__margin-bottom__desktop: false;
+//@h4__font-size-desktop: false;
+//@h4__margin-bottom__desktop: false;
+//@h5__font-size-desktop: false;
+//@h5__margin-bottom__desktop: false;
+//@h6__font-size-desktop: false;
+//@h6__margin-bottom__desktop: false;
+
+
 //
 //@heading__small-color: @primary__color;
 //@heading__small-line-height: 1;
@@ -451,6 +465,10 @@
 //@layout__max-width: 1280px;
 //@layout-indent__width: 20px;
 //@layout__width-xs-indent: 15px;
+//@grid-gutters__var-name: gutter-width;
+//@grid-gutters__xs-width: @layout__width-xs-indent;
+//@grid-gutters__width: @layout-indent__width;
+//@external-gutters__var-name: layout-gutter;
 //
 //  Classnames defining different layouts
 //@layout-class-1column: page-layout-1column;
@@ -492,9 +510,9 @@
 
 @screen__xxs: 320px;
 @screen__xs: 480px;
-@screen__s: 640px;
-@screen__m: 768px;
-@screen__l: 1024px;
+@screen__s: 768px;
+@screen__m: 1024px;
+@screen__l: 1280px;
 @screen__xl: 1440px;
 
 // /**
@@ -1969,6 +1987,19 @@
 //@password-utils-icon-rtl: true;
 
 
+//@search-utils-icon__color: @control-icon__color;
+//@search-utils-icon-hover__color: @control-icon-hover__color;
+//@search-utils-icon-focus__color: @control-icon-focus__color;
+//@search-utils-icon-valid__color: @control-icon-valid__color;
+//@search-utils-icon-error__color: @control-icon-error__color;
+//@search-utils-icon__font-size: @control-icon__font-size;
+//@search-utils-icon__line-height: @control-icon__line-height;
+//@search-utils-icon__height: @control-icon__height;
+//@search-utils-icon__width: @control-icon__width;
+//@search-utils-icon-text-gutter: @control-icon-text-gutter;
+//@search-utils-icon-border-gutter: @control-icon-border-gutter;
+//@search-utils-icon-rtl: true;
+
 
 //  Messages
 //@message-global-note__background: @color-yellow-light2;
@@ -2000,7 +2031,6 @@
 //
 //@button__shadow: inset 0 2px 1px rgba(0,0,0,.12);
 //
-//@h1__margin-bottom__desktop: @indent__xl;
 //
 ////  Footer
 //@footer__background-color: false;

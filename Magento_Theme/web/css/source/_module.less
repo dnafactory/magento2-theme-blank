@@ -297,7 +297,7 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'c-min') and (@break = @screen__m) {
+.media-width(@extremum, @break, @type) when (@extremum = 'min') and (@break = @screen__m) and (@type = 'critical'){
   .page-wrapper {
     > .breadcrumbs,
     > .top-container,

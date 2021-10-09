@@ -28,15 +28,14 @@
   @label-margin-focus: @form-field-label-as-placeholder-focus__margin,
   @label-bg-focus: @form-field-label-as-placeholder-focus__background-color,
   @label-translate-y-focus: @form-field-label-as-placeholder-focus__translate-y,
-  @label-scale-focus: @form-field-label-as-placeholder-focus__scale,
-  @label-default-gap: @control-icon-border-gutter
+  @label-scale-focus: @form-field-label-as-placeholder-focus__scale
 ){
   position: absolute;
   z-index: 10;
   .lib-css(padding,@label-padding);
   .lib-css(margin,@label-margin);
 
-  .dna-form-label-as-placeholder-icon-gaps(@label-default-gap);
+  .dna-form-label-as-placeholder-icon-gaps();
 
   top: 0;
   bottom: auto;
@@ -61,7 +60,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 1px;
+      height: 2px;
       top: 50%;
       z-index: -1;
     }
@@ -70,20 +69,42 @@
     transform: translateY(-50%);
     height: 6px;
   }
+
+  &:not(.not-empty):not(.focus){
+    + .control:not(.not-empty):not(.focus) > input {
+      color: transparent;
+      &::-webkit-input-placeholder {
+        color:transparent;
+      }
+
+      &::-moz-placeholder {
+        color:transparent;
+      }
+
+      &::-ms-placeholder {
+        color:transparent;
+      }
+
+      &::placeholder {
+        color:transparent;
+      }
+    }
+  }
 }
 
 .dna-form-label-as-placeholder-icon-gaps(
-  @label-align: @form-field-label-as-placeholder__align,
-  @gap: @control-icon__width
+  @label-align: @form-field-label-as-placeholder__align
 ){
   & when (@label-align = left) {
-    left: @gap;
+    margin-left: ~"calc(var(--c-icon-border-gutter) + var(--c-icon-width) + var(--c-icon-text-gutter))";
   }
   & when (@label-align = right){
-    right: @gap;
+    margin-right: ~"calc(var(--c-icon-border-gutter) + var(--c-icon-width) + var(--c-icon-text-gutter))";
   }
 }
-
+.dna-root-vars(@media-target) when (@media-target='critical') and not(@form-field-label-as-placeholder){
+  --label-as-placeholder: false;
+}
 .dna-root-vars(@media-target) when (@media-target='critical') and (@form-field-label-as-placeholder){
   --label-as-placeholder: true;
 }

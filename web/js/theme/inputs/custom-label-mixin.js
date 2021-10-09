@@ -46,21 +46,24 @@ define([
                 this.options.notEmptyLabelClass,
                 (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
             );
+            this.container.classList.toggle(
+                this.options.notEmptyLabelClass,
+                (utilities.isBoolean(force)) ? force : !utilities.isControlEmpty(this.element)
+            );
+            this.label.classList.toggle('disabled', this.element.disabled);
         },
         _checkPlaceholder(){
             if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
-                require(['jquery'], ($) => {
+                requirejs(['jquery'], ($) => {
                     // Check if control is in a fieldset
                     var fieldset = $(this.element).closest('fieldset');
                     if(fieldset.length && !$(this.label).is(':visible')){
                         // if it's a labeled fieldset which has a legend element
-                        if( $('legend', fieldset).length ){
-                            var legend = $('legend', fieldset).get(0);
+                        if( $('> legend', fieldset).length ){
+                            var legend = $('> legend', fieldset).get(0);
                             this.label.classList.forEach(value => legend.classList.add(value));
                             this.label = legend;
                         }
-                        // than we clear the placeholders
-                        this.element.setAttribute('placeholder', "");
                     }
                 });
                 if (utilities.getInputType(this.element) === 'select') {

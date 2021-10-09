@@ -34,7 +34,7 @@ define([
             mutationObserver.observe(body, this.options.observeItems);
         },
         _update: function (mutations) {
-            document.dispatchEvent(new CustomEvent('dna.DOMUpdated', mutations));
+            document.dispatchEvent(new CustomEvent('contentUpdated', mutations));
             this._init();
         }
     });

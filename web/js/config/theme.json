@@ -11,6 +11,18 @@
             "triggerClassHide": "icon-eye-off"
           }
         },
+        "calendar": {
+          "element": "[data-widget='date']",
+          "component": "js/theme/inputs/date"
+        },
+        "search": {
+          "element": "input.input-search:not(.handled)",
+          "component": "js/theme/dom/search-utils",
+          "options": {
+            "triggerClassBase": "icon-search",
+            "triggerClassClear": "icon-remove"
+          }
+        },
         "checkbox": {
           "element": "input[type=checkbox]:not(.custom-checkbox):not(.custom-switch)",
           "component": "js/theme/inputs/custom-input",
@@ -30,8 +42,16 @@
           }
         },
         "select": {
-          "element": "select:not(.custom-select)",
-          "component": "js/theme/inputs/custom-select"
+          "element": "select:not(.custom-select):not(.custom-dropdown)",
+          "component": "js/theme/inputs/custom-dropdown",
+          "options": {
+            "valueTemplate":  false,
+            "labelTemplate": false
+            }
+        },
+        "dropdown": {
+          "element": "select.custom-dropdown",
+          "component": "js/theme/inputs/custom-dropdown"
         },
         "switch": {
           "element": "input[type=checkbox].custom-switch",
@@ -41,7 +61,7 @@
           }
         },
         "text": {
-          "element": "input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=search], input[type=tel], textarea",
+          "element": "input[type=text], input[type=password], input[type=email], input[type=number], input[type=search], input[type=tel], textarea",
           "component": "js/theme/inputs/focusable"
         },
         "multipath-icons": {
