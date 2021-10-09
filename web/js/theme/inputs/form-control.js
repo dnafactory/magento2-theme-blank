@@ -23,7 +23,7 @@ define([
         _create(){
             this._super();
             var id = this._getOrGenerateUniqueId(),
-                label = document.querySelector(`label[for=${id}]`.replace(":","\\:"));
+                label = document.querySelector(`label[for=${id}]`.replace(/(\:|\.)/g,"\\$1"));
 
             this.container = this.element.parentElement;
 
