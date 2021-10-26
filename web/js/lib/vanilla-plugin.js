@@ -97,6 +97,12 @@ define([
         _loadChildren(){
             for (let [key, value] of Object.entries(this.children)){
                 if(value && value.component) {
+                    // check if there are any device restrictions
+                    if(value.allowedDevice && navigator){
+                        var reg = new RegExp(value.allowedDevice);
+                        if (!reg.test(navigator.userAgent))
+                            continue;
+                    }
                     // Normalize options bag for jQuery widget instances
                     var options = Object.assign({},
                         (value.options)?
