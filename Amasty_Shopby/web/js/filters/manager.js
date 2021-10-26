@@ -36,21 +36,10 @@ define([
             // inizializza i trigger per il menu dei filtri
             this._initTriggers('body');
 
-
-            /*this.isLoading.subscribe( (newValue) => {
-                $(this.toggleSelector).each( (i,toggle) => {
-                    if($(toggle).data('mageToggleAdvanced'))
-                        $(toggle).toggleAdvanced("toggleEnabled",!newValue);
-                });
-            });*/
-
             $(document)
                 .on('shopby_count:update', (event, count) => {
                     this.productsCount(parseInt(count));
                 })
-                /*.on('shopby_update:start', () => {
-                    this.isLoading(true);
-                })*/
                 .on('amshopby:submit_filters', () => {
                     this.isLoading(true);
                     this.currentFilters.removeAll();

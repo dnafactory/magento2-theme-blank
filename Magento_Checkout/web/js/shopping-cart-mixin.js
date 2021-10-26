@@ -14,7 +14,7 @@ define([
     const mixin = {
         options: {
             qtyThrottle: 500,
-            deleteItemConfirmMessage: 'Are you sure you want to remove this item from your shopping cart?'
+            deleteItemConfirmMessage: true
         },
         /** @inheritdoc */
         _create: function () {
@@ -49,7 +49,7 @@ define([
                 item = $(target).parents('.cart.item');
             if(this.options.deleteItemConfirmMessage) {
                 confirm({
-                    content: $.mage.__(this.options.deleteItemConfirmMessage),
+                    content: $.mage.__('Are you sure you want to remove this item from your shopping cart?'),
                     actions: {
                         /**
                          * Confirmation modal handler to execute clear cart action
