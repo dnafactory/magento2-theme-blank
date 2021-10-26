@@ -81,7 +81,10 @@ define(['underscore'], function(_) {
          */
         isControlEmpty(input){
             // Hack for select inputs: isAutofilled is always true after the first user selection
-            return (!(input.isAutofilled && this.getInputType(input) !== 'select') && this.isEmpty(input.value));
+            return (
+                !(input.isAutofilled && this.getInputType(input) !== 'select') &&
+                (!this.isInputAutofilled(input) && this.isEmpty(input.value))
+            );
         },
         /**
          * Returns the input type of a given HTMLElement
@@ -217,6 +220,29 @@ define(['underscore'], function(_) {
          */
         isVisible(element){
             return this.getCssValue(element, 'display') !== 'none';
+        },
+
+        /**
+         *
+         * @param input
+         * @returns {boolean|*}
+         */
+        isInputAutofilled(input){
+            return (this.testElementFeature(input,':-internal-autofill-selected') || this.testElementFeature(input, ':-webkit-autofill'));
+        },
+
+        /**
+         *
+         * @param element
+         * @param feature
+         * @returns {boolean|*}
+         */
+        testElementFeature(element, feature){
+            try{
+                return element.matches(feature);
+            }catch(ex){
+                return false;
+            }
         }
     };
 

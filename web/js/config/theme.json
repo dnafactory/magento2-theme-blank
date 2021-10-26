@@ -71,9 +71,6 @@
     },
     "scrollbar-fix": {
       "component": "js/theme/scrollbar-fix"
-    },
-    "autofill": {
-      "component": "js/theme/detect-autofill"
     }
   }
 }
