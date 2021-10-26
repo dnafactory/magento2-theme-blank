@@ -136,18 +136,20 @@ define(['underscore'], function(_) {
          * @param element
          * @param events
          * @param handler
+         * @param options
          */
-        attachEvents(element, events, handler){
-            this.cycleItems(events, (event) => element.addEventListener(event, handler, false));
+        attachEvents(element, events, handler, options = false){
+            this.cycleItems(events, (event) => element.addEventListener(event, handler, options));
         },
         /**
          * Removes multiple event listeners from a single HTML element on the events given as a space separated string
          * @param element
          * @param events
          * @param handler
+         * @param options
          */
-        removeEvents(element, events, handler){
-            this.cycleItems(events, (event) => element.removeEventListener(event, handler, false));
+        removeEvents(element, events, handler, options = false){
+            this.cycleItems(events, (event) => element.removeEventListener(event, handler, options));
         },
         getCssValue(element, property, defaultValue = null){
             var value = this.nullishCoalescingValue(
