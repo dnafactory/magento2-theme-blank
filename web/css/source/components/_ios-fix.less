@@ -1,0 +1,11 @@
+/**
+* Prevent scrolling
+ */
+& when (@media-common = true){
+  .ios-lock{
+    &, body {
+      overflow: hidden;
+      height: ~"calc(var(--window-inner-height) - 1px)" !important;
+    }
+  }
+}

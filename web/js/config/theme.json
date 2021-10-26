@@ -71,6 +71,12 @@
     },
     "scrollbar-fix": {
       "component": "js/theme/scrollbar-fix"
+    },
+    "iosFix": {
+      "component": "js/theme/ios-fix",
+      "element": "body",
+      "lockOnClassName": "_has-modal _has-popup -am-noscroll",
+      "allowedDevice": "iPhone.*Safari"
     }
   }
 }
