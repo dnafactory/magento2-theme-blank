@@ -3,5 +3,6 @@
         <link src="Magento_Theme::favicon/favicon-16x16.png" rel="icon" sizes="16x16"/>
         <link src="Magento_Theme::favicon/favicon-32x32.png" rel="icon" sizes="32x32"/>
         <link src="Magento_Theme::favicon/apple-touch-icon.png" rel="apple-touch-icon-precomposed" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
     </head>
 </page>

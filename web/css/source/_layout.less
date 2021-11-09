@@ -32,6 +32,7 @@
 }
 
 .dna-root-vars(@media-target) when (@media-target='critical'){
+    --layout-max-width: @layout__max-width;
     scroll-behavior: smooth;
     .dna-scrollbar();
 }
@@ -77,8 +78,7 @@
     .page-wrapper > .page-bottom,
     .block.category.event,
     .top-container {
-        padding-left: ~"var(--@{external-gutters__var-name})";
-        padding-right: ~"var(--@{external-gutters__var-name})";
+        .dna-layout-gutters();
     }
 }
 
@@ -120,12 +120,7 @@
     .top-container,
     .page-main {
         box-sizing: border-box;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: @layout__max-width;
-        padding-left: @layout-indent__width;
-        padding-right: @layout-indent__width;
-        width: auto;
+        .dna-container(false);
     }
 
     .page-main {
