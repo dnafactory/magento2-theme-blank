@@ -1,0 +1,25 @@
+& when (@media-target = 'critical') {
+  [data-content-type="products"][data-appearance="carousel"]:not([data-carousel-mode="half"]),
+  .pagebuilder-slider-full-width, .full-width-container{
+    &:extend(.full-width-container);
+    overflow: hidden;
+    .dna-carousel:not(.full-width-container){
+      .dna-container();
+    }
+    @{carousel-stage__class}{
+      overflow: visible;
+    }
+  }
+}
+& when (@media-common = true) {
+  [data-appearance="carousel"],[data-content-type="slider"], .dna-carousel{
+    @{carousel-nav-controls__class}{
+      &@{carousel-nav-prev__class}{
+        left: ~"calc( max(0px, calc( (100% - var(--layout-max-width))/2) + max(var(--layout-gutter), var(--sal)) ))";
+      }
+      &@{carousel-nav-next__class}{
+        right: ~"calc( max(0px, calc( (100% - var(--layout-max-width))/2) + max(var(--layout-gutter), var(--sar)) ))";
+      }
+    }
+  }
+}

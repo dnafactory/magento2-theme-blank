@@ -1,3 +1,19 @@
+### v2.1.0
+Importante refactoring dei caroselli
+- Aggiornata la versione minima della dipendenza dnafactory/theme-frontend-blank
+- Aggiornato il wrapper per il carosello di bootstrap, per venire incontro agli aggiornamenti del tema base: ora utilizza dnaCarousel come Abstract
+- Aggiornato il mixin utilizzato da tiny slider (che ora è comunque deprecato)
+- Rimossi gli stili specifici per tiny slider
+- Aggiunti stili generici per i caroselli
+
+#### Bug risolti:
+- i dropdown non permettono lo scroll
+- il qty controller cattura il touch durante lo swipe da mobile
+- le icone dei custom controls (radio|checkbox|switches) non sono sempre correttamente centrate
+
+#### Deprecati
+- tiny-slider
+
 ### v2.0.5
 - update degli stili dei dots
 - Aggiunte utilities less per gestire correttamente il layout della pagina
