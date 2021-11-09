@@ -103,7 +103,7 @@ define(['underscore'], function(_) {
          * @param callback
          */
         cycleItems(items, callback){
-            items.split(' ').forEach( classItem => callback(classItem));
+            items.trim().split(' ').forEach( classItem => callback(classItem));
         },
         /**
          * Adds multiple css classes (as a space separated string) to a single HTML element

@@ -171,8 +171,23 @@
 .dna-full-width(){
   position: relative;
   right: auto;
+  overflow-x: hidden;
   width: calc(~"100vw - var(--scrollbar-width)");
   left: calc(~"(100% - 100vw + var(--scrollbar-width))/2");
+}
+.dna-container(@add-gutters: true){
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  &when (@add-gutters) {
+    .dna-layout-gutters();
+  }
+}
+
+.dna-layout-gutters(){
+  padding-left: ~"max(var(--@{external-gutters__var-name}), var(--sal))";
+  padding-right: ~"max(var(--@{external-gutters__var-name}), var(--sar))";
 }
 
 //
