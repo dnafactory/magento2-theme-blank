@@ -2,9 +2,10 @@ define([
     'jquery',
     'js/theme/inputs/custom-select',
     'js/lib/dna-utilities',
+    'js/lib/mutation-observer',
     'js/theme/inputs/dropdown-modal',
     'underscore'
-], function($,select, utilities, dropdown, _) {
+], function($,select, utilities, MutationObserver, dropdown, _) {
     'use strict';
 
     return select.extend({

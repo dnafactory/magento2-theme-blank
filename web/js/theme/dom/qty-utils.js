@@ -6,6 +6,10 @@ define([
 ], function($, _, utilities){
     'use strict';
 
+    let isSwiping = false;
+    const swipingLock = () => {
+        isSwiping = true;
+    }
     /**
      * dnafactory.qtyUtils
      * @author Ciro Arcadio <ciro.arcadio@dnafactory.it>
@@ -68,21 +72,36 @@ define([
                 });
                 button.insertAfter(this.element);
             }
-            let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
+            let touchEvent = this._getTouchEvent();
+            const debouncedTouchCallback = _.debounce(this._onTouchEvent.bind(this), 100);
             return button
                 .data('step', step)
-                .on(touchEvent, (event) => {
-                    var evt = event || window.event;
-                    if ("buttons" in evt && evt.buttons !== 1) {
-                        return false;
-                    }
-                    // Keep focus on the input
-                    event.preventDefault();
-                    // rimosso per iphone ed altri dispositivi touch
-                    //this.element.focus();
-                    // Update value immediately
-                    this.updateValue(step);
-                });
+                .on(touchEvent, debouncedTouchCallback);
+        },
+        _onTouchEvent: function(event){
+            if(isSwiping){
+                isSwiping = false;
+                return true;
+            }
+            var evt = event || window.event;
+            if ("buttons" in evt && evt.buttons !== 1) {
+                return false;
+            }
+            let step = $(event.target).data('step');
+            // Keep focus on the input
+            event.preventDefault();
+            // rimosso per iphone ed altri dispositivi touch
+            //this.element.focus();
+            // Update value immediately
+            this.updateValue(step);
+        },
+        _getTouchEvent: function(){
+            let isTouch = ('ontouchstart' in window);
+            if(isTouch){
+                $(window).off('touchmove', swipingLock)
+                    .on('touchmove', swipingLock);
+            }
+            return isTouch? 'touchend' : 'mousedown';
         },
         /**
          * Adjusts input's value by adding 'step' and then fires a 'change' event

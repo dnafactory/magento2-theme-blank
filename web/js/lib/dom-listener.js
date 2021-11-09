@@ -1,8 +1,9 @@
 define([
     'js/lib/vanilla-plugin',
+    'js/lib/mutation-observer',
     'underscore',
     'domReady!'
-], function(JSComponent, _){
+], function(JSComponent, MutationObserver, _){
     'use strict';
 
     /**

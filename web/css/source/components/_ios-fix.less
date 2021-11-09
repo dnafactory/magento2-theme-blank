@@ -1,0 +1,18 @@
+/**
+* Prevent scrolling
+ */
+.dna-root-vars(@media-target) when (@media-target = 'critical'){
+  // IOS env vars
+  --sat: env(safe-area-inset-top);
+  --sar: env(safe-area-inset-right);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+}
+& when (@media-common = true){
+  .ios-lock{
+    &, body {
+      overflow: hidden;
+      height: ~"calc(var(--window-inner-height) - 1px)" !important;
+    }
+  }
+}
