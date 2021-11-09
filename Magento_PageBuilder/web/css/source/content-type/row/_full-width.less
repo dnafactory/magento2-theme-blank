@@ -1,0 +1,30 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Full Width row appearance styles
+//  _____________________________________________
+
+& when (@media-target = 'critical') {
+    [data-content-type='row'][data-appearance='full-width'] {
+        box-sizing: border-box;
+        &:extend(.full-width-container);
+
+        > .row-full-width-inner {
+            box-sizing: border-box;
+            .dna-container();
+        }
+    }
+}
+
+//
+//  Mobile (style-m.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    [data-content-type='row'][data-appearance='full-width'] {
+        background-attachment: scroll !important;
+    }
+}

@@ -15,6 +15,17 @@
           "element": "[data-widget='date']",
           "component": "js/theme/inputs/date"
         },
+        "qty": {
+          "element": "[data-widget='qty']",
+          "component": "js/theme/dom/qty-utils",
+          "options": {
+            "buttonClass": "qty-adjust",
+            "plusButtonClass": "icon-expand rounded-right border-left reverse",
+            "minusButtonClass": "icon-collapse rounded-left border-right",
+            "resetButtonClass": "icon-trash rounded-left border-right",
+            "containerClass": "qty-wrapper control-icon-container both"
+          }
+        },
         "search": {
           "element": "input.input-search:not(.handled)",
           "component": "js/theme/dom/search-utils",
@@ -71,6 +82,14 @@
     },
     "scrollbar-fix": {
       "component": "js/theme/scrollbar-fix"
+    },
+    "iosFix": {
+      "component": "js/theme/ios-fix",
+      "element": "body",
+      "options": {
+        "lockOnClassName": "_has-modal _has-popup -am-noscroll"
+      },
+      "allowedDevice": "iPhone.*Safari"
     }
   }
 }

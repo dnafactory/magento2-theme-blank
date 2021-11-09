@@ -17,11 +17,12 @@ define([
         initialize: function(options, element){
             this._super(options, element);
             this._manageCustomClasses();
+            return this;
         },
         _manageCustomClasses(){
             var instance = this.getInstanceStatus(),
                 containerId = instance.container.id;
-            this._addCustomClasses(document.querySelector(`#${containerId}-ow`), this.options.outerWrapperClass);
+            this._addCustomClasses(document.querySelector(`#${containerId}-ow`), this.options.outerWrapperClass + ' dna-carousel');
             this._addCustomClasses(document.querySelector(`#${containerId}-mw`), this.options.middleWrapperClass);
             this._addCustomClasses(document.querySelector(`#${containerId}-iw`), this.options.innerWrapperClass);
         },
