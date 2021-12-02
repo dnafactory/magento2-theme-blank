@@ -17,13 +17,13 @@ if (trim($block->getPageHeading())) {
 <div class="page-title-wrapper-parent <?= $block->escapeHtmlAttr($parentCss) ?>">
     <div class="page-title-wrapper<?= $block->escapeHtmlAttr($cssClass) ?>">
         <?= $block->getChildHtml('page.back.button') ?>
-        <h2 class="page-title"
+        <h1 class="page-title"
             <?php if ($block->getId()) : ?> id="<?= $block->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>
             <?php if ($block->getAddBaseAttributeAria()) : ?>
                 aria-labelledby="<?= $block->escapeHtmlAttr($block->getAddBaseAttributeAria()) ?>"
             <?php endif; ?>>
             <?= /* @noEscape */ $titleHtml ?>
-        </h2>
+        </h1>
         <?= $block->getChildHtml() ?>
     </div>
 </div>
