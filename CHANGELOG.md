@@ -1,5 +1,6 @@
-### v2.1.1 - alpha
+### v2.1.1
 - Aggiunto il supporto per le spaziature Bootstrap con CSS vars
+- Refactoring degli stili delle icone
 
 ### v2.1.0
 Importante refactoring dei caroselli
