@@ -1,3 +1,6 @@
+### v2.1.1 - alpha
+- Aggiunto il supporto per le spaziature Bootstrap con CSS vars
+
 ### v2.1.0
 Importante refactoring dei caroselli
 - Aggiornata la versione minima della dipendenza dnafactory/theme-frontend-blank
