@@ -1,3 +1,11 @@
+### v2.1.2
+- Il mixin (less) per la scrollbar permette ora di inserire anche background-images
+- Fix del selettore di label del form-control
+
+### v2.1.1
+- Aggiunto il supporto per le spaziature Bootstrap con CSS vars
+- Refactoring degli stili delle icone
+
 ### v2.1.0
 Importante refactoring dei caroselli
 - Aggiornata la versione minima della dipendenza dnafactory/theme-frontend-blank
