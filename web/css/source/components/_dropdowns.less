@@ -131,9 +131,6 @@
         );
         .dna-dropdown-dialog {
             padding-top: ~"calc(var(--input-height)) !important";
-            overflow: hidden;
-            max-height: 290px;
-            height: 100vh;
         }
         &.active{
             .action.toggle{
@@ -161,9 +158,8 @@
         .ui-dialog-buttonpane{
             display: none;
         }
-        .modal-inner-wrap{
-            height: 100%;
-            overflow: hidden;
+        .dna-dropdown.modal-content{
+            max-height: 290px;
         }
         display: block;
     }

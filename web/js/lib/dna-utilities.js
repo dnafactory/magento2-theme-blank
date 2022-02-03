@@ -245,6 +245,15 @@ define(['underscore'], function(_) {
             }catch(ex){
                 return false;
             }
+        },
+
+        /**
+         *
+         * @param string
+         * @returns string
+         */
+        sanitizeForQuerySelector(string){
+            return this.nullishCoalescingValue(string,'').replace(/(\:|\.)/g,"\\$1");
         }
     };
 
