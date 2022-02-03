@@ -1,3 +1,7 @@
+### v2.1.3
+- fix della dimensione dei dropdown: precedentemente avevano un'altezza minima di 290px
+- aggiunta la sanificazione delle stringhe utilizzate come querySelector
+
 ### v2.1.2
 - Il mixin (less) per la scrollbar permette ora di inserire anche background-images
 - Fix del selettore di label del form-control

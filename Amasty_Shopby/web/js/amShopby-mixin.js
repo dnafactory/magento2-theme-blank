@@ -1,7 +1,8 @@
 define([
     "jquery",
+    "js/lib/dna-utilities",
     "filterManager"
-], function ($) {
+], function ($, utilities) {
     'use strict';
 
     const abstractMixin = {
@@ -77,7 +78,7 @@ define([
             if(field.value.length > 0) {
                 item = {};
                 item.value = field.value;
-                var input = $(`[value=${field.value}]`, form);
+                var input = $(utilities.sanitizeForQuerySelector(`[value=${field.value}]`), form);
                 item.label = $('.label', input.parent()).text();
             }
             return item;
