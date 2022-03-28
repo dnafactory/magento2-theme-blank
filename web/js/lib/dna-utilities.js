@@ -24,7 +24,7 @@ define(['underscore'], function(_) {
         loadModule: function(options, element, onModuleLoad){
             if(!options.component) return;
 
-            requirejs([options.component], (component) => {
+            require([options.component], (component) => {
                 if(!component) return;
                 var instance = component;
                 if(this.isFunction(component)) {
