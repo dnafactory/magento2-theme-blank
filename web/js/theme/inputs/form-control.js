@@ -14,7 +14,8 @@ define([
     return JSComponent.extend({
         defaults:{
             container: null,
-            label: null
+            label: null,
+            gid: null
         },
         /**
          * On component's creation, we need to find or create element's container and label
@@ -22,22 +23,14 @@ define([
          */
         _create(){
             this._super();
-            var id = this._getOrGenerateUniqueId(),
-                label = document.querySelector(utilities.sanitizeForQuerySelector(`label[for="${id}"]`));
+            this.gid = this._getOrGenerateUniqueId();
 
             this.container = this.element.parentElement;
 
-            this.element.setAttribute('id', id);
+            this.element.setAttribute('id', this.gid);
 
-            if(utilities.isEmpty(label)) {
-                label = document.createElement('label');
-                label.setAttribute('for', id);
-                this.element.after(label);
-                this.element.hasAttribute('placeholder')
-                label.textContent = this.element.getAttribute('placeholder');
-                label.style.display = 'none';
-            }
-            this.label = label;
+            this._getOrGenerateLabel();
+
             this.element.classList.add('handled-input');
         },
 
@@ -49,6 +42,19 @@ define([
                 Math.random().toString(36).substr(2, 9)
                 : this.element.name.replace(/[^\w\s]/gi, '');
             return `custom_${nameId}`;
+        },
+
+        _getOrGenerateLabel(){
+            var label = document.querySelector(utilities.sanitizeForQuerySelector(`label[for="${this.gid}"]`));
+            if(utilities.isEmpty(label)) {
+                label = document.createElement('label');
+                label.setAttribute('for', this.gid);
+                this.element.after(label);
+                this.element.hasAttribute('placeholder')
+                label.textContent = this.element.getAttribute('placeholder');
+                label.style.display = 'none';
+            }
+            this.label = label;
         }
     });
 });

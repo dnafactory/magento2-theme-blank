@@ -20,12 +20,10 @@ define([
             this._super();
             //window.addEventListener('autofill', () => this.toggleLabel)
             // We need to check input's status on every DOM change
-            utilities.attachEvents(this.element,"focusin input focusout click change close autofill", () => this.toggleLabelClass());
+            utilities.attachEvents(this.element,"focusin input focusout click change close autofill", this.toggleLabelClass.bind(this));
         },
         _create: function(){
             this._super();
-            // Reset placeholder content
-            this._checkPlaceholder();
 
             if(this.container.classList.contains('control-icon')) {
                 this.label.parentElement.classList.add('field-icon');
@@ -52,24 +50,23 @@ define([
             );
             this.label.classList.toggle('disabled', this.element.disabled);
         },
-        _checkPlaceholder(){
-            if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
-                require(['jquery'], ($) => {
-                    // Check if control is in a fieldset
-                    var fieldset = $(this.element).closest('fieldset');
-                    if(fieldset.length && !$(this.label).is(':visible')){
-                        // if it's a labeled fieldset which has a legend element
-                        if( $('> legend', fieldset).length ){
-                            var legend = $('> legend', fieldset).get(0);
-                            this.label.classList.forEach(value => legend.classList.add(value));
-                            this.label = legend;
-                        }
-                    }
-                });
+
+        _getOrGenerateLabel(){
+            var fieldset = this.element.closest('fieldset');
+            if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder')) && fieldset){
+                // if it's a labeled fieldset which has a legend element
+                var legend = fieldset.querySelector(':scope > legend');
+                if( legend && utilities.isVisible(legend) ){
+                    this.label = legend;
+                }else{
+                    this._super();
+                }
                 if (utilities.getInputType(this.element) === 'select') {
                     if (this.element.options.length > 0 && this.element.options[0].value === "")
                         this.element.options[0].textContent = "";
                 }
+            } else{
+              return this._super();
             }
         }
     };

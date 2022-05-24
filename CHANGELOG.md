@@ -1,3 +1,6 @@
+### v2.1.5
+- fix delle label con legend: quando in un fieldset è presente un elemento di tipo legend e multiple labels, il legend deve assumere la funzione di label
+
 ### v2.1.3
 - fix della dimensione dei dropdown: precedentemente avevano un'altezza minima di 290px
 - aggiunta la sanificazione delle stringhe utilizzate come querySelector
