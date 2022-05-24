@@ -52,7 +52,7 @@ define([
         },
 
         _getOrGenerateLabel(){
-            var fieldset = this.element.closest('fieldset');
+            var fieldset = this.element.closest('fieldset.field');
             if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder')) && fieldset){
                 // if it's a labeled fieldset which has a legend element
                 var legend = fieldset.querySelector(':scope > legend');
