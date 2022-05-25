@@ -298,7 +298,7 @@
         .lib-form-element-textarea-resize();
     }
 
-    input[type="checkbox"] {
+    input[type="checkbox"]:not(.custom-control-input) {
         .lib-form-element-choice(@_type: input-checkbox);
         position: relative;
         top: 2px;
