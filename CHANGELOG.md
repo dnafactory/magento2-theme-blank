@@ -1,3 +1,7 @@
+### v2.1.6
+- aggiunto il supporto per php 8.1
+- fix delle spaziature delle custom checkbox
+
 ### v2.1.5
 - fix delle label con legend: quando in un fieldset è presente un elemento di tipo legend e multiple labels, il legend deve assumere la funzione di label
 
