@@ -1,3 +1,7 @@
+### v2.1.7
+#### Bug risolti:
+- la ricerca nelle componenti dropdown non funziona
+
 ### v2.1.6
 - aggiunto il supporto per php 8.1
 - fix delle spaziature delle custom checkbox
