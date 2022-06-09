@@ -128,14 +128,14 @@ define([
         },
 
         _searchItem(element, searchString){
-            const regexp = new RegExp(`^${searchString}`,"i");
+            const regexp = new RegExp(`^\\s*${searchString}`,"i");
             return (element.textContent.search(regexp) >= 0)
                 || (element.getAttribute('data-value').search(regexp) >= 0 );
         },
 
         _scrollTo(element){
             // TODO: applicare una soluzione più efficiente
-            var container = this.dialogElement.closest('.dna-dropdown-modal')[0];
+            var container = this.dialogElement[0];
             container.scroll({
                 //behavior: 'smooth',
                 left: 0,
