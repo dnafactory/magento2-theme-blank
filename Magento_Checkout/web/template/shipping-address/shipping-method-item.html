@@ -1,0 +1,45 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<li class="list-group-item m-0 py-2"
+    click="element.selectShippingMethod">
+    <div class="row">
+        <div class="col-auto col-action align-self-center px-0">
+            <div class="control">
+                <input type="radio"
+                       class="radio"
+                       ifnot="method.error_message"
+                       ko-checked="element.isSelected"
+                       ko-value="method.carrier_code + '_' + method.method_code"
+                       attr="'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                    'checked': element.rates().length == 1 || element.isSelected" />
+                <label class="label custom-control-label" attr=" 'for': method.carrier_code + '_' + method.method_code"></label>
+            </div>
+        </div>
+        <div class="col col-method">
+            <div class="method font-weight-bold text-primary"
+                 attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+                 text="method.method_title"></div>
+            <div class="carrier font-sm"
+                 attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+                 text="method.carrier_title"></div>
+        </div>
+        <!-- ko ifnot: (method.error_message) -->
+        <div class="col-auto col-price font-weight-bold text-primary">
+            <each args="element.getRegion('price')" render=""></each>
+        </div>
+        <!-- /ko -->
+
+    </div>
+</li>
+<li class="row list-group-item message error"
+    if="method.error_message" role="alert">
+    <div text="method.error_message"></div>
+    <span class="d-none no-display">
+        <input type="radio"
+               attr="'value' : method.method_code, 'id': 's_method_' + method.method_code">
+    </span>
+</li>

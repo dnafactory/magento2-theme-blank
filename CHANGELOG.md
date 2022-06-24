@@ -1,3 +1,6 @@
+### v2.1.8
+- Aggiunte componenti per il checkout
+
 ### v2.1.7
 #### Bug risolti:
 - la ricerca nelle componenti dropdown non funziona
