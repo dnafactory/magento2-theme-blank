@@ -53,12 +53,12 @@ define([
 
         _getOrGenerateLabel(){
             var fieldset = this.element.closest('fieldset.field');
-            if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder')) && fieldset){
+            if(utilities.getBooleanValue(utilities.getCssVar('label-as-placeholder'))){
                 // if it's a labeled fieldset which has a legend element
-                var legend = fieldset.querySelector(':scope > legend');
-                if( legend && utilities.isVisible(legend) ){
+                var legend = (fieldset)? fieldset.querySelector(':scope > legend') : false;
+                if (legend && utilities.isVisible(legend)) {
                     this.label = legend;
-                }else{
+                } else {
                     this._super();
                 }
                 if (utilities.getInputType(this.element) === 'select') {
@@ -66,7 +66,7 @@ define([
                         this.element.options[0].textContent = "";
                 }
             } else{
-              return this._super();
+                return this._super();
             }
         }
     };

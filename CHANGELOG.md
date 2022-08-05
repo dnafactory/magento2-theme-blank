@@ -1,3 +1,6 @@
+### v2.1.9
+- Fix delle custom label per le select
+
 ### v2.1.8
 - Aggiunte componenti per il checkout
 
